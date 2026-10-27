@@ -2,10 +2,13 @@
   "name": "judi-health",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "packages/minerva-ds",
+    "apps/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present"
+    "build": "npm run build -w @judi-health/minerva-ds",
+    "dev:docs": "npm run dev -w @judi-health/minerva-docs",
+    "dev:tap": "npm run dev -w @judi-health/tap-prototype",
+    "typecheck": "npm run typecheck --workspaces --if-present"
   }
 }

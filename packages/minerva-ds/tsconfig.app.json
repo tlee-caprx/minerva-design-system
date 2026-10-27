@@ -5,12 +5,13 @@
     "module": "esnext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    "strict": true,
     "types": ["vite/client"]
   },
-  "include": ["src/components"]
+  "include": ["src"],
+  "exclude": ["src/tokens/buildCss.ts"]
 }

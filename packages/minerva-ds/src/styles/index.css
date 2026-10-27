@@ -1,3 +1,12 @@
-@import "./fonts.css";
-@import "./tailwind.css";
-@import "./themes.css";
+/*
+ * Full precompiled stylesheet: Tailwind + Minerva tokens + every utility the
+ * components use. Ships as `@judi-health/minerva-ds/style.css` for apps that
+ * don't run Tailwind themselves.
+ *
+ * tokens.css comes first: it starts with the Google Fonts @import, which
+ * browsers ignore unless it precedes every other rule.
+ */
+@import "./tokens.css";
+@import "tailwindcss" source(none);
+@source "../components";
+@source "../patterns";

@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "docs", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev", "-w", "@judi-health/minerva-docs", "--", "--port", "5173", "--strictPort"], "port": 5173 },
+    { "name": "tap", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev", "-w", "@judi-health/tap-prototype", "--", "--port", "5174", "--strictPort"], "port": 5174 }
+  ]
+}

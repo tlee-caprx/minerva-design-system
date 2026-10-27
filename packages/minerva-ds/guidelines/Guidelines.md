@@ -23,9 +23,7 @@ Start with the Shell — set up AppLayout with the correct props, then build pag
 Every page must use AppLayout. Never build a custom layout or render content outside AppLayout.
 
 ```tsx
-import { AppLayout } from "../components/layout/AppLayout";
-import { SideNavItem, SideNavGroup } from "../components/navigation/SideNav";
-import { Lozenge } from "../components/ui/Lozenge";
+import { AppLayout, SideNavItem, SideNavGroup, Lozenge } from "@judi-health/minerva-ds";
 ```
 
 Work through each section of AppLayout in order:
@@ -108,7 +106,7 @@ sideNavContent={
 Once the shell is set up, work through the rest of the design:
 
 1. **Check `components.md` first** — always use a kit component if one exists before building custom
-2. **Build custom components as needed** — new component files go in `src/components/`, never inlined inside a page file
+2. **Build custom components as needed** — new component files go in your project's `src/components/`, never inlined inside a page file. Never edit files inside `node_modules/@judi-health/minerva-ds`
 3. **Custom components must follow token standards** — see the Token Rules section below, and `tokens.md` / `styles.md` for the full reference
 
 ---
@@ -142,7 +140,7 @@ If the token name you want isn't in this table, it does not exist. Use the neare
 Always use the `Text` component — never Tailwind typography classes or raw inline styles:
 
 ```tsx
-import { Text } from '../components/ui/Text'
+import { Text } from '@judi-health/minerva-ds'
 
 // ✓ correct
 <Text as="h1" variant="heading-xl" className="text-(--text-surface-base)">Page Title</Text>

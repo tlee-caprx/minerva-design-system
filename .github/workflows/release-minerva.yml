@@ -1,0 +1,67 @@
+name: Release minerva-ds
+
+# Publishes the built package to the `release` branch so designers can
+# `npm install github:tlee-caprx/minerva-design-system#release`.
+# Each new package.json version also gets a `minerva-ds-v<version>` tag to pin to.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/minerva-ds/**'
+      - 'scripts/prepare-release.mjs'
+      - '.github/workflows/release-minerva.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-minerva
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run typecheck -w @judi-health/minerva-ds
+      - run: npm run build
+
+      - name: Check out release branch
+        run: |
+          git fetch origin release || true
+          if git show-ref --verify --quiet refs/remotes/origin/release; then
+            git worktree add release-out origin/release
+            git -C release-out switch -C release
+          else
+            git worktree add --orphan -b release release-out
+          fi
+
+      - run: node scripts/prepare-release.mjs release-out
+
+      - name: Commit and push
+        working-directory: release-out
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          VERSION=$(node -p "require('./package.json').version")
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to release."
+          else
+            git commit -m "minerva-ds v$VERSION (${GITHUB_SHA::7})"
+            git push origin release
+          fi
+          TAG="minerva-ds-v$VERSION"
+          if ! git ls-remote --exit-code --tags origin "$TAG" >/dev/null; then
+            git tag "$TAG"
+            git push origin "$TAG"
+          fi

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["vite/client"],
+    "paths": {
+      "@judi-health/minerva-ds": ["../../packages/minerva-ds/src/index.ts"],
+      "@judi-health/minerva-ds/patterns": ["../../packages/minerva-ds/src/patterns/index.ts"],
+      "@judi-health/minerva-ds/document-viewer": ["../../packages/minerva-ds/src/patterns/DocumentViewer/index.ts"],
+      "@judi-health/minerva-ds/tokens": ["../../packages/minerva-ds/src/tokens/index.ts"]
+    }
+  },
+  "include": ["src"]
+}
