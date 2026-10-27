@@ -45,7 +45,7 @@ Embedded PDF viewer, imported from its own entry so its large PDF engine is only
 import { DocumentViewer } from '@judi-health/minerva-ds/document-viewer'
 ```
 
-Components without a section below are demonstrated in the docs app (`apps/docs` in the design system repo). Their props are fully typed — rely on the TypeScript definitions shipped with the package.
+Components without a section below are demonstrated in the documentation app (`apps/documentation` in the design system repo). Their props are fully typed — rely on the TypeScript definitions shipped with the package.
 
 ---
 

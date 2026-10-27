@@ -2,7 +2,7 @@
 
 `JudiAssistantPanel` is Minerva's shared chat surface. It renders the Judi header, conversation, reasoning steps, source cards, composer, and message actions. It does not choose case data, prompts, answers, citations, or tool behavior.
 
-The consuming product creates an assistant-ui runtime and passes it to the panel. TAP's scripted adapter is one example; PAT can provide its own adapter without copying the chat UI.
+The consuming product creates an assistant-ui runtime and passes it to the panel. Each product (TAP, PAT, …) provides its own adapter without copying the chat UI. The documentation app's Judi Assistant section shows a minimal scripted adapter.
 
 ```tsx
 const runtime = useLocalRuntime(productAdapter)
