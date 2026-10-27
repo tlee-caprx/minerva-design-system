@@ -1,0 +1,21 @@
+export declare const spacing: {
+    readonly 'space-0': "0";
+    readonly 'space-1': "1px";
+    readonly 'space-2': "2px";
+    readonly 'space-4': "0.25rem";
+    readonly 'space-6': "0.375rem";
+    readonly 'space-8': "0.5rem";
+    readonly 'space-9': "0.5625rem";
+    readonly 'space-10': "0.625rem";
+    readonly 'space-11': "0.6875rem";
+    readonly 'space-12': "0.75rem";
+    readonly 'space-16': "1rem";
+    readonly 'space-18': "1.125rem";
+    readonly 'space-20': "1.25rem";
+    readonly 'space-24': "1.5rem";
+    readonly 'space-30': "1.875rem";
+    readonly 'space-32': "2rem";
+    readonly 'space-36': "2.25rem";
+    readonly 'space-40': "2.5rem";
+    readonly 'space-48': "3rem";
+};

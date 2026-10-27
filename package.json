@@ -1,0 +1,44 @@
+{
+  "name": "@judi-health/minerva-ds",
+  "version": "0.1.0",
+  "description": "Minerva design system: React components, tokens, and themes for Judi prototypes.",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./patterns": {
+      "types": "./dist/patterns/index.d.ts",
+      "import": "./dist/patterns.js"
+    },
+    "./document-viewer": {
+      "types": "./dist/patterns/DocumentViewer/index.d.ts",
+      "import": "./dist/document-viewer.js"
+    },
+    "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
+      "import": "./dist/tokens.js"
+    },
+    "./style.css": "./dist/style.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./guidelines/*": "./guidelines/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "guidelines",
+    "ATTRIBUTIONS.md"
+  ],
+  "dependencies": {
+    "@assistant-ui/react": "^0.15.28",
+    "@embedpdf/react-pdf-viewer": "^2.15.1"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0 || ^19.0.0",
+    "react-dom": "^18.3.0 || ^19.0.0"
+  }
+}
