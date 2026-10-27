@@ -1,5 +1,0 @@
-/*
- * Layer 3: Component tokens — aggregates every component's `.tokens.css`.
- * Add a new `@import` here whenever a component is added. This is the only
- * manual wiring step for a new component's tokens.
- */

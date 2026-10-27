@@ -7,8 +7,7 @@
   ],
   "scripts": {
     "build": "npm run build -w @judi-health/minerva-ds",
-    "dev:docs": "npm run dev -w @judi-health/minerva-docs",
-    "dev:tap": "npm run dev -w @judi-health/tap-prototype",
-    "typecheck": "npm run typecheck --workspaces --if-present"
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "dev:documentation": "npm run dev -w @judi-health/minerva-documentation"
   }
 }

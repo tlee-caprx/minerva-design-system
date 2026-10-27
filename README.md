@@ -1,23 +1,18 @@
-# Judi design systems
+# Minerva design system
 
 | Path                     | What it is |
 | ------------------------ | ---------- |
 | `packages/minerva-ds`    | **`@judi-health/minerva-ds`**: the Minerva design system package designers install. See its [README](packages/minerva-ds/README.md). |
-| `apps/docs`              | Documentation site: every Minerva foundation, component, and pattern, with a theme switcher. |
-| `apps/tap-prototype`     | TAP case review prototype, an example product built on Minerva. |
-| `packages/judi-ui`       | Early work on a shared Minerva + Mochi system. Not part of the npm workspace yet. |
-| `packages/mochi-ds`      | Mochi consumer design system (pnpm). Not part of the npm workspace yet. |
-| `docs/`                  | Planning notes, including the Minerva/Mochi consolidation inventory. |
+| `apps/documentation`              | Documentation site: every Minerva foundation, component, and pattern, with a theme switcher. |
 
 ## Develop
 
 ```bash
 npm install
-npm run dev:docs   # docs site
-npm run dev:tap    # TAP prototype
+npm run dev:documentation   # documentation site
 ```
 
-Both apps load `packages/minerva-ds/src` directly, so component edits hot-reload without a rebuild.
+The documentation app loads `packages/minerva-ds/src` directly, so component edits hot-reload without a rebuild.
 
 ```bash
 npm run build      # build packages/minerva-ds into dist/
