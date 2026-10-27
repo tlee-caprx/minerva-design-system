@@ -1,0 +1,64 @@
+{
+  "name": "@consumer/mochi",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/styles.css",
+    "./icons.svg": "./assets/generated/icons.svg"
+  },
+  "files": [
+    "dist",
+    "assets/generated",
+    "assets/fonts/work-sans/WorkSans-VariableFont_wght.ttf",
+    "assets/fonts/work-sans/WorkSans-Italic-VariableFont_wght.ttf",
+    "assets/fonts/work-sans/OFL.txt"
+  ],
+  "imports": {
+    "#src/*": "./src/*"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "dev:demo": "vite",
+    "test": "vitest",
+    "generate:icons": "node bin/generate-icons.js"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@base-ui/react": "latest",
+    "class-variance-authority": "latest",
+    "clsx": "latest",
+    "tailwind-merge": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "@vitest/browser": "latest",
+    "@vitest/browser-playwright": "^4.1.10",
+    "playwright": "latest",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "latest",
+    "tw-animate-css": "latest",
+    "typescript": "5.9.3",
+    "vite": "latest",
+    "vite-plugin-dts": "latest",
+    "vitest": "latest"
+  }
+}

@@ -1,0 +1,8 @@
+@import "tailwindcss" source(".");
+@import "tw-animate-css";
+@import "./tokens/fonts.css";
+
+@import "./tokens/primitives.css";
+@import "./tokens/brand.css";
+@import "./tokens/components.css";
+@import "./tokens/base.css";

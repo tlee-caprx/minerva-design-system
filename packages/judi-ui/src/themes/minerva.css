@@ -1,0 +1,26 @@
+/* Pilot Button geometry remains provisional; color aliases read shared roles. */
+:root[data-judi-theme="minerva"] {
+  --judi-surface: var(--background);
+  --judi-text: var(--foreground);
+  --judi-font-body: "Source Sans 3", sans-serif;
+
+  --judi-action-primary: var(--primary);
+  --judi-action-primary-hover: var(--color-turquoise-lighten-4);
+  --judi-action-primary-pressed: var(--color-turquoise-darken-6);
+  --judi-action-primary-text: var(--primary-foreground);
+  --judi-action-focus: var(--ring);
+
+  --judi-button-primary-bg: var(--judi-action-primary);
+  --judi-button-primary-bg-hover: var(--judi-action-primary-hover);
+  --judi-button-primary-bg-pressed: var(--judi-action-primary-pressed);
+  --judi-button-primary-text: var(--judi-action-primary-text);
+  --judi-button-focus-ring: var(--judi-action-focus);
+  --judi-button-font: var(--judi-font-body);
+  --judi-button-font-size: 0.9375rem;
+  --judi-button-line-height: 1.25rem;
+  --judi-button-font-weight: 600;
+  --judi-button-padding-block: 0.5rem;
+  --judi-button-padding-inline: 0.75rem;
+  --judi-button-radius: 4px;
+  --judi-button-gap: 0.5rem;
+}

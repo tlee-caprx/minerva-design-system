@@ -1,0 +1,224 @@
+/*
+ * Layer 2: Brand roles. These are the shared, client-overridable choices
+ * between raw primitives and component-specific tokens. The default mappings
+ * follow the supplied Mochi reference screenshots; feedback colors and
+ * contrast pairs should be reviewed before production use.
+ */
+
+:root {
+  /* Surfaces and text */
+  --brand-bg: var(--color-white);
+  --brand-fg: var(--color-stone-950);
+  --brand-surface: var(--color-white);
+  --brand-surface-fg: var(--color-stone-950);
+  --brand-surface-raised: var(--color-stone-50);
+  --brand-surface-sunken: var(--color-stone-100);
+
+  /* Primary */
+  --brand-primary: var(--color-indigo-600);
+  --brand-primary-fg: var(--color-stone-50);
+  --brand-primary-hover: var(--color-indigo-700);
+  --brand-primary-active: var(--color-indigo-800);
+  --brand-primary-subtle: var(--color-indigo-50);
+  --brand-primary-subtle-fg: var(--color-indigo-700);
+
+  /* Secondary and muted */
+  --brand-secondary: var(--color-stone-100);
+  --brand-secondary-fg: var(--color-stone-900);
+  --brand-secondary-hover: var(--color-stone-200);
+  --brand-muted: var(--color-stone-100);
+  --brand-muted-fg: var(--color-stone-500);
+
+  /* Accent */
+  --brand-accent: var(--color-teal-500);
+  --brand-accent-fg: var(--color-stone-50);
+  --brand-accent-hover: var(--color-teal-600);
+
+  /* Feedback */
+  --brand-destructive: var(--color-red-600);
+  --brand-destructive-fg: var(--color-stone-50);
+  --brand-destructive-hover: var(--color-red-700);
+  --brand-destructive-subtle: var(--color-red-50);
+  --brand-destructive-subtle-fg: var(--color-red-700);
+  --brand-warning: var(--color-yellow-500);
+  --brand-warning-fg: var(--color-yellow-950);
+  --brand-warning-subtle: var(--color-yellow-50);
+  --brand-warning-subtle-fg: var(--color-yellow-900);
+  --brand-success: var(--color-green-500);
+  --brand-success-fg: var(--color-stone-50);
+  --brand-success-subtle: var(--color-green-50);
+  --brand-success-subtle-fg: var(--color-green-700);
+  --brand-info: var(--color-indigo-500);
+  --brand-info-fg: var(--color-stone-50);
+  --brand-info-subtle: var(--color-indigo-50);
+  --brand-info-subtle-fg: var(--color-indigo-700);
+
+  /* Borders and interaction */
+  --brand-border: var(--color-stone-200);
+  --brand-border-strong: var(--color-stone-500);
+  --brand-border-focus: var(--color-indigo-500);
+  --brand-ring: var(--color-indigo-500);
+  --brand-input-border: var(--color-stone-200);
+  --brand-input-border-hover: var(--color-stone-400);
+  --brand-input-border-focus: var(--color-indigo-500);
+  --brand-overlay: color-mix(in oklch, var(--color-black) 50%, transparent);
+
+  /* Shape */
+  --brand-radius-sm: var(--radius-md);
+  --brand-radius-md: var(--radius-lg);
+  --brand-radius-lg: var(--radius-xl);
+  --brand-radius-xl: var(--radius-xl_5);
+
+  /* Healthcare status */
+  --brand-status-active: var(--brand-success);
+  --brand-status-active-subtle: var(--brand-success-subtle);
+  --brand-status-pending: var(--brand-warning);
+  --brand-status-pending-subtle: var(--brand-warning-subtle);
+  --brand-status-expired: var(--brand-muted);
+  --brand-status-urgent: var(--brand-destructive);
+  --brand-status-urgent-subtle: var(--brand-destructive-subtle);
+
+  /* Typography */
+  --brand-heading-font-family: var(--font-sans);
+  --brand-body-font-family: var(--font-sans);
+  --brand-heading-font-weight: var(--font-weight-semibold);
+  --brand-body-font-weight: var(--font-weight-normal);
+
+  --brand-heading-lg-font-size: var(--text-lg);
+  --brand-heading-xl-font-size: var(--text-xl);
+  --brand-heading-2xl-font-size: var(--text-2xl);
+  --brand-heading-3xl-font-size: var(--text-3xl);
+  --brand-heading-4xl-font-size: var(--text-4xl);
+  --brand-heading-5xl-font-size: var(--text-5xl);
+  --brand-heading-6xl-font-size: var(--text-6xl);
+  --brand-heading-7xl-font-size: var(--text-7xl);
+  --brand-heading-8xl-font-size: var(--text-8xl);
+  --brand-heading-9xl-font-size: var(--text-9xl);
+  --brand-body-xs-font-size: var(--text-xs);
+  --brand-body-sm-font-size: var(--text-sm);
+  --brand-body-md-font-size: var(--text-base);
+
+  --brand-heading-lg-leading: var(--text-lg--line-height);
+  --brand-heading-xl-leading: var(--text-xl--line-height);
+  --brand-heading-2xl-leading: var(--text-2xl--line-height);
+  --brand-heading-3xl-leading: var(--text-3xl--line-height);
+  --brand-heading-4xl-leading: var(--text-4xl--line-height);
+  --brand-heading-5xl-leading: var(--text-5xl--line-height);
+  --brand-heading-6xl-leading: var(--text-6xl--line-height);
+  --brand-heading-7xl-leading: var(--text-7xl--line-height);
+  --brand-heading-8xl-leading: var(--text-8xl--line-height);
+  --brand-heading-9xl-leading: var(--text-9xl--line-height);
+  --brand-body-xs-leading: var(--text-xs--line-height);
+  --brand-body-sm-leading: var(--text-sm--line-height);
+  --brand-body-md-leading: var(--text-base--line-height);
+}
+
+/* Tailwind-facing aliases. Component token files consume --brand-* directly. */
+@theme inline {
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-fg: var(--brand-fg);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-surface-fg: var(--brand-surface-fg);
+  --color-brand-surface-raised: var(--brand-surface-raised);
+  --color-brand-surface-sunken: var(--brand-surface-sunken);
+
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-fg: var(--brand-primary-fg);
+  --color-brand-primary-hover: var(--brand-primary-hover);
+  --color-brand-primary-active: var(--brand-primary-active);
+  --color-brand-primary-subtle: var(--brand-primary-subtle);
+  --color-brand-primary-subtle-fg: var(--brand-primary-subtle-fg);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-secondary-fg: var(--brand-secondary-fg);
+  --color-brand-secondary-hover: var(--brand-secondary-hover);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-muted-fg: var(--brand-muted-fg);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-fg: var(--brand-accent-fg);
+  --color-brand-accent-hover: var(--brand-accent-hover);
+
+  --color-brand-destructive: var(--brand-destructive);
+  --color-brand-destructive-fg: var(--brand-destructive-fg);
+  --color-brand-destructive-hover: var(--brand-destructive-hover);
+  --color-brand-destructive-subtle: var(--brand-destructive-subtle);
+  --color-brand-destructive-subtle-fg: var(--brand-destructive-subtle-fg);
+  --color-brand-warning: var(--brand-warning);
+  --color-brand-warning-fg: var(--brand-warning-fg);
+  --color-brand-warning-subtle: var(--brand-warning-subtle);
+  --color-brand-warning-subtle-fg: var(--brand-warning-subtle-fg);
+  --color-brand-success: var(--brand-success);
+  --color-brand-success-fg: var(--brand-success-fg);
+  --color-brand-success-subtle: var(--brand-success-subtle);
+  --color-brand-success-subtle-fg: var(--brand-success-subtle-fg);
+  --color-brand-info: var(--brand-info);
+  --color-brand-info-fg: var(--brand-info-fg);
+  --color-brand-info-subtle: var(--brand-info-subtle);
+  --color-brand-info-subtle-fg: var(--brand-info-subtle-fg);
+
+  --color-brand-border: var(--brand-border);
+  --color-brand-border-strong: var(--brand-border-strong);
+  --color-brand-border-focus: var(--brand-border-focus);
+  --color-brand-ring: var(--brand-ring);
+  --color-brand-input-border: var(--brand-input-border);
+  --color-brand-input-border-hover: var(--brand-input-border-hover);
+  --color-brand-input-border-focus: var(--brand-input-border-focus);
+  --color-brand-overlay: var(--brand-overlay);
+
+  --color-brand-status-active: var(--brand-status-active);
+  --color-brand-status-active-subtle: var(--brand-status-active-subtle);
+  --color-brand-status-pending: var(--brand-status-pending);
+  --color-brand-status-pending-subtle: var(--brand-status-pending-subtle);
+  --color-brand-status-expired: var(--brand-status-expired);
+  --color-brand-status-urgent: var(--brand-status-urgent);
+  --color-brand-status-urgent-subtle: var(--brand-status-urgent-subtle);
+
+  --radius-brand-sm: var(--brand-radius-sm);
+  --radius-brand-md: var(--brand-radius-md);
+  --radius-brand-lg: var(--brand-radius-lg);
+  --radius-brand-xl: var(--brand-radius-xl);
+  --font-brand-heading: var(--brand-heading-font-family);
+  --font-brand-body: var(--brand-body-font-family);
+  --font-weight-brand-heading-weight: var(--brand-heading-font-weight);
+  --font-weight-brand-body-weight: var(--brand-body-font-weight);
+
+  --text-brand-heading-lg: var(--brand-heading-lg-font-size);
+  --text-brand-heading-lg--line-height: var(--brand-heading-lg-leading);
+  --text-brand-heading-xl: var(--brand-heading-xl-font-size);
+  --text-brand-heading-xl--line-height: var(--brand-heading-xl-leading);
+  --text-brand-heading-2xl: var(--brand-heading-2xl-font-size);
+  --text-brand-heading-2xl--line-height: var(--brand-heading-2xl-leading);
+  --text-brand-heading-3xl: var(--brand-heading-3xl-font-size);
+  --text-brand-heading-3xl--line-height: var(--brand-heading-3xl-leading);
+  --text-brand-heading-4xl: var(--brand-heading-4xl-font-size);
+  --text-brand-heading-4xl--line-height: var(--brand-heading-4xl-leading);
+  --text-brand-heading-5xl: var(--brand-heading-5xl-font-size);
+  --text-brand-heading-5xl--line-height: var(--brand-heading-5xl-leading);
+  --text-brand-heading-6xl: var(--brand-heading-6xl-font-size);
+  --text-brand-heading-6xl--line-height: var(--brand-heading-6xl-leading);
+  --text-brand-heading-7xl: var(--brand-heading-7xl-font-size);
+  --text-brand-heading-7xl--line-height: var(--brand-heading-7xl-leading);
+  --text-brand-heading-8xl: var(--brand-heading-8xl-font-size);
+  --text-brand-heading-8xl--line-height: var(--brand-heading-8xl-leading);
+  --text-brand-heading-9xl: var(--brand-heading-9xl-font-size);
+  --text-brand-heading-9xl--line-height: var(--brand-heading-9xl-leading);
+  --text-brand-body-xs: var(--brand-body-xs-font-size);
+  --text-brand-body-xs--line-height: var(--brand-body-xs-leading);
+  --text-brand-body-sm: var(--brand-body-sm-font-size);
+  --text-brand-body-sm--line-height: var(--brand-body-sm-leading);
+  --text-brand-body-md: var(--brand-body-md-font-size);
+  --text-brand-body-md--line-height: var(--brand-body-md-leading);
+
+  --leading-brand-heading-lg: var(--brand-heading-lg-leading);
+  --leading-brand-heading-xl: var(--brand-heading-xl-leading);
+  --leading-brand-heading-2xl: var(--brand-heading-2xl-leading);
+  --leading-brand-heading-3xl: var(--brand-heading-3xl-leading);
+  --leading-brand-heading-4xl: var(--brand-heading-4xl-leading);
+  --leading-brand-heading-5xl: var(--brand-heading-5xl-leading);
+  --leading-brand-heading-6xl: var(--brand-heading-6xl-leading);
+  --leading-brand-heading-7xl: var(--brand-heading-7xl-leading);
+  --leading-brand-heading-8xl: var(--brand-heading-8xl-leading);
+  --leading-brand-heading-9xl: var(--brand-heading-9xl-leading);
+  --leading-brand-body-xs: var(--brand-body-xs-leading);
+  --leading-brand-body-sm: var(--brand-body-sm-leading);
+  --leading-brand-body-md: var(--brand-body-md-leading);
+}

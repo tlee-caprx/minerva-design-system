@@ -1,0 +1,186 @@
+/* Recreated from supplied brand2.css screenshots for review.
+ * Layer: named Mochi palette ramps and typography aliases.
+ * Keep unimported until the unified token mapping is approved.
+ */
+:root {
+  /* accent-primary */
+  --accent-primary-50: var(--color-teal-50);
+  --accent-primary-100: var(--color-teal-100);
+  --accent-primary-200: var(--color-teal-200);
+  --accent-primary-300: var(--color-teal-300);
+  --accent-primary-400: var(--color-teal-400);
+  --accent-primary-500: var(--color-teal-500);
+  --accent-primary-600: var(--color-teal-600);
+  --accent-primary-700: var(--color-teal-700);
+  --accent-primary-800: var(--color-teal-800);
+  --accent-primary-900: var(--color-teal-900);
+  --accent-primary-950: var(--color-teal-950);
+
+  /* accent-secondary */
+  --accent-secondary-50: var(--color-pink-50);
+  --accent-secondary-100: var(--color-pink-100);
+  --accent-secondary-200: var(--color-pink-200);
+  --accent-secondary-300: var(--color-pink-300);
+  --accent-secondary-400: var(--color-pink-400);
+  --accent-secondary-500: var(--color-pink-500);
+  --accent-secondary-600: var(--color-pink-600);
+  --accent-secondary-700: var(--color-pink-700);
+  --accent-secondary-800: var(--color-pink-800);
+  --accent-secondary-900: var(--color-pink-900);
+  --accent-secondary-950: var(--color-pink-950);
+
+  /* brand-primary */
+  --brand-primary-50: var(--color-indigo-50);
+  --brand-primary-100: var(--color-indigo-100);
+  --brand-primary-200: var(--color-indigo-200);
+  --brand-primary-300: var(--color-indigo-300);
+  --brand-primary-400: var(--color-indigo-400);
+  --brand-primary-500: var(--color-indigo-500);
+  --brand-primary-600: var(--color-indigo-600);
+  --brand-primary-700: var(--color-indigo-700);
+  --brand-primary-800: var(--color-indigo-800);
+  --brand-primary-900: var(--color-indigo-900);
+  --brand-primary-950: var(--color-indigo-950);
+
+  /* brand-secondary */
+  --brand-secondary-50: var(--color-stone-50);
+  --brand-secondary-100: var(--color-stone-100);
+  --brand-secondary-200: var(--color-stone-200);
+  --brand-secondary-300: var(--color-stone-300);
+  --brand-secondary-400: var(--color-stone-400);
+  --brand-secondary-500: var(--color-stone-500);
+  --brand-secondary-600: var(--color-stone-600);
+  --brand-secondary-700: var(--color-stone-700);
+  --brand-secondary-800: var(--color-stone-800);
+  --brand-secondary-900: var(--color-stone-900);
+  --brand-secondary-950: var(--color-stone-950);
+
+  /* brand-tertiary */
+  --brand-tertiary-50: var(--color-slate-50);
+  --brand-tertiary-100: var(--color-slate-100);
+  --brand-tertiary-200: var(--color-slate-200);
+  --brand-tertiary-300: var(--color-slate-300);
+  --brand-tertiary-400: var(--color-slate-400);
+  --brand-tertiary-500: var(--color-slate-500);
+  --brand-tertiary-600: var(--color-slate-600);
+  --brand-tertiary-700: var(--color-slate-700);
+  --brand-tertiary-800: var(--color-slate-800);
+  --brand-tertiary-900: var(--color-slate-900);
+  --brand-tertiary-950: var(--color-slate-950);
+
+  /* semantic-attention */
+  --semantic-attention-50: var(--color-orange-50);
+  --semantic-attention-100: var(--color-orange-100);
+  --semantic-attention-200: var(--color-orange-200);
+  --semantic-attention-300: var(--color-orange-300);
+  --semantic-attention-400: var(--color-orange-400);
+  --semantic-attention-500: var(--color-orange-500);
+  --semantic-attention-600: var(--color-orange-600);
+  --semantic-attention-700: var(--color-orange-700);
+  --semantic-attention-800: var(--color-orange-800);
+  --semantic-attention-900: var(--color-orange-900);
+  --semantic-attention-950: var(--color-orange-950);
+
+  /* semantic-error */
+  --semantic-error-50: var(--color-red-50);
+  --semantic-error-100: var(--color-red-100);
+  --semantic-error-200: var(--color-red-200);
+  --semantic-error-300: var(--color-red-300);
+  --semantic-error-400: var(--color-red-400);
+  --semantic-error-500: var(--color-red-500);
+  --semantic-error-600: var(--color-red-600);
+  --semantic-error-700: var(--color-red-700);
+  --semantic-error-800: var(--color-red-800);
+  --semantic-error-900: var(--color-red-900);
+  --semantic-error-950: var(--color-red-950);
+
+  /* semantic-message */
+  --semantic-message-50: var(--color-blue-50);
+  --semantic-message-100: var(--color-blue-100);
+  --semantic-message-200: var(--color-blue-200);
+  --semantic-message-300: var(--color-blue-300);
+  --semantic-message-400: var(--color-blue-400);
+  --semantic-message-500: var(--color-blue-500);
+  --semantic-message-600: var(--color-blue-600);
+  --semantic-message-700: var(--color-blue-700);
+  --semantic-message-800: var(--color-blue-800);
+  --semantic-message-900: var(--color-blue-900);
+  --semantic-message-950: var(--color-blue-950);
+
+  /* semantic-miscellaneous */
+  --semantic-miscellaneous-50: var(--color-purple-50);
+  --semantic-miscellaneous-100: var(--color-purple-100);
+  --semantic-miscellaneous-200: var(--color-purple-200);
+  --semantic-miscellaneous-300: var(--color-purple-300);
+  --semantic-miscellaneous-400: var(--color-purple-400);
+  --semantic-miscellaneous-500: var(--color-purple-500);
+  --semantic-miscellaneous-600: var(--color-purple-600);
+  --semantic-miscellaneous-700: var(--color-purple-700);
+  --semantic-miscellaneous-800: var(--color-purple-800);
+  --semantic-miscellaneous-900: var(--color-purple-900);
+  --semantic-miscellaneous-950: var(--color-purple-950);
+
+  /* semantic-success */
+  --semantic-success-50: var(--color-green-50);
+  --semantic-success-100: var(--color-green-100);
+  --semantic-success-200: var(--color-green-200);
+  --semantic-success-300: var(--color-green-300);
+  --semantic-success-400: var(--color-green-400);
+  --semantic-success-500: var(--color-green-500);
+  --semantic-success-600: var(--color-green-600);
+  --semantic-success-700: var(--color-green-700);
+  --semantic-success-800: var(--color-green-800);
+  --semantic-success-900: var(--color-green-900);
+  --semantic-success-950: var(--color-green-950);
+
+  /* semantic-warning */
+  --semantic-warning-50: var(--color-yellow-50);
+  --semantic-warning-100: var(--color-yellow-100);
+  --semantic-warning-200: var(--color-yellow-200);
+  --semantic-warning-300: var(--color-yellow-300);
+  --semantic-warning-400: var(--color-yellow-400);
+  --semantic-warning-500: var(--color-yellow-500);
+  --semantic-warning-600: var(--color-yellow-600);
+  --semantic-warning-700: var(--color-yellow-700);
+  --semantic-warning-800: var(--color-yellow-800);
+  --semantic-warning-900: var(--color-yellow-900);
+  --semantic-warning-950: var(--color-yellow-950);
+
+  /* Typography — font family */
+  --brand-heading-font-family: var(--font-sans);
+  --brand-body-font-family: var(--font-sans);
+
+  /* Typography — font size */
+  --brand-heading-lg-font-size: var(--text-lg);
+  --brand-heading-xl-font-size: var(--text-xl);
+  --brand-heading-2xl-font-size: var(--text-2xl);
+  --brand-heading-3xl-font-size: var(--text-3xl);
+  --brand-heading-4xl-font-size: var(--text-4xl);
+  --brand-heading-5xl-font-size: var(--text-5xl);
+  --brand-heading-6xl-font-size: var(--text-6xl);
+  --brand-heading-7xl-font-size: var(--text-7xl);
+  --brand-heading-8xl-font-size: var(--text-8xl);
+  --brand-heading-9xl-font-size: var(--text-9xl);
+  --brand-body-xs-font-size: var(--text-xs);
+  --brand-body-sm-font-size: var(--text-sm);
+  --brand-body-md-font-size: var(--text-base);
+
+  /* Typography — font weight */
+  --brand-heading-font-weight: var(--font-weight-semibold);
+  --brand-body-font-weight: var(--font-weight-normal);
+
+  /* Typography — leading */
+  --brand-heading-lg-leading: var(--text-lg--line-height);
+  --brand-heading-xl-leading: var(--text-xl--line-height);
+  --brand-heading-2xl-leading: var(--text-2xl--line-height);
+  --brand-heading-3xl-leading: var(--text-3xl--line-height);
+  --brand-heading-4xl-leading: var(--text-4xl--line-height);
+  --brand-heading-5xl-leading: var(--text-5xl--line-height);
+  --brand-heading-6xl-leading: var(--text-6xl--line-height);
+  --brand-heading-7xl-leading: var(--text-7xl--line-height);
+  --brand-heading-8xl-leading: var(--text-8xl--line-height);
+  --brand-heading-9xl-leading: var(--text-9xl--line-height);
+  --brand-body-xs-leading: var(--text-xs--line-height);
+  --brand-body-sm-leading: var(--text-sm--line-height);
+  --brand-body-md-leading: var(--text-base--line-height);
+}

@@ -1,0 +1,323 @@
+@theme static {
+  /*
+   * Layer 1: Primitives — raw values, no semantic meaning.
+   * We extend Tailwind's default theme rather than replace it. The Mochi
+   * palette below is transcribed from design screenshots for review.
+   * Palette names follow the design source directly (for example,
+   * --color-blue-100) and replace Tailwind's palettes of the same names.
+   * Components should use semantic or component tokens, never raw primitives.
+   */
+
+  /* Neutrals */
+  --color-black: #000;
+  --color-white: #fff;
+  --color-transparent: transparent;
+
+
+  /* Indigo */
+  --color-indigo-50: #fafbff;
+  --color-indigo-100: #f5f6ff;
+  --color-indigo-200: #e0e5ff;
+  --color-indigo-300: #adbaff;
+  --color-indigo-400: #7a8fff;
+  --color-indigo-500: #4763ff;
+  --color-indigo-600: #1438ff;
+  --color-indigo-700: #0022e0;
+  --color-indigo-800: #001aad;
+  --color-indigo-900: #001170;
+  --color-indigo-950: #000833;
+
+  /* Blue */
+  --color-blue-50: #f5f9ff;
+  --color-blue-100: #ebf3ff;
+  --color-blue-200: #b8d4fe;
+  --color-blue-300: #86b6fe;
+  --color-blue-400: #5497fd;
+  --color-blue-500: #2179fc;
+  --color-blue-600: #035ee7;
+  --color-blue-700: #024ab5;
+  --color-blue-800: #023583;
+  --color-blue-900: #012150;
+  --color-blue-950: #000c1e;
+
+  /* Teal */
+  --color-teal-50: #e7f9f6;
+  --color-teal-100: #cef3ee;
+  --color-teal-200: #a5e8df;
+  --color-teal-300: #7dded1;
+  --color-teal-400: #4cd2c0;
+  --color-teal-500: #2fbaa8;
+  --color-teal-600: #259284;
+  --color-teal-700: #1b6a5f;
+  --color-teal-800: #10413b;
+  --color-teal-900: #0a2925;
+  --color-teal-950: #000c1e;
+
+  /* Green */
+  --color-green-50: #eefcf4;
+  --color-green-100: #cbf6dd;
+  --color-green-200: #a0eec0;
+  --color-green-300: #54d489;
+  --color-green-400: #22bf63;
+  --color-green-500: #09a549;
+  --color-green-600: #008537;
+  --color-green-700: #005222;
+  --color-green-800: #003315;
+  --color-green-900: #00240f;
+  --color-green-950: #000f06;
+
+  /* Yellow */
+  --color-yellow-50: #fffaeb;
+  --color-yellow-100: #fff5d6;
+  --color-yellow-200: #ffedb8;
+  --color-yellow-300: #ffe38f;
+  --color-yellow-400: #ffd75c;
+  --color-yellow-500: #ffca28;
+  --color-yellow-600: #e0a900;
+  --color-yellow-700: #ad8300;
+  --color-yellow-800: #7a5c00;
+  --color-yellow-900: #473600;
+  --color-yellow-950: #241b00;
+
+  /* Orange */
+  --color-orange-50: #fef2e6;
+  --color-orange-100: #fcdaba;
+  --color-orange-200: #fbc593;
+  --color-orange-300: #f9ab62;
+  --color-orange-400: #f79130;
+  --color-orange-500: #ec7709;
+  --color-orange-600: #bb5e07;
+  --color-orange-700: #8a4505;
+  --color-orange-800: #592c03;
+  --color-orange-900: #3b1d02;
+  --color-orange-950: #1e0f01;
+
+  /* Pink */
+  --color-pink-50: #fef1f7;
+  --color-pink-100: #fcd9ea;
+  --color-pink-200: #f9b8d9;
+  --color-pink-300: #f79cc9;
+  --color-pink-400: #f476b5;
+  --color-pink-500: #f150a0;
+  --color-pink-600: #e72787;
+  --color-pink-700: #c5166d;
+  --color-pink-800: #971154;
+  --color-pink-900: #6a0c3a;
+  --color-pink-950: #3c0721;
+
+  /* Red */
+  --color-red-50: #fdf1f2;
+  --color-red-100: #fbe4e5;
+  --color-red-200: #f6bbbf;
+  --color-red-300: #f08e95;
+  --color-red-400: #ea616a;
+  --color-red-500: #e43440;
+  --color-red-600: #ca1a26;
+  --color-red-700: #871219;
+  --color-red-800: #681912;
+  --color-red-900: #3d0f0b;
+  --color-red-950: #1a0605;
+
+  /* Purple */
+  --color-purple-50: #f9f7fd;
+  --color-purple-100: #eee6f9;
+  --color-purple-200: #d0beef;
+  --color-purple-300: #b99de7;
+  --color-purple-400: #9c74dc;
+  --color-purple-500: #7f4bd2;
+  --color-purple-600: #6a31c4;
+  --color-purple-700: #56289f;
+  --color-purple-800: #401e76;
+  --color-purple-900: #30175a;
+  --color-purple-950: #160a29;
+
+  /* Slate */
+  --color-slate-50: #f9f9fb;
+  --color-slate-100: #e6e7ef;
+  --color-slate-200: #c6cadc;
+  --color-slate-300: #a7acc8;
+  --color-slate-400: #878fb5;
+  --color-slate-500: #6871a1;
+  --color-slate-600: #525a84;
+  --color-slate-700: #3e4565;
+  --color-slate-800: #31364f;
+  --color-slate-900: #1d202f;
+  --color-slate-950: #101119;
+
+  /* Stone */
+  --color-stone-50: #fafaf9;
+  --color-stone-100: #f5f4f3;
+  --color-stone-200: #ecebe9;
+  --color-stone-300: #dedbd8;
+  --color-stone-400: #ccc7c2;
+  --color-stone-500: #b9b2ac;
+  --color-stone-600: #aba39c;
+  --color-stone-700: #938980;
+  --color-stone-800: #797067;
+  --color-stone-900: #4d4742;
+  --color-stone-950: #211f1c;
+
+
+
+  /* Animation */
+  --animate-bounce: bounce 1s infinite;
+  --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin: spin 1s linear infinite;
+  --aspect-video: 16/9;
+  --default-transition-duration: 150ms;
+  --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  --blur: 8px;
+  --blur-none: 0px;
+  --blur-sm: 4px;
+  --blur-md: 8px;
+  --blur-lg: 12px;
+  --blur-xl: 16px;
+  --blur-2xl: 24px;
+  --blur-3xl: 40px;
+  --blur-4xl: 64px;
+
+  --border-width-0: 0px;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  --border-width-8: 8px;
+
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+
+  --container-xs: 20rem;
+  --container-sm: 24rem;
+  --container-md: 28rem;
+  --container-lg: 32rem;
+  --container-xl: 36rem;
+  --container-2xl: 42rem;
+  --container-3xl: 48rem;
+  --container-4xl: 56rem;
+  --container-5xl: 64rem;
+  --container-6xl: 72rem;
+  --container-7xl: 80rem;
+
+  --drop-shadow: 0 1px 2px rgb(0 0 0/0.1), 0 1px 1px rgb(0 0 0/0.06);
+  --drop-shadow-xs: 0 1px 1px rgb(0 0 0/0.05);
+  --drop-shadow-sm: 0 1px 2px rgb(0 0 0/0.15);
+  --drop-shadow-md: 0 3px 3px rgb(0 0 0/0.12);
+  --drop-shadow-lg: 0 4px 4px rgb(0 0 0/0.15);
+  --drop-shadow-xl: 0 9px 7px rgb(0 0 0/0.1);
+  --drop-shadow-2xl: 0 25px 25px rgb(0 0 0/0.15);
+
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+  /* Work Sans is loaded by fonts.css; the system stack remains the fallback. */
+  --font-sans:
+    "Work Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-thin: 100;
+
+  --inset-shadow-2xs: inset 0 1px rgb(0 0 0/0.05);
+  --inset-shadow-sm: inset 0 2px 4px rgb(0 0 0/0.05);
+  --inset-shadow-xs: inset 0 1px 1px rgb(0 0 0/0.05);
+
+  --leading-loose: 2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-snug: 1.375;
+  --leading-tight: 1.25;
+
+  --max-width-prose: 65ch;
+  --perspective-distant: 1200px;
+  --perspective-dramatic: 100px;
+  --perspective-midrange: 800px;
+  --perspective-near: 300px;
+  --perspective-normal: 500px;
+
+  --radius: 0.25rem;
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-xl_5: 10px;
+  --radius-2xl: 12px;
+  --radius-2xl_5: 14px;
+  --radius-3xl: 16px;
+  --radius-4xl: 24px;
+  --radius-full: 9999px;
+
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-2xs: 0 1px rgb(0 0 0/0.05);
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0/0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0/0.1), 0 1px 2px -1px rgb(0 0 0/0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0/0.1), 0 2px 4px -2px rgb(0 0 0/0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0/0.1), 0 4px 6px -4px rgb(0 0 0/0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0/0.1), 0 8px 10px -6px rgb(0 0 0/0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0/0.25);
+  --shadow-soft-sm: 0 1px 3px oklch(0 0 0/0.06);
+  --shadow-soft-md: 0 4px 12px oklch(0 0 0/0.08);
+  --shadow-soft-lg: 0 8px 24px oklch(0 0 0/0.1);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0/0.05);
+
+  --spacing: 0.25rem;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl:4.5rem;
+  --text-8xl: 6rem;
+  --text-9xl: 8rem;
+
+  --text-xs--line-height: 1.333333333;
+  --text-sm--line-height: 1.428571429;
+  --text-base--line-height: 1.5;
+  --text-lg--line-height: 1.555555556;
+  --text-xl--line-height: 1.6;
+  --text-2xl--line-height: 1.5;
+  --text-3xl--line-height: 1.333333333;
+  --text-4xl--line-height: 1.333333333;
+  --text-5xl--line-height: 1.333333333;
+  --text-6xl--line-height: 1.333333333;
+  --text-7xl--line-height: 1.333333333;
+  --text-8xl--line-height: 1.333333333;
+  --text-9xl--line-height: 1.25;
+
+  --tracking-normal: 0em;
+  --tracking-tight: -0.025em;
+  --tracking-tighter: -0.05em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  --text-shadow-2xs: 0px 1px 0px rgb(0 0 0/0.15);
+  --text-shadow-xs: 0px 1px 1px rgb(0 0 0/0.2);
+  --text-shadow-sm: 0px 1px 0px rgb(0 0 0/0.075), 0px 1px 1px rgb(0 0 0/0.075), 0px 2px 2px rgb(0 0 0/0.075);
+  --text-shadow-md: 0px 1px 1px rgb(0 0 0/0.1), 0px 1px 2px rgb(0 0 0/0.1), 0px 2px 4px rgb(0 0 0/0.1);
+  --text-shadow-lg: 0px 1px 2px rgb(0 0 0/0.1), 0px 3px 2px rgb(0 0 0/0.1), 0px 4px 8px rgb(0 0 0/0.1);
+
+
+
+
+
+}
