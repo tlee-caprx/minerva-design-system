@@ -696,6 +696,9 @@ html {
     border-bottom: var(--space-1) solid var(--border-surface-base);
     background: var(--row-bg);
   }
+  .minerva-table > * > tr[data-row] > * {
+    white-space: nowrap;
+  }
   .minerva-table > * > tr > :last-child {
     border-right: 0;
   }

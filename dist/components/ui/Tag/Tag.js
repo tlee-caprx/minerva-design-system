@@ -1,6 +1,6 @@
-import { jsx as c } from "react/jsx-runtime";
+import { jsx as a } from "react/jsx-runtime";
 import { Text as n } from "../Text/Text.js";
-const b = {
+const i = {
   info: {
     className: "bg-(--bg-surface-subtle) text-(--text-surface-subtle)",
     border: "1px solid var(--border-surface-base)"
@@ -24,16 +24,17 @@ const b = {
     className: "bg-(--bg-surface-accent-primary) text-(--text-surface-inverse)"
   }
 };
-function f({ variant: s = "info", children: a, className: t = "" }) {
-  const { className: r, border: e } = b[s];
-  return /* @__PURE__ */ c(
+function f({ variant: t = "info", children: e, className: r = "" }) {
+  const { className: c, border: s } = i[t];
+  return /* @__PURE__ */ a(
     n,
     {
       as: "span",
       variant: "tag-label",
-      className: `inline-flex items-center rounded-(--radius-sm) py-(--inset-1) px-(--inset-3) ${r} ${t}`,
-      style: e ? { border: e } : void 0,
-      children: a
+      title: typeof e == "string" ? e : void 0,
+      className: `inline-flex items-center min-w-0 max-w-full whitespace-nowrap rounded-(--radius-sm) py-(--inset-1) px-(--inset-3) ${c} ${r}`,
+      style: s ? { border: s } : void 0,
+      children: /* @__PURE__ */ a("span", { className: "truncate", children: e })
     }
   );
 }
