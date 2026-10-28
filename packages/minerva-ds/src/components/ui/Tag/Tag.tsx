@@ -57,14 +57,18 @@ const VARIANT_STYLES: Record<TagVariant, VariantStyle> = {
 export function Tag({ variant = 'info', children, className = '' }: TagProps) {
   const { className: variantClass, border } = VARIANT_STYLES[variant]
 
+  // Never wraps: a tag reads as one unit. When its container is narrower
+  // than the label, it shrinks and ends in "…" (full text in the native
+  // title). In a Table the cell sizes to the tag, so it shows in full there.
   return (
     <Text
       as="span"
       variant="tag-label"
-      className={`inline-flex items-center rounded-(--radius-sm) py-(--inset-1) px-(--inset-3) ${variantClass} ${className}`}
+      title={typeof children === 'string' ? children : undefined}
+      className={`inline-flex items-center min-w-0 max-w-full whitespace-nowrap rounded-(--radius-sm) py-(--inset-1) px-(--inset-3) ${variantClass} ${className}`}
       style={border ? { border } : undefined}
     >
-      {children}
+      <span className="truncate">{children}</span>
     </Text>
   )
 }
