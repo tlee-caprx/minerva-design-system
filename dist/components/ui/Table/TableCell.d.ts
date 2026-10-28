@@ -1,31 +1,11 @@
-import { CSSProperties, KeyboardEvent, ReactNode } from 'react';
-export type TableCellType = 'text' | 'link' | 'date' | 'number' | 'money' | 'checkbox' | 'radio' | 'action' | 'tag';
-interface TableCellCommonProps {
-    /** Alternates the fill by row position — pass the row's own odd/even state */
-    odd?: boolean;
-    /**
-     * Whether this cell's row is a click target — only then does it react to
-     * the row's hover (bg-surface-muted). The row wrapper needs the `group`
-     * class for this to take effect.
-     */
-    hoverable?: boolean;
+import { ReactNode, TdHTMLAttributes } from 'react';
+export type TableCellType = 'text' | 'link' | 'date' | 'number' | 'money' | 'checkbox' | 'radio' | 'action' | 'tag' | 'expand';
+interface TableCellCommonProps extends Omit<TdHTMLAttributes<HTMLTableCellElement>, 'color' | 'children'> {
     children: ReactNode;
-    className?: string;
-    /** Used by Table to explicitly place this cell in its grid — not for consumer use */
-    style?: CSSProperties;
-    /**
-     * Used by Table to make the first cell of a clickable row a keyboard
-     * activation target for `onRowClick` — not for consumer use. (The row
-     * wrapper itself is `display: contents` and can't receive focus, so the
-     * activation point has to live on a real cell instead.)
-     */
-    tabIndex?: number;
-    /** Used by Table alongside `tabIndex` above — not for consumer use */
-    onKeyDown?: (e: KeyboardEvent<HTMLDivElement>) => void;
 }
 interface TableCellTextProps extends TableCellCommonProps {
     type: 'text' | 'link' | 'date' | 'number' | 'money';
-    /** Second line underneath, only valid for text/link/date/number/money — always text-surface-base regardless of `color` */
+    /** Second line underneath, which makes the row taller — always text-surface-base regardless of `color` */
     subtext?: ReactNode;
     /**
      * Overrides the default text-surface-base color — pass a CSS color value,
@@ -34,9 +14,14 @@ interface TableCellTextProps extends TableCellCommonProps {
      * color comes from whatever you pass as children.
      */
     color?: string;
+    /**
+     * Caps the cell's width; longer text is cut off with "…" and shows in full
+     * in a Tooltip on hover. Any CSS length, e.g. `'calc(var(--space-40) * 6)'`.
+     */
+    maxWidth?: string;
 }
 interface TableCellOtherProps extends TableCellCommonProps {
-    type: 'checkbox' | 'radio' | 'action' | 'tag';
+    type: 'checkbox' | 'radio' | 'action' | 'tag' | 'expand';
 }
 export type TableCellProps = TableCellTextProps | TableCellOtherProps;
 export declare function TableCell(props: TableCellProps): import('react').JSX.Element;

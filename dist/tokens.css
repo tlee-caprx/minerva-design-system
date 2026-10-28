@@ -678,3 +678,74 @@ html {
     animation-name: judi-assistant-review-step-fade;
   }
 }
+@layer theme, base, components, utilities;
+@layer components {
+  .minerva-table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  .minerva-table-frame {
+    width: fit-content;
+  }
+  .minerva-table-frame:has(> div > .minerva-table > thead > tr > th[data-grow]), .minerva-table:has(> thead > tr > th[data-grow]), .minerva-table > thead > tr > th[data-grow] {
+    width: 100%;
+  }
+  .minerva-table > * > tr > * {
+    border-right: var(--space-1) solid var(--border-surface-base);
+    border-bottom: var(--space-1) solid var(--border-surface-base);
+    background: var(--row-bg);
+  }
+  .minerva-table > * > tr > :last-child {
+    border-right: 0;
+  }
+  .minerva-table > tbody > tr:last-child > td, .minerva-table:has(> tbody:empty) > thead > tr:last-child > th {
+    border-bottom: 0;
+  }
+  .minerva-table > thead > tr {
+    --row-bg: var(--bg-surface-base);
+  }
+  .minerva-table > tbody > tr {
+    --row-bg: var(--bg-surface-subtle);
+  }
+  .minerva-table > tbody > tr:where([data-row]:nth-child(even of [data-row])), .minerva-table > tbody > tr:where([data-row]:nth-child(even of [data-row]) + [data-detail]) {
+    --row-bg: var(--bg-surface-base);
+  }
+  .minerva-table > tbody > tr[data-clickable]:hover {
+    --row-bg: var(--bg-control-subtle-hover);
+  }
+  .minerva-table[data-sticky-first] > * > tr[data-row] > :first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+  .minerva-table > tbody > tr[data-row] > td[data-type='action']:last-child, .minerva-table:has(> tbody > tr > td[data-type='action']:last-child) > thead > tr > th:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 1;
+    border-left: var(--space-1) solid var(--border-surface-base);
+  }
+  .minerva-table > tbody > tr[data-row] > :has(+ td[data-type='action']:last-child), .minerva-table:has(> tbody > tr > td[data-type='action']:last-child) > thead > tr > th:nth-last-child(2) {
+    border-right: 0;
+  }
+  .minerva-table:where([data-sticky-first][data-scrolled-start]) > * > tr:where([data-row]) > :first-child {
+    box-shadow: var(--shadow-table-outer-right);
+    clip-path: inset(0 calc(var(--space-16) * -1) 0 0);
+  }
+  .minerva-table:where([data-scrolled-end]) > tbody > tr:where([data-row]) > td:where([data-type='action']):last-child, .minerva-table:where([data-scrolled-end]):where(:has(> tbody > tr > td[data-type='action']:last-child)) > thead > tr > th:last-child {
+    box-shadow: var(--shadow-table-outer-left);
+    clip-path: inset(0 0 0 calc(var(--space-16) * -1));
+  }
+  .minerva-table > tbody > tr[data-clickable] {
+    outline: none;
+  }
+  .minerva-table > tbody > tr[data-clickable]:focus-visible > td {
+    --row-focus-ring: var(--border-control-default-focus);
+    box-shadow: inset 0 var(--space-2) 0 0 var(--row-focus-ring), inset 0 calc(var(--space-2) * -1) 0 0 var(--row-focus-ring);
+  }
+  .minerva-table > tbody > tr[data-clickable]:focus-visible > td:first-child {
+    box-shadow: inset 0 var(--space-2) 0 0 var(--row-focus-ring), inset 0 calc(var(--space-2) * -1) 0 0 var(--row-focus-ring), inset var(--space-2) 0 0 0 var(--row-focus-ring);
+  }
+  .minerva-table > tbody > tr[data-clickable]:focus-visible > td:last-child {
+    box-shadow: inset 0 var(--space-2) 0 0 var(--row-focus-ring), inset 0 calc(var(--space-2) * -1) 0 0 var(--row-focus-ring), inset calc(var(--space-2) * -1) 0 0 0 var(--row-focus-ring);
+  }
+}

@@ -15,8 +15,10 @@ export interface TooltipBubbleProps {
 export interface TooltipProps {
     content: ReactNode;
     beak?: TooltipBeak;
+    /** Skips showing the tooltip, e.g. while truncated text still fits */
+    disabled?: boolean;
     children: ReactNode;
     className?: string;
 }
 export declare function TooltipBubble({ content, beak, id, className }: TooltipBubbleProps): import('react').JSX.Element;
-export declare function Tooltip({ content, beak, children, className }: TooltipProps): import('react').JSX.Element;
+export declare function Tooltip({ content, beak, disabled, children, className }: TooltipProps): import('react').JSX.Element;

@@ -32,8 +32,8 @@ export { Dropdown, MultiSelectDropdown, MenuGroup, MenuItem, MenuSearchBar, Menu
 export type { DropdownProps, MultiSelectDropdownProps, MenuGroupProps, MenuItemProps, MenuSearchBarProps, MenuPanelProps, } from './ui/Dropdown';
 export { Message } from './ui/Message';
 export type { MessageProps, MessageVariant } from './ui/Message';
-export { Table, TableCell, TableCellHeader, Pagination } from './ui/Table';
-export type { TableProps, TableCellProps, TableCellType, TableCellHeaderProps, PaginationProps } from './ui/Table';
+export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableExpandButton, TableRowActions, Pagination } from './ui/Table';
+export type { TableProps, TableHeaderProps, TableBodyProps, TableRowProps, TableHeadProps, TableCellProps, TableCellType, TableExpandButtonProps, TableRowActionsProps, TableRowAction, PaginationProps } from './ui/Table';
 export { Modal, ModalContent } from './ui/Modal';
 export type { ModalProps, ModalContentProps } from './ui/Modal';
 export { Lozenge } from './ui/Lozenge';

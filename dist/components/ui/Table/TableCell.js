@@ -1,30 +1,59 @@
-import { jsx as t, jsxs as y, Fragment as h } from "react/jsx-runtime";
-import { Text as i } from "../Text/Text.js";
-const p = ["text", "link", "date", "number", "money"], E = ["text", "date", "number", "money"], N = ["link", "action"];
-function I(e) {
-  const { type: s, odd: l = !1, hoverable: r = !1, children: n, className: d = "", style: b, tabIndex: u, onKeyDown: m } = e, o = "subtext" in e ? e.subtext : void 0, x = "color" in e ? e.color : void 0, f = p.includes(s), T = E.includes(s), c = N.includes(s), g = c ? (v) => v.stopPropagation() : void 0, a = /* @__PURE__ */ y(h, { children: [
-    T ? /* @__PURE__ */ t(i, { variant: "body-md", className: "whitespace-nowrap", style: { color: x ?? "var(--text-surface-base)" }, children: n }) : n,
-    o && /* @__PURE__ */ t(i, { variant: "body-sm", className: "text-(--text-surface-base) whitespace-nowrap", children: o })
+import { jsx as t, jsxs as x, Fragment as b } from "react/jsx-runtime";
+import { useRef as A, useState as I, useLayoutEffect as S } from "react";
+import { Tooltip as _ } from "../Tooltip/Tooltip.js";
+import { Text as p } from "../Text/Text.js";
+const g = ["text", "link", "date", "number", "money"], w = ["text", "date", "number", "money"], C = ["link", "action", "checkbox", "radio", "expand"];
+function L(l) {
+  const e = A(null), [n, s] = I(!1);
+  return S(() => {
+    const o = e.current;
+    if (!l || !o) return;
+    const a = () => {
+      const d = Array.from(o.querySelectorAll("[data-truncate]"));
+      s(d.some((c) => c.scrollWidth > c.clientWidth));
+    };
+    a();
+    const i = new ResizeObserver(a);
+    return i.observe(o), () => i.disconnect();
+  }), [e, n];
+}
+function Y(l) {
+  const { type: e, children: n, subtext: s, color: o, maxWidth: a, className: i = "", style: d, onClick: c, ...h } = l, T = g.includes(e), y = w.includes(e), v = C.includes(e), r = a !== void 0, [E, N] = L(r), k = (f) => {
+    v && f.stopPropagation(), c == null || c(f);
+  }, u = r ? "block truncate" : "whitespace-nowrap", m = /* @__PURE__ */ x(b, { children: [
+    y ? /* @__PURE__ */ t(p, { variant: "body-md", "data-truncate": r || void 0, className: u, style: { color: o ?? "var(--text-surface-base)" }, children: n }) : n,
+    s && /* @__PURE__ */ t(p, { variant: "body-sm", "data-truncate": r || void 0, className: `text-(--text-surface-base) ${u}`, children: s })
   ] });
   return /* @__PURE__ */ t(
-    "div",
+    "td",
     {
-      role: "cell",
-      style: b,
-      tabIndex: u,
-      onKeyDown: m,
-      className: [
-        "flex flex-col justify-center",
-        f ? "items-start" : "items-center",
-        "py-(--inset-3) px-(--inset-5)",
-        l ? "bg-(--bg-surface-subtle)" : "bg-(--bg-surface-base)",
-        r ? "group-hover:bg-(--bg-surface-muted)" : "",
-        d
-      ].join(" "),
-      children: c ? /* @__PURE__ */ t("span", { onClick: g, className: "contents", children: a }) : a
+      ...h,
+      "data-type": e,
+      onClick: k,
+      style: d,
+      className: `py-(--inset-3) px-(--inset-5) align-middle ${i}`,
+      children: /* @__PURE__ */ t(
+        "div",
+        {
+          className: `flex flex-col justify-center ${T ? "items-start" : "items-center"}`,
+          style: r ? { maxWidth: a } : void 0,
+          children: r ? /* @__PURE__ */ t(
+            _,
+            {
+              disabled: !N,
+              content: s ? /* @__PURE__ */ x(b, { children: [
+                n,
+                /* @__PURE__ */ t("br", {}),
+                s
+              ] }) : n,
+              children: /* @__PURE__ */ t("span", { ref: E, className: "block min-w-0", children: m })
+            }
+          ) : m
+        }
+      )
     }
   );
 }
 export {
-  I as TableCell
+  Y as TableCell
 };

@@ -1,19 +1,19 @@
 import { jsxs as x, jsx as s } from "react/jsx-runtime";
-import { useState as h, useRef as y, useId as v } from "react";
-import { createPortal as w } from "react-dom";
+import { useState as h, useRef as v, useId as w } from "react";
+import { createPortal as N } from "react-dom";
 import { Text as B } from "../Text/Text.js";
-const N = {
+const S = {
   top: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2",
   bottom: "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2",
   left: "left-0 top-1/2 -translate-x-1/2 -translate-y-1/2",
   right: "right-0 top-1/2 translate-x-1/2 -translate-y-1/2"
 };
-function S({ content: a, beak: o = "bottom", id: n, className: l = "" }) {
+function j({ content: n, beak: o = "bottom", id: r, className: l = "" }) {
   return /* @__PURE__ */ x(
     "span",
     {
       role: "tooltip",
-      id: n,
+      id: r,
       className: [
         "relative inline-block w-max max-w-[240px]",
         "px-(--inset-5) py-(--inset-3)",
@@ -25,55 +25,56 @@ function S({ content: a, beak: o = "bottom", id: n, className: l = "" }) {
           "span",
           {
             "aria-hidden": "true",
-            className: `absolute w-(--space-8) h-(--space-8) rotate-45 bg-(--bg-surface-inverse) ${N[o]}`
+            className: `absolute w-(--space-8) h-(--space-8) rotate-45 bg-(--bg-surface-inverse) ${S[o]}`
           }
         ),
-        /* @__PURE__ */ s(B, { as: "span", variant: "body-sm", className: "relative text-(--text-surface-inverse)", children: a })
+        /* @__PURE__ */ s(B, { as: "span", variant: "body-sm", className: "relative text-(--text-surface-inverse)", children: n })
       ]
     }
   );
 }
-const r = 8;
-function E({ content: a, beak: o = "bottom", children: n, className: l = "" }) {
-  const [i, c] = h(!1), [f, g] = h(null), p = y(null), d = v(), m = () => {
+const a = 8;
+function I({ content: n, beak: o = "bottom", disabled: r = !1, children: l, className: g = "" }) {
+  const [i, c] = h(!1), [f, y] = h(null), p = v(null), m = w(), u = () => {
     var b;
+    if (r) return;
     const t = (b = p.current) == null ? void 0 : b.getBoundingClientRect();
     if (!t) return;
     const e = { position: "fixed" };
     switch (o) {
       case "top":
-        e.top = t.bottom + r, e.left = t.left + t.width / 2, e.transform = "translateX(-50%)";
+        e.top = t.bottom + a, e.left = t.left + t.width / 2, e.transform = "translateX(-50%)";
         break;
       case "left":
-        e.top = t.top + t.height / 2, e.left = t.right + r, e.transform = "translateY(-50%)";
+        e.top = t.top + t.height / 2, e.left = t.right + a, e.transform = "translateY(-50%)";
         break;
       case "right":
-        e.top = t.top + t.height / 2, e.left = t.left - r, e.transform = "translate(-100%, -50%)";
+        e.top = t.top + t.height / 2, e.left = t.left - a, e.transform = "translate(-100%, -50%)";
         break;
       case "bottom":
       case "none":
       default:
-        e.top = t.top - r, e.left = t.left + t.width / 2, e.transform = "translate(-50%, -100%)";
+        e.top = t.top - a, e.left = t.left + t.width / 2, e.transform = "translate(-50%, -100%)";
         break;
     }
-    g(e), c(!0);
-  }, u = () => c(!1);
+    y(e), c(!0);
+  }, d = () => c(!1);
   return /* @__PURE__ */ x(
     "span",
     {
       ref: p,
-      className: "inline-flex",
-      onMouseEnter: m,
-      onMouseLeave: u,
-      onFocus: m,
-      onBlur: u,
+      className: "inline-flex max-w-full",
+      onMouseEnter: u,
+      onMouseLeave: d,
+      onFocus: u,
+      onBlur: d,
       children: [
-        /* @__PURE__ */ s("span", { "aria-describedby": i ? d : void 0, children: n }),
-        i && f && w(
+        /* @__PURE__ */ s("span", { className: "min-w-0", "aria-describedby": i ? m : void 0, children: l }),
+        i && !r && f && N(
           // Arbitrary max z-index (beyond Tailwind's z-50 ceiling, which the
           // sidebar/header also use) — a tooltip must always paint above
           // everything else on the page, no matter what.
-          /* @__PURE__ */ s("span", { style: { ...f, zIndex: 9999 }, children: /* @__PURE__ */ s(S, { content: a, beak: o, id: d, className: l }) }),
+          /* @__PURE__ */ s("span", { style: { ...f, zIndex: 9999 }, children: /* @__PURE__ */ s(j, { content: n, beak: o, id: m, className: g }) }),
           document.body
         )
       ]
@@ -81,6 +82,6 @@ function E({ content: a, beak: o = "bottom", children: n, className: l = "" }) {
   );
 }
 export {
-  E as Tooltip,
-  S as TooltipBubble
+  I as Tooltip,
+  j as TooltipBubble
 };

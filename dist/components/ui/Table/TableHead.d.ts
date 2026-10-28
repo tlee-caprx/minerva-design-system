@@ -1,7 +1,8 @@
-import { CSSProperties } from 'react';
+import { ReactNode, ThHTMLAttributes } from 'react';
 import { SortIconDirection } from '../Icon';
-export interface TableCellHeaderProps {
-    label: string;
+export interface TableHeadProps extends Omit<ThHTMLAttributes<HTMLTableCellElement>, 'align' | 'children'> {
+    /** Column label, or a control such as a select-all Checkbox */
+    children?: ReactNode;
     /** Info icon after the label, with a Tooltip on hover/focus */
     tooltip?: string;
     /** Whole cell becomes a click/keyboard sort trigger */
@@ -12,8 +13,7 @@ export interface TableCellHeaderProps {
     onSort?: () => void;
     /** Match this to the column's body alignment — center for checkbox/radio/action/tag columns */
     align?: 'left' | 'center';
-    className?: string;
-    /** Used by Table to explicitly place this cell in its grid — not for consumer use */
-    style?: CSSProperties;
+    /** This column absorbs the table's leftover width. Mark at most one column; without it the table hugs its content. */
+    grow?: boolean;
 }
-export declare function TableCellHeader({ label, tooltip, sortable, sortDirection, onSort, align, className, style, }: TableCellHeaderProps): import('react').JSX.Element;
+export declare function TableHead({ children, tooltip, sortable, sortDirection, onSort, align, grow, className, style, ...rest }: TableHeadProps): import('react').JSX.Element;
