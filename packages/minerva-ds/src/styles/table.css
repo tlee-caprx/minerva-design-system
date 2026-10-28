@@ -40,6 +40,15 @@
     background: var(--row-bg);
   }
 
+  /* Cells never wrap, whatever they hold (bare text in a link cell, a Tag,
+     buttons): columns hug their content and the table scrolls sideways
+     instead of squeezing a column down to its narrowest width. Detail rows
+     are excluded so their content wraps normally. Truncated cells still cut
+     off with "…" because they set their own max width. */
+  .minerva-table > * > tr[data-row] > * {
+    white-space: nowrap;
+  }
+
   .minerva-table > * > tr > :last-child {
     border-right: 0;
   }
