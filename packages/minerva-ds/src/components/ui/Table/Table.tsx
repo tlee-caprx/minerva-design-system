@@ -159,7 +159,8 @@ export function TableRow({ children, onClick, detail, expanded = false, classNam
         onClick={clickable ? onClick : undefined}
         onKeyDown={handleKeyDown}
         className={[
-          clickable ? 'cursor-pointer outline-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-(--border-control-default-focus)' : '',
+          // Focus ring is drawn by the cells in table.css.
+          clickable ? 'cursor-pointer' : '',
           className,
         ].join(' ')}
       >

@@ -26,9 +26,11 @@
     width: fit-content;
   }
 
-  .minerva-table-frame:has(th[data-grow]),
-  .minerva-table:has(th[data-grow]),
-  .minerva-table th[data-grow] {
+  /* Child combinators throughout, so a table nested in a detail row
+     doesn't restyle the table around it. */
+  .minerva-table-frame:has(> div > .minerva-table > thead > tr > th[data-grow]),
+  .minerva-table:has(> thead > tr > th[data-grow]),
+  .minerva-table > thead > tr > th[data-grow] {
     width: 100%;
   }
 
@@ -93,15 +95,45 @@
   }
 
   /* Shadows only while content is hidden on that side. clip-path keeps each
-     cell's shadow to its own row band, so stacked cells join without seams. */
-  .minerva-table[data-sticky-first][data-scrolled-start] > * > tr[data-row] > :first-child {
+     cell's shadow to its own row band, so stacked cells join without seams.
+     :where() keeps these low-specificity so the row focus ring below wins. */
+  .minerva-table:where([data-sticky-first][data-scrolled-start]) > * > tr:where([data-row]) > :first-child {
     box-shadow: var(--shadow-table-outer-right);
     clip-path: inset(0 calc(var(--space-16) * -1) 0 0);
   }
 
-  .minerva-table[data-scrolled-end] > tbody > tr[data-row] > td[data-type='action']:last-child,
-  .minerva-table[data-scrolled-end]:has(> tbody > tr > td[data-type='action']:last-child) > thead > tr > th:last-child {
+  .minerva-table:where([data-scrolled-end]) > tbody > tr:where([data-row]) > td:where([data-type='action']):last-child,
+  .minerva-table:where([data-scrolled-end]):where(:has(> tbody > tr > td[data-type='action']:last-child)) > thead > tr > th:last-child {
     box-shadow: var(--shadow-table-outer-left);
     clip-path: inset(0 0 0 calc(var(--space-16) * -1));
+  }
+
+  /* ── Keyboard focus on clickable rows ────────────────────────────────────
+     Drawn by the cells, not as an outline on the <tr>: an outline paints
+     beneath positioned children, so pinned cells would cover it. Takes over
+     a pinned cell's scroll shadow while the row is focused. */
+  .minerva-table > tbody > tr[data-clickable] {
+    outline: none;
+  }
+
+  .minerva-table > tbody > tr[data-clickable]:focus-visible > td {
+    --row-focus-ring: var(--border-control-default-focus);
+    box-shadow:
+      inset 0 var(--space-2) 0 0 var(--row-focus-ring),
+      inset 0 calc(var(--space-2) * -1) 0 0 var(--row-focus-ring);
+  }
+
+  .minerva-table > tbody > tr[data-clickable]:focus-visible > td:first-child {
+    box-shadow:
+      inset 0 var(--space-2) 0 0 var(--row-focus-ring),
+      inset 0 calc(var(--space-2) * -1) 0 0 var(--row-focus-ring),
+      inset var(--space-2) 0 0 0 var(--row-focus-ring);
+  }
+
+  .minerva-table > tbody > tr[data-clickable]:focus-visible > td:last-child {
+    box-shadow:
+      inset 0 var(--space-2) 0 0 var(--row-focus-ring),
+      inset 0 calc(var(--space-2) * -1) 0 0 var(--row-focus-ring),
+      inset calc(var(--space-2) * -1) 0 0 0 var(--row-focus-ring);
   }
 }
