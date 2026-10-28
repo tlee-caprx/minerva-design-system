@@ -131,14 +131,16 @@ export function Tooltip({ content, beak = 'bottom', disabled = false, children, 
       ref={triggerRef}
       // max-w-full + min-w-0 let the trigger shrink inside a width-limited
       // parent, so truncated text (e.g. a Table cell with maxWidth) can
-      // ellipsize instead of overflowing.
+      // ellipsize instead of overflowing. The inner span is flex so it hugs
+      // the trigger exactly; as a block it would add a line box's height
+      // around an inline button and push it off-center.
       className="inline-flex max-w-full"
       onMouseEnter={show}
       onMouseLeave={hide}
       onFocus={show}
       onBlur={hide}
     >
-      <span className="min-w-0" aria-describedby={visible ? tooltipId : undefined}>{children}</span>
+      <span className="flex min-w-0" aria-describedby={visible ? tooltipId : undefined}>{children}</span>
 
       {visible &&
         !disabled &&

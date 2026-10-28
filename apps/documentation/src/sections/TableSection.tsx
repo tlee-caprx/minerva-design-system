@@ -303,9 +303,9 @@ function SelectableTable() {
               <TableCell type="money">{row.amount}</TableCell>
               <TableCell type="date">{row.date}</TableCell>
               <TableCell type="action">
-                <div className="flex items-center gap-(--inline-1)">
+                <div className="flex items-center gap-(--inline-3)">
                   <Tooltip content="Edit">
-                    <Button variant="tertiary" iconOnly aria-label={`Edit ${row.name}`}>
+                    <Button variant="tertiary" iconOnly unpadded aria-label={`Edit ${row.name}`}>
                       <Icon icon={EditIcon} size="regular" />
                     </Button>
                   </Tooltip>
@@ -494,7 +494,7 @@ function WideTable() {
                     actions={[
                       { label: 'Open case', onClick: () => {} },
                       { label: 'Reassign', onClick: () => {} },
-                      { label: 'Unlock', onClick: () => {}, disabled: !row.lockedBy },
+                      ...(row.lockedBy ? [{ label: 'Unlock', onClick: () => {} }] : []),
                     ]}
                   />
                 </div>

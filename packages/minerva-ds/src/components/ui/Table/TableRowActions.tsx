@@ -102,6 +102,7 @@ export function TableRowActions({ actions, label = 'Row actions' }: TableRowActi
         ref={triggerRef}
         variant="tertiary"
         iconOnly
+        unpadded
         aria-label={label}
         aria-haspopup="menu"
         aria-expanded={open}
