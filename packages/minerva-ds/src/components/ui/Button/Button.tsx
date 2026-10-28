@@ -25,7 +25,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * Removes all padding — tertiary only, so the button sits flush inline
    * with surrounding content (e.g. inside a Message) at exactly its text's
    * line-height rather than tertiary's usual 12px vertical touch-target
-   * padding. Ignored for every other variant.
+   * padding. With `iconOnly`, the button shrinks to the 20×20 icon itself.
+   * Ignored for every other variant.
    */
   unpadded?: boolean
 }
@@ -198,7 +199,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     'transition-colors duration-150',
     'outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
     iconOnly
-      ? 'p-(--inset-3) shrink-0'
+      ? `${variant === 'tertiary' && unpadded ? 'p-0' : 'p-(--inset-3)'} shrink-0`
       : variant === 'link' || (variant === 'tertiary' && unpadded)
       ? `p-0 gap-(--inline-2) ${fullWidth ? 'w-full sm:w-auto' : ''}`
       : `py-(--inset-3) ${variant === 'tertiary' ? 'px-0' : 'px-(--inset-5)'} gap-(--inline-2) ${fullWidth ? 'w-full sm:w-auto' : ''}`,
