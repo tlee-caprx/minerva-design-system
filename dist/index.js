@@ -14,7 +14,7 @@ import { ArrowUpRightIcon as D } from "./components/ui/Icon/icons/arrow-up-right
 import { AttachmentIcon as M } from "./components/ui/Icon/icons/attachment.js";
 import { Badge as k } from "./components/ui/Badge/Badge.js";
 import { BankIcon as E } from "./components/ui/Icon/icons/bank.js";
-import { BellIcon as P } from "./components/ui/Icon/icons/bell.js";
+import { BellIcon as G } from "./components/ui/Icon/icons/bell.js";
 import { BoltIcon as U } from "./components/ui/Icon/icons/bolt.js";
 import { BranchIcon as H } from "./components/ui/Icon/icons/branch.js";
 import { Breadcrumb as O } from "./components/navigation/Breadcrumb/Breadcrumb.js";
@@ -40,7 +40,7 @@ import { DeleteIcon as Bo } from "./components/ui/Icon/icons/delete.js";
 import { Divider as Lo } from "./components/ui/Divider/Divider.js";
 import { DocumentIcon as vo } from "./components/ui/Icon/icons/document.js";
 import { DocumentPageFoldIcon as Ro } from "./components/ui/Icon/icons/document-page-fold.js";
-import { DollarCircleIcon as Go } from "./components/ui/Icon/icons/dollar-circle.js";
+import { DollarCircleIcon as Po } from "./components/ui/Icon/icons/dollar-circle.js";
 import { DollarIcon as yo } from "./components/ui/Icon/icons/dollar.js";
 import { DownloadIcon as Fo } from "./components/ui/Icon/icons/download.js";
 import { Dropdown as No } from "./components/ui/Dropdown/Dropdown.js";
@@ -67,7 +67,7 @@ import { LinkIcon as Dr } from "./components/ui/Icon/icons/link.js";
 import { LinkOutIcon as Mr } from "./components/ui/Icon/icons/link-out.js";
 import { ListTreeIcon as kr } from "./components/ui/Icon/icons/list-tree.js";
 import { LocationIcon as Er } from "./components/ui/Icon/icons/location.js";
-import { LockIcon as Pr } from "./components/ui/Icon/icons/lock.js";
+import { LockIcon as Gr } from "./components/ui/Icon/icons/lock.js";
 import { LockOpenIcon as Ur } from "./components/ui/Icon/icons/lock-open.js";
 import { LogOutIcon as Hr } from "./components/ui/Icon/icons/log-out.js";
 import { Lozenge as Or } from "./components/ui/Lozenge/Lozenge.js";
@@ -85,51 +85,52 @@ import { Modal as xe, ModalContent as ce } from "./components/ui/Modal/Modal.js"
 import { MultiSelectDropdown as ae } from "./components/ui/Dropdown/MultiSelectDropdown.js";
 import { Notification as ie } from "./components/ui/Notification/Notification.js";
 import { Pagination as Ce } from "./components/ui/Table/Pagination.js";
-import { PasswordInput as he } from "./components/ui/Input/PasswordInput.js";
-import { PhoneIcon as Se } from "./components/ui/Icon/icons/phone.js";
-import { PillBottleIcon as we } from "./components/ui/Icon/icons/pill-bottle.js";
-import { PlaceholderIcon as ge } from "./components/ui/Icon/icons/placeholder.js";
-import { PrintIcon as Be } from "./components/ui/Icon/icons/print.js";
-import { QuestionCircleIcon as Le } from "./components/ui/Icon/icons/question-circle.js";
-import { Radio as ve } from "./components/ui/Radio/Radio.js";
-import { RedoIcon as Re } from "./components/ui/Icon/icons/redo.js";
-import { RefreshIcon as Ge } from "./components/ui/Icon/icons/refresh.js";
-import { RemoveIcon as ye } from "./components/ui/Icon/icons/remove.js";
-import { ScaleIcon as Fe } from "./components/ui/Icon/icons/scale.js";
-import { SearchIcon as Ne } from "./components/ui/Icon/icons/search.js";
-import { SearchInput as Xe } from "./components/ui/Input/SearchInput.js";
-import { SeriesIcon as je } from "./components/ui/Icon/icons/series.js";
-import { SettingsIcon as Je } from "./components/ui/Icon/icons/settings.js";
-import { ShieldCheckIcon as Ve } from "./components/ui/Icon/icons/shield-check.js";
-import { ShippingIcon as Ke } from "./components/ui/Icon/icons/shipping.js";
-import { SideNav as Ze } from "./components/navigation/SideNav/SideNav.js";
-import { SideNavGroup as $e } from "./components/navigation/SideNav/SideNavGroup.js";
-import { SideNavItem as rt } from "./components/navigation/SideNav/SideNavItem.js";
-import { SortIcon as tt } from "./components/ui/Icon/icons/sort.js";
-import { Spinner as mt } from "./components/ui/Spinner/Spinner.js";
-import { StarEmptyIcon as ft } from "./components/ui/Icon/icons/star-empty.js";
-import { StarFilledIcon as ct } from "./components/ui/Icon/icons/star-filled.js";
-import { Steps as at } from "./components/ui/Steps/Steps.js";
-import { Tab as it } from "./components/ui/TabSet/Tab.js";
-import { TabSet as Ct } from "./components/ui/TabSet/TabSet.js";
-import { Table as ht, TableBody as st, TableHeader as St, TableRow as bt } from "./components/ui/Table/Table.js";
-import { TableCell as Tt } from "./components/ui/Table/TableCell.js";
-import { TableExpandButton as At } from "./components/ui/Table/TableExpandButton.js";
-import { TableHead as Dt } from "./components/ui/Table/TableHead.js";
-import { TableRowActions as Mt } from "./components/ui/Table/TableRowActions.js";
-import { Tag as kt } from "./components/ui/Tag/Tag.js";
-import { Text as Et } from "./components/ui/Text/Text.js";
-import { Textarea as Pt } from "./components/ui/Input/Textarea.js";
-import { ThumbsDownIcon as Ut } from "./components/ui/Icon/icons/thumbs-down.js";
-import { ThumbsUpIcon as Ht } from "./components/ui/Icon/icons/thumbs-up.js";
-import { Tooltip as Ot, TooltipBubble as Xt } from "./components/ui/Tooltip/Tooltip.js";
-import { UndoIcon as jt } from "./components/ui/Icon/icons/undo.js";
-import { UploadIcon as Jt } from "./components/ui/Icon/icons/upload.js";
-import { UserIcon as Vt } from "./components/ui/Icon/icons/user.js";
-import { WarningCircleIcon as Kt } from "./components/ui/Icon/icons/warning-circle.js";
-import { XCircleIcon as Zt } from "./components/ui/Icon/icons/x-circle.js";
-import { XCloseIcon as $t } from "./components/ui/Icon/icons/x-close.js";
-import { XIcon as rp } from "./components/ui/Icon/icons/x.js";
+import { Panel as he } from "./components/ui/Panel/Panel.js";
+import { PasswordInput as Se } from "./components/ui/Input/PasswordInput.js";
+import { PhoneIcon as we } from "./components/ui/Icon/icons/phone.js";
+import { PillBottleIcon as ge } from "./components/ui/Icon/icons/pill-bottle.js";
+import { PlaceholderIcon as Be } from "./components/ui/Icon/icons/placeholder.js";
+import { PrintIcon as Le } from "./components/ui/Icon/icons/print.js";
+import { QuestionCircleIcon as ve } from "./components/ui/Icon/icons/question-circle.js";
+import { Radio as Re } from "./components/ui/Radio/Radio.js";
+import { RedoIcon as Pe } from "./components/ui/Icon/icons/redo.js";
+import { RefreshIcon as ye } from "./components/ui/Icon/icons/refresh.js";
+import { RemoveIcon as Fe } from "./components/ui/Icon/icons/remove.js";
+import { ScaleIcon as Ne } from "./components/ui/Icon/icons/scale.js";
+import { SearchIcon as Xe } from "./components/ui/Icon/icons/search.js";
+import { SearchInput as je } from "./components/ui/Input/SearchInput.js";
+import { SeriesIcon as Je } from "./components/ui/Icon/icons/series.js";
+import { SettingsIcon as Ve } from "./components/ui/Icon/icons/settings.js";
+import { ShieldCheckIcon as Ke } from "./components/ui/Icon/icons/shield-check.js";
+import { ShippingIcon as Ze } from "./components/ui/Icon/icons/shipping.js";
+import { SideNav as $e } from "./components/navigation/SideNav/SideNav.js";
+import { SideNavGroup as rt } from "./components/navigation/SideNav/SideNavGroup.js";
+import { SideNavItem as tt } from "./components/navigation/SideNav/SideNavItem.js";
+import { SortIcon as mt } from "./components/ui/Icon/icons/sort.js";
+import { Spinner as ft } from "./components/ui/Spinner/Spinner.js";
+import { StarEmptyIcon as ct } from "./components/ui/Icon/icons/star-empty.js";
+import { StarFilledIcon as at } from "./components/ui/Icon/icons/star-filled.js";
+import { Steps as it } from "./components/ui/Steps/Steps.js";
+import { Tab as Ct } from "./components/ui/TabSet/Tab.js";
+import { TabSet as ht } from "./components/ui/TabSet/TabSet.js";
+import { Table as St, TableBody as bt, TableHeader as wt, TableRow as Tt } from "./components/ui/Table/Table.js";
+import { TableCell as At } from "./components/ui/Table/TableCell.js";
+import { TableExpandButton as Dt } from "./components/ui/Table/TableExpandButton.js";
+import { TableHead as Mt } from "./components/ui/Table/TableHead.js";
+import { TableRowActions as kt } from "./components/ui/Table/TableRowActions.js";
+import { Tag as Et } from "./components/ui/Tag/Tag.js";
+import { Text as Gt } from "./components/ui/Text/Text.js";
+import { Textarea as Ut } from "./components/ui/Input/Textarea.js";
+import { ThumbsDownIcon as Ht } from "./components/ui/Icon/icons/thumbs-down.js";
+import { ThumbsUpIcon as Ot } from "./components/ui/Icon/icons/thumbs-up.js";
+import { Tooltip as Wt, TooltipBubble as jt } from "./components/ui/Tooltip/Tooltip.js";
+import { UndoIcon as Jt } from "./components/ui/Icon/icons/undo.js";
+import { UploadIcon as Vt } from "./components/ui/Icon/icons/upload.js";
+import { UserIcon as Kt } from "./components/ui/Icon/icons/user.js";
+import { WarningCircleIcon as Zt } from "./components/ui/Icon/icons/warning-circle.js";
+import { XCircleIcon as $t } from "./components/ui/Icon/icons/x-circle.js";
+import { XCloseIcon as rp } from "./components/ui/Icon/icons/x-close.js";
+import { XIcon as tp } from "./components/ui/Icon/icons/x.js";
 export {
   e as AIIcon,
   p as ActionBar,
@@ -147,7 +148,7 @@ export {
   M as AttachmentIcon,
   k as Badge,
   E as BankIcon,
-  P as BellIcon,
+  G as BellIcon,
   U as BoltIcon,
   H as BranchIcon,
   O as Breadcrumb,
@@ -173,7 +174,7 @@ export {
   Lo as Divider,
   vo as DocumentIcon,
   Ro as DocumentPageFoldIcon,
-  Go as DollarCircleIcon,
+  Po as DollarCircleIcon,
   yo as DollarIcon,
   Fo as DownloadIcon,
   No as Dropdown,
@@ -200,7 +201,7 @@ export {
   Mr as LinkOutIcon,
   kr as ListTreeIcon,
   Er as LocationIcon,
-  Pr as LockIcon,
+  Gr as LockIcon,
   Ur as LockOpenIcon,
   Hr as LogOutIcon,
   Or as Lozenge,
@@ -219,54 +220,55 @@ export {
   ae as MultiSelectDropdown,
   ie as Notification,
   Ce as Pagination,
-  he as PasswordInput,
-  Se as PhoneIcon,
-  we as PillBottleIcon,
-  ge as PlaceholderIcon,
-  Be as PrintIcon,
-  Le as QuestionCircleIcon,
-  ve as Radio,
-  Re as RedoIcon,
-  Ge as RefreshIcon,
-  ye as RemoveIcon,
-  Fe as ScaleIcon,
-  Ne as SearchIcon,
-  Xe as SearchInput,
-  je as SeriesIcon,
-  Je as SettingsIcon,
-  Ve as ShieldCheckIcon,
-  Ke as ShippingIcon,
-  Ze as SideNav,
-  $e as SideNavGroup,
-  rt as SideNavItem,
-  tt as SortIcon,
-  mt as Spinner,
-  ft as StarEmptyIcon,
-  ct as StarFilledIcon,
-  at as Steps,
-  it as Tab,
-  Ct as TabSet,
-  ht as Table,
-  st as TableBody,
-  Tt as TableCell,
-  At as TableExpandButton,
-  Dt as TableHead,
-  St as TableHeader,
-  bt as TableRow,
-  Mt as TableRowActions,
-  kt as Tag,
-  Et as Text,
-  Pt as Textarea,
-  Ut as ThumbsDownIcon,
-  Ht as ThumbsUpIcon,
-  Ot as Tooltip,
-  Xt as TooltipBubble,
-  jt as UndoIcon,
-  Jt as UploadIcon,
-  Vt as UserIcon,
-  Kt as WarningCircleIcon,
-  Zt as XCircleIcon,
-  $t as XCloseIcon,
-  rp as XIcon,
+  he as Panel,
+  Se as PasswordInput,
+  we as PhoneIcon,
+  ge as PillBottleIcon,
+  Be as PlaceholderIcon,
+  Le as PrintIcon,
+  ve as QuestionCircleIcon,
+  Re as Radio,
+  Pe as RedoIcon,
+  ye as RefreshIcon,
+  Fe as RemoveIcon,
+  Ne as ScaleIcon,
+  Xe as SearchIcon,
+  je as SearchInput,
+  Je as SeriesIcon,
+  Ve as SettingsIcon,
+  Ke as ShieldCheckIcon,
+  Ze as ShippingIcon,
+  $e as SideNav,
+  rt as SideNavGroup,
+  tt as SideNavItem,
+  mt as SortIcon,
+  ft as Spinner,
+  ct as StarEmptyIcon,
+  at as StarFilledIcon,
+  it as Steps,
+  Ct as Tab,
+  ht as TabSet,
+  St as Table,
+  bt as TableBody,
+  At as TableCell,
+  Dt as TableExpandButton,
+  Mt as TableHead,
+  wt as TableHeader,
+  Tt as TableRow,
+  kt as TableRowActions,
+  Et as Tag,
+  Gt as Text,
+  Ut as Textarea,
+  Ht as ThumbsDownIcon,
+  Ot as ThumbsUpIcon,
+  Wt as Tooltip,
+  jt as TooltipBubble,
+  Jt as UndoIcon,
+  Vt as UploadIcon,
+  Kt as UserIcon,
+  Zt as WarningCircleIcon,
+  $t as XCircleIcon,
+  rp as XCloseIcon,
+  tp as XIcon,
   Ar as judiLogoSrc
 };

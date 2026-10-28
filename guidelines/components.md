@@ -25,7 +25,7 @@ import { KeyCaseDetails } from '@judi-health/minerva-ds/patterns'
 | Feedback     | `Message`, `Notification`, `Spinner`, `Tooltip`, `TooltipBubble` |
 | Overlays     | `Modal`, `ModalContent` |
 | Data         | `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableExpandButton`, `TableRowActions`, `Pagination` — see [Table](#table) |
-| Structure    | `TabSet`, `Tab`, `Steps`, `Collapse`, `Divider` |
+| Structure    | `Panel`, `TabSet`, `Tab`, `Steps`, `Collapse`, `Divider` — see [Panel](#panel) |
 | Icons        | `Icon` + every `*Icon` listed under [Icon](#icon) |
 
 ### Patterns — `@judi-health/minerva-ds/patterns`
@@ -398,6 +398,50 @@ Use `rightSlot` to render an icon or lozenge to the right of the label:
 ```tsx
 <Tab label="Overview" rightSlot={<Lozenge count={3} />} />
 <Tab label="Alerts"   rightSlot={<Icon icon={WarningCircleIcon} size="small" />} />
+```
+
+---
+
+## Panel
+
+The card. Use `Panel` whenever a design shows content grouped in a white box with a light border — never build a card from a `div` with your own border, shadow or padding.
+
+| Variant | Look | Use |
+| --- | --- | --- |
+| `default` | Surface fill, 1px stroke, small shadow, 4px radius, 24px padding | Top-level cards on a page |
+| `nested` | Subtle (gray) fill, no stroke or shadow, same radius and padding | Grouping inside a Panel |
+
+Panel only provides the container. Lay out what's inside yourself with `Text`, `Tag`, `MetaItem`, `Button` and flex/grid using spacing tokens.
+
+```tsx
+import { Panel, Text, MetaItem } from '@judi-health/minerva-ds'
+
+<Panel>
+  <div className="flex flex-col gap-(--stack-4)">
+    <Text as="h3" variant="heading-sm" className="text-(--text-surface-base)">Member</Text>
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(calc(var(--space-40)*4),1fr))] gap-(--inline-4)">
+      <Panel variant="nested"><MetaItem label="Name" value="Walter White" /></Panel>
+      <Panel variant="nested"><MetaItem label="Member ID" value="1234567" /></Panel>
+    </div>
+  </div>
+</Panel>
+```
+
+**Tabbed panel.** Pass a `TabSet` as `tabs`. It sits flush on top of the panel body with no gap, and the whole panel keeps its 4px corners. Switch the body content on the selected tab yourself.
+
+```tsx
+import { Panel, TabSet, Tab } from '@judi-health/minerva-ds'
+
+<Panel
+  tabs={
+    <TabSet>
+      <Tab label="Summary" selected={tab === 'summary'} onClick={() => setTab('summary')} />
+      <Tab label="History" selected={tab === 'history'} onClick={() => setTab('history')} />
+    </TabSet>
+  }
+>
+  {tab === 'summary' ? <CaseSummary /> : <CaseHistory />}
+</Panel>
 ```
 
 ---
