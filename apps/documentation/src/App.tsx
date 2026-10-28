@@ -17,6 +17,7 @@ import { TooltipSection } from './sections/TooltipSection'
 import { MessageSection } from './sections/MessageSection'
 import { ModalSection } from './sections/ModalSection'
 import { TagBadgeSection } from './sections/TagBadgeSection'
+import { PanelSection } from './sections/PanelSection'
 import { TabsSection } from './sections/TabsSection'
 import { StepperSection } from './sections/StepperSection'
 import { TableSection } from './sections/TableSection'
@@ -41,7 +42,7 @@ const NAV_GROUPS: { label: string; sections: Record<string, ComponentType> }[] =
   },
   {
     label: 'Content & Feedback',
-    sections: { Notification: NotificationSection, Collapse: CollapseSection, Tooltip: TooltipSection, Message: MessageSection, Modal: ModalSection, 'Tag & Badge': TagBadgeSection },
+    sections: { Panel: PanelSection, Notification: NotificationSection, Collapse: CollapseSection, Tooltip: TooltipSection, Message: MessageSection, Modal: ModalSection, 'Tag & Badge': TagBadgeSection },
   },
   {
     label: 'Navigation & Data',
