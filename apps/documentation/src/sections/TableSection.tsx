@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
-  Button, Tag, Text, Checkbox, Tooltip, Modal, Icon, DeleteIcon, EditIcon, LockIcon, DocumentIcon,
-  Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableExpandButton, Pagination,
+  Button, Tag, Text, Checkbox, Tooltip, Modal, Icon, EditIcon, LockIcon, DocumentIcon,
+  Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableExpandButton, TableRowActions, Pagination,
 } from '@judi-health/minerva-ds'
 import type { TagVariant } from '@judi-health/minerva-ds'
 
@@ -262,7 +262,7 @@ function SelectableTable() {
     <div>
       <SectionLabel
         title="Row click + checkbox"
-        description={`The checkbox selects a row; clicking anywhere else on the row opens it. Member Name has grow. ${
+        description={`The checkbox selects a row; clicking anywhere else on the row opens it. Member Name has grow. Actions pairs an inline Edit button with a TableRowActions menu. ${
           opened ? `Last opened: ${opened.name}.` : 'Click a row to open it.'
         }`}
       />
@@ -309,11 +309,14 @@ function SelectableTable() {
                       <Icon icon={EditIcon} size="regular" />
                     </Button>
                   </Tooltip>
-                  <Tooltip content="Delete">
-                    <Button variant="tertiary" destructive iconOnly aria-label={`Delete ${row.name}`} onClick={() => setDeleteModalOpen(true)}>
-                      <Icon icon={DeleteIcon} size="regular" />
-                    </Button>
-                  </Tooltip>
+                  <TableRowActions
+                    label={`More actions for ${row.name}`}
+                    actions={[
+                      { label: 'Reassign', onClick: () => setOpened(row) },
+                      { label: 'Download', onClick: () => setOpened(row) },
+                      { label: 'Delete', onClick: () => setDeleteModalOpen(true), destructive: true },
+                    ]}
+                  />
                 </div>
               </TableCell>
             </TableRow>
@@ -486,6 +489,14 @@ function WideTable() {
                       </span>
                     </Tooltip>
                   )}
+                  <TableRowActions
+                    label={`Actions for case ${row.caseId}`}
+                    actions={[
+                      { label: 'Open case', onClick: () => {} },
+                      { label: 'Reassign', onClick: () => {} },
+                      { label: 'Unlock', onClick: () => {}, disabled: !row.lockedBy },
+                    ]}
+                  />
                 </div>
               </TableCell>
             </TableRow>

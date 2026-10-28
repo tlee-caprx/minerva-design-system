@@ -24,7 +24,7 @@ import { KeyCaseDetails } from '@judi-health/minerva-ds/patterns'
 | Status       | `Tag`, `Badge`, `Lozenge`, `MetaItem` |
 | Feedback     | `Message`, `Notification`, `Spinner`, `Tooltip`, `TooltipBubble` |
 | Overlays     | `Modal`, `ModalContent` |
-| Data         | `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableExpandButton`, `Pagination` — see [Table](#table) |
+| Data         | `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableExpandButton`, `TableRowActions`, `Pagination` — see [Table](#table) |
 | Structure    | `TabSet`, `Tab`, `Steps`, `Collapse`, `Divider` |
 | Icons        | `Icon` + every `*Icon` listed under [Icon](#icon) |
 
@@ -441,7 +441,7 @@ import {
 | `link` | A `<Button variant="link">` | Left-aligned. Clicks don't trigger the row's `onClick`. |
 | `tag` | A `Tag` | Centered. |
 | `checkbox`, `radio` | Row selection | Centered. Clicks don't trigger the row's `onClick`. |
-| `action` | Icon buttons at the end of the row | Centered. **A last column of `action` cells is always pinned to the right**, with a shadow while columns scroll under it. |
+| `action` | Icon buttons and/or `TableRowActions` at the end of the row | Centered. **A last column of `action` cells is always pinned to the right**, with a shadow while columns scroll under it. |
 | `expand` | A `TableExpandButton` | Centered. Clicks don't trigger the row's `onClick`. |
 
 **Layout**
@@ -465,6 +465,29 @@ import {
 ```
 
 A select-all `Checkbox` (with `indeterminate`) can go directly inside a `TableHead align="center"`.
+
+**Row actions.** Put actions in a last column of `action` cells.
+
+- One or two frequent actions (Edit, Download) → inline icon `Button`s (`variant="tertiary" iconOnly`), each with a `Tooltip`.
+- Three or more, or a tight table → `TableRowActions`: a ⋮ button that opens the same menu as `Dropdown` (`MenuPanel` + `MenuItem`). Put destructive actions last with `destructive: true`.
+- Both is fine: the most common action inline, followed by `TableRowActions` for the rest.
+
+```tsx
+import { TableRowActions } from '@judi-health/minerva-ds'
+
+<TableCell type="action">
+  <TableRowActions
+    label={`Actions for case ${c.id}`}
+    actions={[
+      { label: 'Reassign', onClick: () => reassign(c.id) },
+      { label: 'Download', onClick: () => download(c.id) },
+      { label: 'Delete', onClick: () => confirmDelete(c.id), destructive: true },
+    ]}
+  />
+</TableCell>
+```
+
+Don't build a ⋮ button or menu by hand. `TableRowActions` keeps the menu from being clipped by the table, closes it on outside click, Escape or scroll, and supports arrow keys.
 
 **Expandable rows.** `detail` is a full-width area under the row, shown while `expanded` is true. It keeps the row's fill and doesn't break the alternating colors.
 
