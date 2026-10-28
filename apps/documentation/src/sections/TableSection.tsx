@@ -494,7 +494,7 @@ function WideTable() {
                     actions={[
                       { label: 'Open case', onClick: () => {} },
                       { label: 'Reassign', onClick: () => {} },
-                      { label: 'Unlock', onClick: () => {}, disabled: !row.lockedBy },
+                      ...(row.lockedBy ? [{ label: 'Unlock', onClick: () => {} }] : []),
                     ]}
                   />
                 </div>

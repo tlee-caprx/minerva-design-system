@@ -33,17 +33,20 @@ export function Pagination({ currentPage, pageSize, totalItems, onPageChange, cl
       <Text variant="body-md" className="text-(--text-surface-base)">
         Showing {start}-{end} of {totalItems}
       </Text>
+      {/* Never shown disabled: Minerva doesn't use the disabled button
+          style. Buttons that can't move further keep the normal look and do
+          nothing, with aria-disabled so screen readers still say so. */}
       <ButtonGroup>
-        <Button variant="secondary" iconOnly disabled={isFirst} onClick={() => onPageChange(1)} aria-label="First page">
+        <Button variant="secondary" iconOnly aria-disabled={isFirst || undefined} onClick={() => !isFirst && onPageChange(1)} aria-label="First page">
           <Icon icon={ChevronStartIcon} size="regular" />
         </Button>
-        <Button variant="secondary" iconOnly disabled={isFirst} onClick={() => onPageChange(currentPage - 1)} aria-label="Previous page">
+        <Button variant="secondary" iconOnly aria-disabled={isFirst || undefined} onClick={() => !isFirst && onPageChange(currentPage - 1)} aria-label="Previous page">
           <Icon icon={ChevronLeftIcon} size="regular" />
         </Button>
-        <Button variant="secondary" iconOnly disabled={isLast} onClick={() => onPageChange(currentPage + 1)} aria-label="Next page">
+        <Button variant="secondary" iconOnly aria-disabled={isLast || undefined} onClick={() => !isLast && onPageChange(currentPage + 1)} aria-label="Next page">
           <Icon icon={ChevronRightIcon} size="regular" />
         </Button>
-        <Button variant="secondary" iconOnly disabled={isLast} onClick={() => onPageChange(totalPages)} aria-label="Last page">
+        <Button variant="secondary" iconOnly aria-disabled={isLast || undefined} onClick={() => !isLast && onPageChange(totalPages)} aria-label="Last page">
           <Icon icon={ChevronEndIcon} size="regular" />
         </Button>
       </ButtonGroup>
