@@ -1,51 +1,73 @@
 # Components
 
-Always use these components. Only build a custom component when nothing here covers the UI (see `Guidelines.md` → Building from designs).
+Always use a Minerva component when one fits. Build something custom only when nothing here covers it (see `Guidelines.md` → Body Content).
 
-Everything is imported by name from the package — never from a file path inside `node_modules`:
+Import everything by name from the package, never from a file path inside `node_modules`:
 
 ```tsx
 import { AppLayout, Button, Tag } from '@judi-health/minerva-ds'
 import { KeyCaseDetails } from '@judi-health/minerva-ds/patterns'
 ```
 
----
+## Find a component
 
-## Available components
+Designers often use a different name from the component's. Look in **Also called** before deciding Minerva doesn't have something.
 
-### Core — `@judi-health/minerva-ds`
+### Core: `@judi-health/minerva-ds`
 
-| Group        | Components |
-| ------------ | ---------- |
-| Shell        | `AppLayout`, `GlobalHeader`, `ActionBar`, `Breadcrumb`, `SideNav`, `SideNavItem`, `SideNavGroup` |
-| Actions      | `Button`, `ButtonGroup`, `Chip` |
-| Typography   | `Text` |
-| Form         | `Input`, `PasswordInput`, `SearchInput`, `Textarea`, `FieldWrapper`, `Checkbox`, `Radio`, `Dropdown`, `MultiSelectDropdown`, `MenuPanel`, `MenuGroup`, `MenuItem`, `MenuSearchBar` |
-| Status       | `Tag`, `Badge`, `Lozenge`, `MetaItem` |
-| Feedback     | `Message`, `Notification`, `Spinner`, `Tooltip`, `TooltipBubble` |
-| Overlays     | `Modal`, `ModalContent` |
-| Data         | `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableExpandButton`, `TableRowActions`, `Pagination` — see [Table](#table) |
-| Structure    | `Panel`, `TabSet`, `Tab`, `Steps`, `Collapse`, `Divider` — see [Panel](#panel) |
-| Icons        | `Icon` + every `*Icon` listed under [Icon](#icon) |
+| Component | Also called | Use |
+| --- | --- | --- |
+| [`AppLayout`](#applayout) | page, shell, layout, template, frame | Every page. Includes `GlobalHeader`, `ActionBar`, `Breadcrumb` and `SideNav`; set them through its props |
+| [`SideNavItem`](#sidenavitem), `SideNavGroup` | sidebar link, left nav, menu item | Items in AppLayout's side nav |
+| [`Steps`](#steps) | stepper, progress bar, wizard steps | Progress through a multi-step flow, under the ActionBar |
+| [`Text`](#text) | heading, title, paragraph, label, typography | All text |
+| [`Button`](#button) | CTA, link, icon button | Actions. `variant="link"` for text links |
+| [`ButtonGroup`](#buttongroup) | button row, actions, footer buttons | Two or more related buttons |
+| [`Chip`](#chip) | filter chip, toggle, pill button | Quick toggle filters |
+| [`Input`](#input-textarea-passwordinput-searchinput), `Textarea`, `PasswordInput`, `SearchInput` | text field, form field, text box, search bar | Typing text |
+| [`Dropdown`](#dropdown-multiselectdropdown), `MultiSelectDropdown` | select, picker, combobox, multi-select | Choosing from a list |
+| `MenuPanel`, `MenuItem`, `MenuGroup`, `MenuSearchBar` | menu, popover menu, options list | The list inside Dropdown, for building a menu |
+| [`Checkbox`, `Radio`](#checkbox-radio) | tick box, radio button, option | Yes/no and single-choice options |
+| `FieldWrapper` | field shell | Label, box and helper text around a custom control |
+| [`Tag`](#tag) | status, label, chip, pill, status badge | Read-only status |
+| [`Badge`](#badge) | removable tag, filter tag, token | An applied filter or selection the user can remove |
+| [`Lozenge`](#lozenge) | count, counter, number badge, notification dot | A number next to a tab or nav item |
+| [`MetaItem`](#metaitem) | key-value, metadata, label: value, detail | A labeled value |
+| [`Message`](#message) | inline message, callout, notice | A status message inside the page content |
+| [`Alert`](#alert), `showAlert` | **alert, toast, banner, snackbar, flash message** | Temporary feedback over the page after an action ("Case saved") |
+| [`Tooltip`](#tooltip), `TooltipBubble` | hint, hover text, info popover | Short help on hover |
+| [`Spinner`](#spinner) | loader, loading indicator | Page or section loading |
+| [`Notification`](#notification) | notifications panel, bell dropdown, inbox | The panel that opens from the header bell. Not a toast |
+| [`Modal`](#modal), `ModalContent` | dialog, popup, confirmation, lightbox | Confirmations and short focused tasks |
+| [`Panel`](#panel) | card, container, box, section, tile | Grouping content in a white box |
+| [`Tab`, `TabSet`](#tab--tabset) | tabs, tab bar, segmented control | Switching between views |
+| [`Collapse`](#collapse) | accordion, expandable section, disclosure | Sections that open and close |
+| [`Divider`](#divider) | separator, rule, line, hr | A line between sections |
+| [`Table`](#table) and its parts, `Pagination` | data table, grid, list, data grid | Rows of records |
+| [`Icon`](#icon) and every `*Icon` | glyph, symbol | Icons |
 
-### Patterns — `@judi-health/minerva-ds/patterns`
+### Patterns: `@judi-health/minerva-ds/patterns`
 
-Judi-specific compositions. Only use them when the design shows them.
+Judi-specific compositions. Use them only when the design shows them.
 
-| Component                                      | Use |
-| ---------------------------------------------- | --- |
-| `KeyCaseDetails`                               | Collapsible member/drug/prescriber strip at the top of a case |
-| `JudiAssistantPanel`, `JudiAssistantReviewStep` | Judi AI chat surface — see `JudiAssistant.md` |
+| Component | Also called | Use |
+| --- | --- | --- |
+| [`KeyCaseDetails`](#keycasedetails) | case header, case summary bar, member strip | Collapsible member/drug/prescriber bar at the top of a case |
+| `JudiAssistantPanel`, `JudiAssistantReviewStep` | Judi AI, chat, assistant, copilot | The Judi AI chat panel. See `JudiAssistant.md` |
 
-### Document viewer — `@judi-health/minerva-ds/document-viewer`
+### Document viewer: `@judi-health/minerva-ds/document-viewer`
 
-Embedded PDF viewer, imported from its own entry so its large PDF engine is only bundled when used:
+| Component | Also called | Use |
+| --- | --- | --- |
+| `DocumentViewer` | PDF viewer, file preview | An embedded PDF |
+
+It has its own import path so its large PDF engine is only bundled when used:
 
 ```tsx
 import { DocumentViewer } from '@judi-health/minerva-ds/document-viewer'
 ```
 
-Components without a section below are demonstrated in the documentation app (`apps/documentation` in the design system repo). Their props are fully typed — rely on the TypeScript definitions shipped with the package.
+Not in the table? Minerva doesn't have it. Build it from the components above and the token rules in `Guidelines.md`, and tell the designer it's custom.
 
 ---
 
@@ -155,65 +177,17 @@ Use the `completed` prop to show the green ✓ "Case Completed" indicator inline
 
 ---
 
-## Text
+## SideNavItem
 
-Always use `Text` for typography — never Tailwind text classes or raw inline styles.
-
-```tsx
-import { Text } from '@judi-health/minerva-ds'
-
-<Text as="h1" variant="heading-xl" className="text-(--text-surface-base)">Page Title</Text>
-<Text variant="body-md" className="text-(--text-surface-base)">Body copy</Text>
-<Text variant="body-md" weight="semibold">Semibold</Text>
-```
-
-Variants: `heading-xl/lg/md/sm/xs` | `body-lg/md/sm` | `label-lg/md/sm` | `tag-label`
-
-Use `as` to set the HTML element (`h1`–`h3`, `p`, `span` — defaults to `span`). Use `weight="semibold"` to override a variant's default weight.
-
----
-
-## Tag
-
-Read-only status labels. Text only — no interactive elements.
+Only used inside AppLayout's `sideNavContent` prop — never rendered standalone.
 
 ```tsx
-import { Tag } from '@judi-health/minerva-ds'
+import { SideNavItem } from '@judi-health/minerva-ds'
 
-<Tag variant="success">Approved</Tag>
-<Tag variant="warning">Pending Review</Tag>
-<Tag variant="error">Rejected</Tag>
-```
-
-Variants: `info` | `info-high-contrast` | `success` | `warning` | `error` | `system` | `system-alt`
-
----
-
-## Badge
-
-Same visual as the `info` Tag but supports an optional dismiss button. Use for removable filters or selections.
-
-```tsx
-import { Badge } from '@judi-health/minerva-ds'
-
-<Badge>Label</Badge>
-<Badge onClose={() => removeFilter()}>Status: Active</Badge>
-```
-
----
-
-## MetaItem
-
-Inline key/value pair with an optional leading icon. Use in ActionBar `secondaryContent` or anywhere metadata is displayed.
-
-```tsx
-import { MetaItem, ClockIcon } from '@judi-health/minerva-ds'
-
-<MetaItem label="Assigned" value="Chad Ontario" />
-<MetaItem icon={ClockIcon} label="Elapses" value="05/26/2026 12:00PM EST" />
-
-// Clickable link value — renders underlined text + LinkOut icon
-<MetaItem label="Plan" value="J.P. Wynne High School" onClick={() => navigate('/plan')} />
+// href renders a plain anchor tag — no router needed
+<SideNavItem label="Dashboard" active />
+<SideNavItem label="Cases" href="/cases" />
+<SideNavItem label="Clients" onClick={() => setSection('clients')} />
 ```
 
 ---
@@ -243,17 +217,21 @@ A step is `active` if the user can navigate to it (current or previously complet
 
 ---
 
-## KeyCaseDetails
+## Text
 
-Collapsible full-width bar showing case-level metadata in columns. Clicking the chevron expands each column to reveal sub-fields. Place in AppLayout's `subBar` prop, below `<Steps>` if both are present.
-
-**Always use this component whenever a KeyCaseDetails bar appears in a design.** Do not build a custom version, inline the markup, or skip it because the data is hardcoded. The hardcoded data is intentional — this is a display component for the design system and accepts no props.
+Always use `Text` for typography — never Tailwind text classes or raw inline styles.
 
 ```tsx
-import { KeyCaseDetails } from '@judi-health/minerva-ds/patterns'
+import { Text } from '@judi-health/minerva-ds'
 
-<AppLayout subBar={<KeyCaseDetails />}>
+<Text as="h1" variant="heading-xl" className="text-(--text-surface-base)">Page Title</Text>
+<Text variant="body-md" className="text-(--text-surface-base)">Body copy</Text>
+<Text variant="body-md" weight="semibold">Semibold</Text>
 ```
+
+Variants: `heading-xl/lg/md/sm/xs` | `body-lg/md/sm` | `label-lg/md/sm`. `tag-label` and `option-default` exist for `Tag` and `MenuItem` internally; don't use them directly.
+
+Use `as` to set the HTML element (`h1`–`h3`, `p`, `span` — defaults to `span`). Use `weight="semibold"` to override a variant's default weight.
 
 ---
 
@@ -269,6 +247,7 @@ import { Button, AddIcon, DeleteIcon, ArrowRightIcon } from '@judi-health/minerv
 | `secondary` | Supporting actions                 |
 | `tertiary`  | Low-emphasis actions               |
 | `inverse`   | Use on dark/navigation backgrounds |
+| `link`      | Inline text link                   |
 
 ```tsx
 // Basic
@@ -314,56 +293,259 @@ import { ButtonGroup, Button } from '@judi-health/minerva-ds'
 
 ---
 
-## Icon
+## Chip
+
+A toggle button for quick filters. Use a row of Chips for "show only" filters above a list or table. Use `Badge` for a filter that's already applied and can be removed.
 
 ```tsx
-import { Icon, AddIcon, SearchIcon, DeleteIcon } from '@judi-health/minerva-ds'
+import { Chip } from '@judi-health/minerva-ds'
 
-// Standalone icon
-<Icon icon={SearchIcon} size="regular" />
-
-// Pass directly to Button — never wrap in Icon when used inside Button
-<Button variant="primary" leftIcon={AddIcon}>Add</Button>
-```
-
-Sizes: `small` (14px) | `regular` (20px, default)
-
-`JudiLogoIcon` and `judiLogoSrc` are also exported for custom headers.
-
-### All available icons
-
-```
-AddCircleIcon, AddIcon, AIIcon, AlarmClockIcon, ArrowDownIcon, ArrowDownLeftIcon,
-ArrowDownRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, ArrowUpRightIcon,
-AttachmentIcon, BankIcon, BellIcon, BoltIcon, BranchIcon, CheckCircleIcon,
-CheckMarkIcon, ChevronDownIcon, ChevronEndIcon, ChevronLeftIcon, ChevronRightIcon,
-ChevronStartIcon, ChevronUpIcon, ClockIcon, CloseIcon, CopyIcon, CreditCardIcon,
-CustomerServiceIcon, DeleteIcon, DocumentIcon, DocumentPageFoldIcon,
-DollarCircleIcon, DollarIcon, DownloadIcon, EditIcon, EllipsisCircleIcon,
-EllipsisVerticalIcon, EnvelopeIcon, EyeIcon, EyeSlashIcon, FaceIdIcon, FilterIcon,
-GlobeIcon, GrabberIcon, GridIcon, HistoryIcon, HomeIcon, InfoCircleIcon, LinkIcon,
-LinkOutIcon, ListTreeIcon, LocationIcon, LockIcon, LockOpenIcon, LogOutIcon,
-MedicalIcon, MenuBarsIcon, MenuGridIcon, MessageDotsIcon, PhoneIcon, PillBottleIcon,
-PlaceholderIcon, PrintIcon, QuestionCircleIcon, RedoIcon, RefreshIcon, RemoveIcon,
-ScaleIcon, SearchIcon, SeriesIcon, SettingsIcon, ShieldCheckIcon, ShippingIcon,
-SortIcon, StarEmptyIcon, StarFilledIcon, ThumbsDownIcon, ThumbsUpIcon, UndoIcon,
-UploadIcon, UserIcon, WarningCircleIcon, XCircleIcon, XCloseIcon, XIcon
+<div className="flex gap-(--inline-2)">
+  <Chip selected={filter === 'open'} onClick={() => setFilter('open')}>Open</Chip>
+  <Chip selected={filter === 'closed'} onClick={() => setFilter('closed')}>Closed</Chip>
+</div>
 ```
 
 ---
 
-## SideNavItem
+## Input, Textarea, PasswordInput, SearchInput
 
-Only used inside AppLayout's `sideNavContent` prop — never rendered standalone.
+Text fields. Each one includes its own label, required asterisk, info tooltip, helper text and error state, so don't add your own label or error message around it.
 
 ```tsx
-import { SideNavItem } from '@judi-health/minerva-ds'
+import { Input, Textarea, SearchInput, PasswordInput } from '@judi-health/minerva-ds'
 
-// href renders a plain anchor tag — no router needed
-<SideNavItem label="Dashboard" active />
-<SideNavItem label="Cases" href="/cases" />
-<SideNavItem label="Clients" onClick={() => setSection('clients')} />
+<Input label="Member ID" required value={memberId} onChange={(e) => setMemberId(e.target.value)} />
+<Input label="NPI" instructions="10 digits" invalid={npiInvalid} />
+<Input label="Date of birth" tooltip="As shown on the member's card" placeholder="MM/DD/YYYY" />
+<Textarea label="Notes" rows={4} />
+<SearchInput placeholder="Search cases" value={query} onChange={(e) => setQuery(e.target.value)} />
+<PasswordInput label="Password" />
 ```
+
+| Prop | Use |
+| --- | --- |
+| `label` | Text above the field |
+| `required` | Adds the asterisk |
+| `tooltip` | Info icon after the label, with this text on hover |
+| `instructions` | Helper text below the field. Turns red when `invalid` |
+| `invalid` | Error state. Shows "Invalid input" if there are no `instructions` |
+| `leftIcon`, `rightIcon` | Content inside the field's edges. `Input` takes both; `PasswordInput` takes `leftIcon` |
+
+All other native `<input>` / `<textarea>` props (`value`, `onChange`, `placeholder`, `disabled`, `readOnly`) work as usual. `SearchInput` adds the search icon and a clear button. `PasswordInput` adds the show/hide toggle.
+
+Building a custom control that should look like a field? Wrap it in `FieldWrapper`, which provides the same label, box and helper text.
+
+---
+
+## Dropdown, MultiSelectDropdown
+
+A select field. Options are `MenuItem`s, optionally split into sections by `MenuGroup`. It takes the same `label`, `required`, `tooltip`, `instructions` and `invalid` props as `Input`. `Dropdown` doesn't store the value: keep it in your own state, and it marks the matching `MenuItem` as selected for you.
+
+```tsx
+import { Dropdown, MultiSelectDropdown, MenuGroup, MenuItem, MenuSearchBar } from '@judi-health/minerva-ds'
+
+<Dropdown
+  label="Reviewer"
+  placeholder="Choose a reviewer"
+  value={reviewer}
+  onSelect={setReviewer}
+  onClear={() => setReviewer(undefined)}
+  searchBar={<MenuSearchBar placeholder="Search reviewers" />}
+>
+  <MenuGroup label="Pharmacists" />
+  <MenuItem label="Chad Ontario" />
+  <MenuItem label="Ana Ruiz" />
+</Dropdown>
+
+<MultiSelectDropdown label="Status" placeholder="Any status" onChange={setStatuses}>
+  <MenuItem label="Open" />
+  <MenuItem label="Pending" />
+  <MenuItem label="Closed" />
+</MultiSelectDropdown>
+```
+
+- `onSelect` receives the clicked item's `label`. Omit `onClear` to hide the × button.
+- `MultiSelectDropdown` keeps the menu open while picking and shows the selections as removable badges. It stores the selection itself (it has no `value` prop, so it can't be preset or reset from outside) and calls `onChange` with every selected label.
+- For a menu of actions rather than a value (a ⋮ menu), use `TableRowActions` in tables. `MenuPanel` and `MenuItem` (with `destructive` for red items) are the building blocks if you need a menu elsewhere.
+
+---
+
+## Checkbox, Radio
+
+```tsx
+import { Checkbox, Radio } from '@judi-health/minerva-ds'
+
+<Checkbox label="Expedited review" checked={expedited} onChange={(e) => setExpedited(e.target.checked)} />
+<Checkbox label="Select all" checked={allSelected} indeterminate={someSelected} onChange={toggleAll} />
+<Checkbox label="I attest this is accurate" error errorMessage="Required before submitting" />
+
+<div className="flex flex-col gap-(--stack-2)">
+  <Radio name="decision" label="Approve" checked={decision === 'approve'} onChange={() => setDecision('approve')} />
+  <Radio name="decision" label="Deny" checked={decision === 'deny'} onChange={() => setDecision('deny')} />
+</div>
+```
+
+- `label` is optional. Without one, pass `aria-label` (as in table selection columns).
+- `padding` makes the row as tall as a Button, for lists and form rows.
+- `readOnly` shows the value but blocks changes. Use it instead of `disabled` when the user should still see the value clearly.
+- `indeterminate` (Checkbox only) shows a dash for a partly selected group.
+
+---
+
+## Tag
+
+Read-only status labels. Text only — no interactive elements.
+
+```tsx
+import { Tag } from '@judi-health/minerva-ds'
+
+<Tag variant="success">Approved</Tag>
+<Tag variant="warning">Pending Review</Tag>
+<Tag variant="error">Rejected</Tag>
+```
+
+Variants: `info` | `info-high-contrast` | `success` | `warning` | `error` | `system` | `system-alt`
+
+---
+
+## Badge
+
+Same colors as the `info` Tag but supports an optional dismiss button. Use for removable filters or selections.
+
+```tsx
+import { Badge } from '@judi-health/minerva-ds'
+
+<Badge>Label</Badge>
+<Badge onClose={() => removeFilter()}>Status: Active</Badge>
+```
+
+---
+
+## Lozenge
+
+A small count bubble, e.g. the number of items in a tab or nav item. Pass it to `Tab`'s `rightSlot` or `SideNavItem`'s `lozenge`.
+
+```tsx
+import { Lozenge } from '@judi-health/minerva-ds'
+
+<Tab label="Open" rightSlot={<Lozenge count={12} />} />
+<SideNavItem label="Inbox" lozenge={<Lozenge count={3} variant="dark" />} />
+```
+
+Variants: `light` (default) | `dark`
+
+---
+
+## MetaItem
+
+Inline key/value pair with an optional leading icon. Use in ActionBar `secondaryContent` or anywhere metadata is displayed.
+
+```tsx
+import { MetaItem, ClockIcon } from '@judi-health/minerva-ds'
+
+<MetaItem label="Assigned" value="Chad Ontario" />
+<MetaItem icon={ClockIcon} label="Elapses" value="05/26/2026 12:00PM EST" />
+
+// Clickable link value — renders underlined text + LinkOut icon
+<MetaItem label="Plan" value="J.P. Wynne High School" onClick={() => navigate('/plan')} />
+```
+
+---
+
+## Alert
+
+Temporary feedback shown over the page after something happens: "Case saved", "Couldn't reach the server". Designers call it an alert, toast or banner. It has two properties, matching Figma:
+
+| Prop | Values | Figma property |
+| --- | --- | --- |
+| `type` | `success` \| `warning` \| `error` \| `general` | Type |
+| `variant` | `banner` \| `toast` | Style (React reserves `style`, so it's `variant` in code) |
+
+- **Banner:** full width, covers the global header, × to dismiss.
+- **Toast:** hugs its text, centered at the top of the page, no ×. Several toasts stack.
+- Both disappear after 5 seconds. A new banner replaces the current one.
+- The message is plain text only: no header, links or buttons. For status that should stay on the page, or that needs an action, use [`Message`](#message).
+
+Show one by calling `showAlert` from an event handler. `AppLayout` already renders the `AlertViewport` where it appears, so there's nothing to add to the page:
+
+```tsx
+import { showAlert } from '@judi-health/minerva-ds'
+
+const handleSave = () => {
+  saveCase()
+  showAlert({ type: 'success', variant: 'toast', message: 'Case saved' })
+}
+
+showAlert({ type: 'error', variant: 'banner', message: 'We couldn’t submit the determination. Try again.' })
+showAlert({ type: 'general', variant: 'toast', message: 'Draft autosaved', duration: 3000 })
+```
+
+- `duration` (milliseconds) overrides the 5-second default.
+- `showAlert` returns an id. Pass it to `dismissAlert(id)` to remove the alert early.
+- On a page without `AppLayout`, render `<AlertViewport />` once yourself.
+
+To show an alert in place for a static mockup or a screenshot of a state, render the component directly. A banner takes `onClose`:
+
+```tsx
+import { Alert } from '@judi-health/minerva-ds'
+
+<Alert type="warning" variant="banner" onClose={() => {}}>Your session expires in 5 minutes</Alert>
+<Alert type="success" variant="toast">Case saved</Alert>
+```
+
+Never build a toast or banner yourself, and never use `Message` for one.
+
+---
+
+## Message
+
+An inline status box inside the page content, with an icon, an optional bold header, body text and an optional action. Designers may call it an inline message, callout or notice.
+
+`Message` is not an alert, toast or banner: those are [`Alert`](#alert). Use `Message` for status that belongs to the page and stays put; use `Alert` for temporary feedback after an action.
+
+```tsx
+import { Message, Button } from '@judi-health/minerva-ds'
+
+<Message variant="warning" header="Prior authorization expires soon">
+  This authorization expires on 05/26/2026. Request an extension before then.
+</Message>
+
+<Message
+  variant="error"
+  action={<Button variant="tertiary" unpadded onClick={retry}>Retry</Button>}
+>
+  We couldn't load the member's claims.
+</Message>
+```
+
+Variants: `informational` | `success` | `warning` | `error`
+
+- Place it in the page flow, next to the content it's about. It doesn't float.
+- `icon` replaces the default status icon, e.g. `AIIcon`. `ai` adds the Judi AI gradient background.
+
+---
+
+## Tooltip
+
+Short help text shown on hover and keyboard focus. Wrap the element that triggers it.
+
+```tsx
+import { Tooltip, Button, Icon, EditIcon, InfoCircleIcon } from '@judi-health/minerva-ds'
+
+<Tooltip content="Edit case">
+  <Button variant="tertiary" iconOnly unpadded aria-label="Edit case"><Icon icon={EditIcon} /></Button>
+</Tooltip>
+
+<Tooltip content="Based on the last 12 months of claims" beak="top">
+  <Icon icon={InfoCircleIcon} size="small" />
+</Tooltip>
+```
+
+- `beak` sets which side the arrow is on, which also sets placement: `bottom` (default, tooltip above), `top`, `left`, `right`, `none`.
+- Every icon-only button should have a Tooltip naming its action.
+- Form fields have a built-in `tooltip` prop, and truncated table cells show one automatically, so don't add your own there.
+- `TooltipBubble` is the bubble on its own, for static mockups only.
 
 ---
 
@@ -379,26 +561,47 @@ import { Spinner } from '@judi-health/minerva-ds'
 
 ---
 
-## Tab / TabSet
+## Notification
 
-`TabSet` is the container — it holds the bottom border and left/right padding. `Tab` is each individual tab. Manage selected state externally.
-
-```tsx
-import { Tab, TabSet } from '@judi-health/minerva-ds'
-
-<TabSet>
-  <Tab label="Overview" selected={active === 'overview'} onClick={() => setActive('overview')} />
-  <Tab label="Details"  selected={active === 'details'}  onClick={() => setActive('details')} />
-  <Tab label="History"  selected={active === 'history'}  onClick={() => setActive('history')} />
-</TabSet>
-```
-
-Use `rightSlot` to render an icon or lozenge to the right of the label:
+The notifications dropdown panel that opens from the bell in the global header, with "Mark All As Read" and "View All" in its header. It isn't a toast or alert.
 
 ```tsx
-<Tab label="Overview" rightSlot={<Lozenge count={3} />} />
-<Tab label="Alerts"   rightSlot={<Icon icon={WarningCircleIcon} size="small" />} />
+import { Notification } from '@judi-health/minerva-ds'
+
+<Notification onMarkAllAsRead={markAllRead} onViewAll={() => navigate('/notifications')}>
+  {/* your list of notification items, built with Text, Tag and Button variant="link" */}
+</Notification>
 ```
+
+---
+
+## Modal
+
+A dialog over the page for confirmations and short focused tasks. It has a title, a body, and a footer with a tertiary action on the left and buttons on the right.
+
+```tsx
+import { Modal, Button, Text } from '@judi-health/minerva-ds'
+
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Delete case?"
+  rightActions={
+    <>
+      <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
+      <Button variant="primary" destructive onClick={deleteCase}>Delete</Button>
+    </>
+  }
+>
+  <Text variant="body-md" className="text-(--text-surface-base)">
+    This permanently deletes Case #123456 and its documents.
+  </Text>
+</Modal>
+```
+
+- `rightActions` are wrapped in a `ButtonGroup` for you. Put the primary button last.
+- `leftAction` takes one tertiary Button, e.g. "Learn more".
+- `ModalContent` is the dialog box without the overlay, for static mockups.
 
 ---
 
@@ -443,6 +646,70 @@ import { Panel, TabSet, Tab } from '@judi-health/minerva-ds'
   {tab === 'summary' ? <CaseSummary /> : <CaseHistory />}
 </Panel>
 ```
+
+---
+
+## Tab / TabSet
+
+`TabSet` is the container — it holds the bottom border and left/right padding. `Tab` is each individual tab. Manage selected state externally.
+
+```tsx
+import { Tab, TabSet } from '@judi-health/minerva-ds'
+
+<TabSet>
+  <Tab label="Overview" selected={active === 'overview'} onClick={() => setActive('overview')} />
+  <Tab label="Details"  selected={active === 'details'}  onClick={() => setActive('details')} />
+  <Tab label="History"  selected={active === 'history'}  onClick={() => setActive('history')} />
+</TabSet>
+```
+
+Use `rightSlot` to render an icon or lozenge to the right of the label:
+
+```tsx
+<Tab label="Overview" rightSlot={<Lozenge count={3} />} />
+<Tab label="Alerts"   rightSlot={<Icon icon={WarningCircleIcon} size="small" />} />
+```
+
+---
+
+## Collapse
+
+A section with a header that expands and collapses its content (an accordion item). Stack several for an accordion.
+
+```tsx
+import { Collapse, Button } from '@judi-health/minerva-ds'
+
+<Collapse title="Prescriber details" defaultOpen>
+  {/* content */}
+</Collapse>
+
+<Collapse style="underline" title="Attachments" actions={<Button variant="tertiary">Upload</Button>}>
+  {/* content */}
+</Collapse>
+```
+
+- `style`: `default` (bordered box) | `underline` | `blank` | `underline-flush` | `blank-flush` | `unpadded`
+- `trigger`: `chevron` (default) | `checkbox`
+- `actions` sits on the right of the header. Clicking it doesn't toggle the section.
+
+---
+
+## Divider
+
+A 1px line between sections or items.
+
+```tsx
+import { Divider } from '@judi-health/minerva-ds'
+
+<Divider />
+<div className="flex items-center gap-(--inline-3)">
+  <Text variant="body-md">Left</Text>
+  <Divider orientation="vertical" />
+  <Text variant="body-md">Right</Text>
+</div>
+```
+
+Prefer spacing over dividers inside a `Panel`. Use a Divider only when the design shows a line.
 
 ---
 
@@ -548,3 +815,54 @@ import { TableExpandButton } from '@judi-health/minerva-ds'
 
 Use an empty `<TableHead />` above an expand column.
 
+---
+
+## Icon
+
+```tsx
+import { Icon, AddIcon, SearchIcon, DeleteIcon } from '@judi-health/minerva-ds'
+
+// Standalone icon
+<Icon icon={SearchIcon} size="regular" />
+
+// Pass directly to Button — never wrap in Icon when used inside Button
+<Button variant="primary" leftIcon={AddIcon}>Add</Button>
+```
+
+Sizes: `small` (14px) | `regular` (20px, default)
+
+`JudiLogoIcon` and `judiLogoSrc` are also exported for custom headers.
+
+### All available icons
+
+```
+AddCircleIcon, AddIcon, AIIcon, AlarmClockIcon, ArrowDownIcon, ArrowDownLeftIcon,
+ArrowDownRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, ArrowUpRightIcon,
+AttachmentIcon, BankIcon, BellIcon, BoltIcon, BranchIcon, CheckCircleIcon,
+CheckMarkIcon, ChevronDownIcon, ChevronEndIcon, ChevronLeftIcon, ChevronRightIcon,
+ChevronStartIcon, ChevronUpIcon, ClockIcon, CloseIcon, CopyIcon, CreditCardIcon,
+CustomerServiceIcon, DeleteIcon, DocumentIcon, DocumentPageFoldIcon,
+DollarCircleIcon, DollarIcon, DownloadIcon, EditIcon, EllipsisCircleIcon,
+EllipsisVerticalIcon, EnvelopeIcon, EyeIcon, EyeSlashIcon, FaceIdIcon, FilterIcon,
+GlobeIcon, GrabberIcon, GridIcon, HistoryIcon, HomeIcon, InfoCircleIcon, LinkIcon,
+LinkOutIcon, ListTreeIcon, LocationIcon, LockIcon, LockOpenIcon, LogOutIcon,
+MedicalIcon, MenuBarsIcon, MenuGridIcon, MessageDotsIcon, PhoneIcon, PillBottleIcon,
+PlaceholderIcon, PrintIcon, QuestionCircleIcon, RedoIcon, RefreshIcon, RemoveIcon,
+ScaleIcon, SearchIcon, SeriesIcon, SettingsIcon, ShieldCheckIcon, ShippingIcon,
+SortIcon, StarEmptyIcon, StarFilledIcon, ThumbsDownIcon, ThumbsUpIcon, UndoIcon,
+UploadIcon, UserIcon, WarningCircleIcon, XCircleIcon, XCloseIcon, XIcon
+```
+
+---
+
+## KeyCaseDetails
+
+Collapsible full-width bar showing case-level metadata in columns. Clicking the chevron expands each column to reveal sub-fields. Place in AppLayout's `subBar` prop, below `<Steps>` if both are present.
+
+**Always use this component whenever a KeyCaseDetails bar appears in a design.** Do not build a custom version, inline the markup, or skip it because the data is hardcoded. The hardcoded data is intentional — this is a display component for the design system and accepts no props.
+
+```tsx
+import { KeyCaseDetails } from '@judi-health/minerva-ds/patterns'
+
+<AppLayout subBar={<KeyCaseDetails />}>
+```

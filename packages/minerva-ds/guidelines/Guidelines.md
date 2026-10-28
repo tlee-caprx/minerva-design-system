@@ -105,76 +105,29 @@ sideNavContent={
 
 Once the shell is set up, work through the rest of the design:
 
-1. **Check `components.md` first** — always use a kit component if one exists before building custom
-2. **Build custom components as needed** — new component files go in your project's `src/components/`, never inlined inside a page file. Never edit files inside `node_modules/@judi-health/minerva-ds`
-3. **Custom components must follow token standards** — see the Token Rules section below, and `tokens.md` / `styles.md` for the full reference
+1. **Find the component in `components.md`.** Its table lists what each component is for and the other names designers use for it (a "card" is a `Panel`). Always use a Minerva component when one fits.
+2. **Build custom pieces only when nothing fits.** Put them in their own files, never inline in a page file, and never edit anything inside `node_modules/@judi-health/minerva-ds`.
+3. **Custom pieces follow the token rules below.** To pick a specific spacing, color, radius or shadow token, use `tokens.md`.
 
 ---
 
-## Token Rules
+## Rules
 
-### Spacing
-
-Never use Tailwind's built-in scale (`p-4`, `gap-2`, `mt-6`). Always use our tokens with this syntax:
-
-```tsx
-// ✓ correct
-<div className="p-(--inset-6) gap-(--inline-3) mt-(--stack-4)">
-// ✗ wrong
-<div className="p-4 gap-3 mt-6">
-```
-
-**Complete token scales — do not extrapolate beyond these:**
-
-| Token | Values available |
-|-------|-----------------|
-| `--inset-*` | 1 2 3 4 5 6 7 — nothing beyond 7 |
-| `--stack-*` | 1 2 3 4 5 — nothing beyond 5 |
-| `--inline-*` | 1 2 3 4 5 — nothing beyond 5 |
-| `--layout-*` | 1 2 3 4 — nothing beyond 4 |
-
-If the token name you want isn't in this table, it does not exist. Use the nearest value instead — never guess or extrapolate.
-
-### Typography
-
-Always use the `Text` component — never Tailwind typography classes or raw inline styles:
-
-```tsx
-import { Text } from '@judi-health/minerva-ds'
-
-// ✓ correct
-<Text as="h1" variant="heading-xl" className="text-(--text-surface-base)">Page Title</Text>
-<Text variant="body-md" className="text-(--text-surface-base)">Body copy</Text>
-<Text variant="body-md" weight="semibold">Semibold label</Text>
-<Text variant="label-md" italic>Italic label</Text>
-
-// ✗ wrong
-<h1 className="text-2xl font-bold">
-<p style={{ fontSize: 'var(--body-md-size)', lineHeight: 'var(--body-md-line-height)', fontWeight: 'var(--body-md-weight)' }}>
-```
-
-Available variants: `body-sm` | `body-md` | `body-lg` | `heading-xs` | `heading-sm` | `heading-md` | `heading-lg` | `heading-xl` | `label-sm` | `label-md` | `label-lg`
-
-Use `as` to set the HTML element (`h1`, `h2`, `h3`, `p`, `span` — defaults to `span`). Use `className` for color tokens.
-
-### Colors
-
-Never hardcode hex values or Tailwind color names — always our token syntax:
+- **Layout:** every page uses `AppLayout`. Lay out content with flex or grid, never absolute positioning. Don't set fixed heights; let content size containers.
+- **Spacing:** use spacing tokens, never Tailwind's scale (`p-4`, `gap-2`) or pixel values. The scales are `--inset-1`…`7`, `--inline-1`…`5`, `--stack-1`…`5` and `--layout-1`…`5`. Nothing exists beyond those numbers.
+- **Typography:** always use the `Text` component. Never use Tailwind text classes (`text-sm`, `font-bold`) or inline font styles.
+- **Color:** use color tokens, never hex values or Tailwind color names (`bg-white`, `text-gray-900`).
+- **Radius:** `--radius-sm` (4px) for almost everything, `--radius-full` for pills.
+- **CSS:** style with Tailwind classes using tokens. Don't write custom CSS classes or stylesheets.
 
 ```tsx
 // ✓ correct
-<div className="bg-(--bg-surface-base) text-(--text-surface-base)">
+<div className="flex flex-col gap-(--stack-4) p-(--inset-7) bg-(--bg-surface-base) rounded-(--radius-sm)">
+  <Text as="h2" variant="heading-sm" className="text-(--text-surface-base)">Member</Text>
+</div>
+
 // ✗ wrong
-<div className="bg-white text-gray-900">
+<div className="flex flex-col gap-4 p-6 bg-white rounded-lg">
+  <h2 className="text-lg font-semibold">Member</h2>
+</div>
 ```
-
----
-
-## General Rules
-
-- Never build a custom layout — always use AppLayout
-- Never use Tailwind's built-in spacing scale
-- Never hardcode hex values, pixel values, or arbitrary colors
-- Never write custom CSS classes
-- Typography always uses inline styles, never Tailwind classes
-- One component per file

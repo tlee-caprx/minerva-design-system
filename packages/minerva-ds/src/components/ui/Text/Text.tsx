@@ -8,6 +8,7 @@ export type TextVariant =
   | 'label-sm' | 'label-md' | 'label-lg'
   | 'tag-label'
   | 'option-default'
+  | 'banner-text' | 'toast-text'
 
 export type TextWeight = 'regular' | 'semibold'
 
@@ -50,6 +51,8 @@ const VARIANT_STYLES: Record<TextVariant, VariantStyle> = {
   'label-lg':   { fontSize: 'var(--label-lg-size)',    lineHeight: 'var(--label-lg-line-height)',    fontWeight: 'var(--label-lg-weight)'   },
   'tag-label':  { fontSize: 'var(--tag-label-size)',   lineHeight: 'var(--tag-label-line-height)',   fontWeight: 'var(--tag-label-weight)'  },
   'option-default': { fontSize: 'var(--option-default-size)', lineHeight: 'var(--option-default-line-height)', fontWeight: 'var(--option-default-weight)' },
+  'banner-text': { fontSize: 'var(--banner-text-size)', lineHeight: 'var(--banner-text-line-height)', fontWeight: 'var(--banner-text-weight)' },
+  'toast-text':  { fontSize: 'var(--toast-text-size)',  lineHeight: 'var(--toast-text-line-height)',  fontWeight: 'var(--toast-text-weight)'  },
 }
 
 const WEIGHT_TOKENS: Record<TextWeight, string> = {

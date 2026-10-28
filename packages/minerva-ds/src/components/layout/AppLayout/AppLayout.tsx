@@ -5,6 +5,7 @@ import { ActionBar } from '../../navigation/ActionBar'
 import { SideNav } from '../../navigation/SideNav'
 import type { BreadcrumbItem } from '../../navigation/Breadcrumb'
 import { judiLogoSrc } from '../../ui/Icon/icons/judi-logo'
+import { AlertViewport } from '../../ui/Alert'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -172,6 +173,8 @@ export function AppLayout({
 
   return (
     <div className={`flex flex-col h-screen overflow-hidden bg-(--bg-surface-base) ${className}`}>
+      {/* Where showAlert() banners and toasts appear */}
+      <AlertViewport />
 
       {variant === 'evolution' ? (
 

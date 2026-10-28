@@ -89,6 +89,15 @@ const minervaTypography = {
   'tag-label-size':        fontSize['100'],   // 12px / 0.75rem
   'tag-label-line-height': lineHeight['050'], // 12px / 0.75rem (tight, fits pill shape)
   'tag-label-weight':      fontWeight['semibold'],
+
+  // ─── Alert ────────────────────────────────────────────────────────────────
+  'banner-text-size':        fontSize['600'],   // 20px / 1.25rem
+  'banner-text-line-height': lineHeight['600'], // 32px / 2rem
+  'banner-text-weight':      fontWeight['semibold'],
+
+  'toast-text-size':         fontSize['200'],   // 14px / 0.875rem
+  'toast-text-line-height':  lineHeight['500'], // 24px / 1.5rem
+  'toast-text-weight':       fontWeight['semibold'],
 } as const
 
 const evolutionTypography = {

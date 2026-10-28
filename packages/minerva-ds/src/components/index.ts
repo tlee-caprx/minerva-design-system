@@ -42,6 +42,8 @@ export type {
   MenuSearchBarProps,
   MenuPanelProps,
 } from './ui/Dropdown'
+export { Alert, AlertViewport, showAlert, dismissAlert } from './ui/Alert'
+export type { AlertProps, AlertType, AlertVariant, ShowAlertOptions } from './ui/Alert'
 export { Message } from './ui/Message'
 export type { MessageProps, MessageVariant } from './ui/Message'
 export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableExpandButton, TableRowActions, Pagination } from './ui/Table'

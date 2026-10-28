@@ -10,6 +10,11 @@ This repo builds and publishes `@judi-health/minerva-ds`, the Minerva design sys
   - `src/tokens/`: TypeScript source of truth for tokens (primitive → semantic).
   - `src/styles/`: `themes.css` (generated), `base.css`, `fonts.css`, plus `tokens.css` and `index.css`, which become `dist/tokens.css` and `dist/style.css`.
   - `guidelines/`: Markdown shipped in the package. Designers' AI tools read these files to build with Minerva. Treat them as public API.
+    - `Guidelines.md`: page workflow and the rules. Read every time.
+    - `components.md`: lookup table (with the names designers use) and usage for every component. Read every time.
+    - `tokens.md`: picking a token for custom UI. Read when needed.
+    - `setup.md`, `JudiAssistant.md`: read only for those tasks.
+    - Each rule lives in one file. Don't copy rules between files; link to the one that owns them.
 - `apps/documentation/`: documentation site, with one file per section in `src/sections/`. It resolves the package from `packages/minerva-ds/src` through Vite aliases, so edits hot-reload.
 - `scripts/prepare-release.mjs` and `.github/workflows/release-minerva.yml`: publish the built package to the `release` branch.
 
@@ -37,7 +42,7 @@ npm run typecheck           # package + documentation app
 1. Create `src/components/ui/Name/Name.tsx` and `index.ts`, following an existing component such as `Tag` or `Button`. Export its props type.
 2. Export it from `src/components/index.ts`, or from `src/patterns/index.ts` for a pattern. Anything not exported there is unreachable for consumers.
 3. Add or update its section in `apps/documentation/src/sections/` and register it in `NAV_GROUPS` in `apps/documentation/src/App.tsx`.
-4. Update `guidelines/components.md`: the table at the top, plus a usage section if designers need guidance. Keep examples importing from `@judi-health/minerva-ds`, never from file paths.
+4. Update `guidelines/components.md`: add a row to the "Find a component" table, including **Also called** (the names designers use for it, so agents can find it), then a usage section. Keep examples importing from `@judi-health/minerva-ds`, never from file paths.
 5. Run `npm run typecheck && npm run build`, then check the component in the documentation app under both themes.
 
 ## Releasing
