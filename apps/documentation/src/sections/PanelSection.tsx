@@ -45,7 +45,7 @@ export function PanelSection() {
         <Panel>
           <div className="flex flex-col gap-(--stack-4)">
             <Text as="h3" variant="heading-sm" className="text-(--text-surface-base)">Member</Text>
-            <div className="grid grid-cols-2 gap-(--inline-4)">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(calc(var(--space-40)*4),1fr))] gap-(--inline-4)">
               <Panel variant="nested">
                 <MetaItem label="Name" value="Walter White" />
               </Panel>
