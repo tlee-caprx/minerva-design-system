@@ -12,32 +12,34 @@ const b = {
   "label-md": { fontSize: "var(--label-md-size)", lineHeight: "var(--label-md-line-height)", fontWeight: "var(--label-md-weight)" },
   "label-lg": { fontSize: "var(--label-lg-size)", lineHeight: "var(--label-lg-line-height)", fontWeight: "var(--label-lg-weight)" },
   "tag-label": { fontSize: "var(--tag-label-size)", lineHeight: "var(--tag-label-line-height)", fontWeight: "var(--tag-label-weight)" },
-  "option-default": { fontSize: "var(--option-default-size)", lineHeight: "var(--option-default-line-height)", fontWeight: "var(--option-default-weight)" }
-}, m = {
+  "option-default": { fontSize: "var(--option-default-size)", lineHeight: "var(--option-default-line-height)", fontWeight: "var(--option-default-weight)" },
+  "banner-text": { fontSize: "var(--banner-text-size)", lineHeight: "var(--banner-text-line-height)", fontWeight: "var(--banner-text-weight)" },
+  "toast-text": { fontSize: "var(--toast-text-size)", lineHeight: "var(--toast-text-line-height)", fontWeight: "var(--toast-text-weight)" }
+}, z = {
   regular: "var(--font-weight-regular)",
   semibold: "var(--font-weight-semibold)"
 };
-function S({
+function x({
   variant: i,
   weight: e,
   italic: t = !1,
-  underline: g = !1,
+  underline: n = !1,
   as: a = "span",
-  style: n,
-  className: l = "",
-  children: h,
+  style: g,
+  className: h = "",
+  children: l,
   ...o
 }) {
-  const { fontSize: d, lineHeight: r, fontWeight: v } = b[i], s = {
-    fontSize: d,
-    lineHeight: r,
-    fontWeight: e ? m[e] : v,
+  const { fontSize: r, lineHeight: d, fontWeight: v } = b[i], s = {
+    fontSize: r,
+    lineHeight: d,
+    fontWeight: e ? z[e] : v,
     fontStyle: t ? "italic" : void 0,
-    textDecoration: g ? "underline" : void 0,
-    ...n
+    textDecoration: n ? "underline" : void 0,
+    ...g
   };
-  return /* @__PURE__ */ f(a, { className: l, style: s, ...o, children: h });
+  return /* @__PURE__ */ f(a, { className: h, style: s, ...o, children: l });
 }
 export {
-  S as Text
+  x as Text
 };

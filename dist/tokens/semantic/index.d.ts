@@ -59,6 +59,12 @@ export declare const themes: {
         'tag-label-size': "0.75rem";
         'tag-label-line-height': "0.75rem";
         'tag-label-weight': "600";
+        'banner-text-size': "1.25rem";
+        'banner-text-line-height': "2rem";
+        'banner-text-weight': "600";
+        'toast-text-size': "0.875rem";
+        'toast-text-line-height': "1.5rem";
+        'toast-text-weight': "600";
         'space-0': "0";
         'space-1': "1px";
         'space-2': "2px";
@@ -363,6 +369,12 @@ export declare const themes: {
         'tag-label-size': "0.75rem";
         'tag-label-line-height': "0.75rem";
         'tag-label-weight': "600";
+        'banner-text-size': "1.25rem";
+        'banner-text-line-height': "2rem";
+        'banner-text-weight': "600";
+        'toast-text-size': "0.875rem";
+        'toast-text-line-height': "1.5rem";
+        'toast-text-weight': "600";
         'space-0': "0";
         'space-1': "1px";
         'space-2': "2px";

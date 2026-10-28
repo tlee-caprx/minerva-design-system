@@ -63,5 +63,5 @@ and components.md. Use Minerva components and tokens; never hardcode colors, spa
 - [setup.md](guidelines/setup.md): project setup
 - [Guidelines.md](guidelines/Guidelines.md): workflow and rules
 - [components.md](guidelines/components.md): every component, with usage
-- [tokens.md](guidelines/tokens.md) and [styles.md](guidelines/styles.md): spacing, color, typography, radius
+- [tokens.md](guidelines/tokens.md): picking spacing, color, radius and shadow tokens for custom UI
 - [JudiAssistant.md](guidelines/JudiAssistant.md): the Judi AI chat surface

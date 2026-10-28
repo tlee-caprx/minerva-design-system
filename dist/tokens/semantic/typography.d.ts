@@ -58,6 +58,12 @@ export declare const typographyThemes: {
         readonly 'tag-label-size': "0.75rem";
         readonly 'tag-label-line-height': "0.75rem";
         readonly 'tag-label-weight': "600";
+        readonly 'banner-text-size': "1.25rem";
+        readonly 'banner-text-line-height': "2rem";
+        readonly 'banner-text-weight': "600";
+        readonly 'toast-text-size': "0.875rem";
+        readonly 'toast-text-line-height': "1.5rem";
+        readonly 'toast-text-weight': "600";
     };
     evolution: {
         readonly 'font-base': "\"Inter\", sans-serif";
@@ -118,5 +124,11 @@ export declare const typographyThemes: {
         readonly 'tag-label-size': "0.75rem";
         readonly 'tag-label-line-height': "0.75rem";
         readonly 'tag-label-weight': "600";
+        readonly 'banner-text-size': "1.25rem";
+        readonly 'banner-text-line-height': "2rem";
+        readonly 'banner-text-weight': "600";
+        readonly 'toast-text-size': "0.875rem";
+        readonly 'toast-text-line-height': "1.5rem";
+        readonly 'toast-text-weight': "600";
     };
 };

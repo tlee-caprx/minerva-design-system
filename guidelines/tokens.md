@@ -1,158 +1,147 @@
 # Tokens
 
-Always use `var(--token-name)` over hardcoded color, spacing, or typography values.
+Use this file to pick the right token when you build something Minerva has no component for. The short rules are in `Guidelines.md`. Minerva components already use the right tokens, so you only need this for your own markup.
+
+Every color, spacing and radius value comes from a CSS variable, written with Tailwind's token syntax:
+
+```tsx
+// ✓ correct
+<div className="p-(--inset-6) gap-(--inline-3) bg-(--bg-surface-base) rounded-(--radius-sm)">
+
+// ✗ wrong: Tailwind's scale, hex values, raw pixels
+<div className="p-4 gap-3 bg-white rounded-lg" style={{ borderColor: '#e5e7eb', padding: '16px' }}>
+```
+
+Don't guess token names. If the one you want isn't here, use the nearest listed one.
 
 ---
 
 ## Spacing
 
-### Naming pattern
+Pick the family by what the space is for, then the size.
 
-```
---{intent}-{scale}
-```
+| Family | Use | Tokens |
+| --- | --- | --- |
+| `--inset-*` | Padding inside a box | 1–7 |
+| `--inline-*` | Gap between items in a row | 1–5 |
+| `--stack-*` | Gap between items in a column | 1–5 |
+| `--layout-*` | Page-level padding and spacing between page sections | 1–5 |
 
-- `inset` — padding inside a container
-- `stack` — vertical gap between elements
-- `inline` — horizontal gap between elements
-- `layout` — page-level structural spacing
+Sizes, in pixels at the Minerva theme's 16px base. Evolution's 14px base scales them down proportionally.
 
-Scale runs 1–7 for inset, 1–5 for stack/inline, 1–4 for layout.
+| Token | px | Typical use |
+| --- | --- | --- |
+| `--inset-1` | 4 | Tags (vertical) |
+| `--inset-2` | 6 | Badges (vertical), dense controls |
+| `--inset-3` | 8 | Buttons, inputs, nav items, table cells (vertical) |
+| `--inset-4` | 10 | List items |
+| `--inset-5` | 12 | Table cells and menu items (horizontal) |
+| `--inset-6` | 16 | Messages, compact boxes |
+| `--inset-7` | 24 | Panels, modals, page sections |
+| `--inline-1` | 4 | Icon next to its text |
+| `--inline-2` | 8 | Icon + label, items in a toolbar |
+| `--inline-3` | 12 | Grouped items |
+| `--inline-4` | 16 | Distinct groups, grid columns |
+| `--inline-5` | 24 | Widely separated groups |
+| `--stack-1` | 4 | Label and its value |
+| `--stack-2` | 8 | Tightly related lines |
+| `--stack-3` | 12 | Related items |
+| `--stack-4` | 16 | Distinct groups, heading and its content |
+| `--stack-5` | 24 | Major sections inside a panel |
+| `--layout-1` … `--layout-5` | 16, 24, 32, 40, 48 | Between panels and page sections. `AppLayout` already pads the page with `--layout-4` |
 
-### Values
-
-| Token | Value | Use |
-|-------|-------|-----|
-| `--inset-3` | 8px | Button padding, nav items, compact inputs |
-| `--inset-4` | 10px | Table cells, list items |
-| `--inset-5` | 12px | Default inputs |
-| `--inset-6` | 16px | Cards, panels, header padding |
-| `--inset-7` | 24px | Dialogs, page sections, sidenav |
-| `--inline-2` | 8px | Icon + label gap |
-| `--inline-3` | 12px | Between grouped items |
-| `--inline-4` | 16px | Between distinct groups |
-| `--stack-2` | 8px | Tightly related items |
-| `--stack-3` | 12px | Related items |
-| `--stack-4` | 16px | Distinct groups |
-| `--layout-4` | 40px | Page content padding |
-
-### Decision tree
-
-- Padding inside a component? → `--inset-*`
-- Gap between items in a row? → `--inline-*`
-- Gap between items in a column? → `--stack-*`
-- Page-level padding or margin? → `--layout-*`
-
-### Usage in Tailwind
-
-```tsx
-// ✓ correct
-<div className="p-(--inset-6) gap-(--inline-3) mt-(--stack-4)">
-
-// ✗ wrong — never use Tailwind's built-in scale
-<div className="p-4 gap-3 mt-6">
-```
+For widths, heights and hairlines, use the `--space-*` primitives in `calc()`: `w-[calc(var(--space-40)*6)]`, `border-(--space-1)`. Never type pixel values.
 
 ---
 
 ## Typography
 
-### Naming pattern
+Always use the `Text` component. Never use Tailwind text classes (`text-sm`, `font-bold`) or inline font styles. Pick the variant by role, and set color with a text token in `className`.
 
-```
---{style}-{size}-{property}
-```
-
-- Style: `heading`, `body`, `label`
-- Size: `xl`, `lg`, `md`, `sm`, `xs`
-- Property: `size`, `line-height`, `weight`
-
-### Usage
-
-Always use inline styles — never Tailwind classes for typography:
+| Role | Variant |
+| --- | --- |
+| Page title | `heading-xl`. `AppLayout`'s `title` prop already renders it |
+| Section heading | `heading-lg` or `heading-md` |
+| Panel or card heading | `heading-sm` |
+| Small heading | `heading-xs` |
+| Body text | `body-md` (default), `body-sm` (dense), `body-lg` (featured) |
+| Form label | `label-md` (default), `label-sm` (compact), `label-lg` |
+| Metadata label | Use `MetaItem`. It renders the label as `body-md` semibold |
 
 ```tsx
-// ✓ correct
-<h1 style={{
-  fontSize:   'var(--heading-xl-size)',
-  lineHeight: 'var(--heading-xl-line-height)',
-  fontWeight: 'var(--heading-xl-weight)',
-}} />
-
-// ✗ wrong
-<h1 className="text-2xl font-bold">
+<Text as="h2" variant="heading-sm" className="text-(--text-surface-base)">Member</Text>
+<Text variant="body-md" className="text-(--text-surface-subtle)">Last updated 2 hours ago</Text>
+<Text variant="body-md" weight="semibold">Bold body text</Text>
 ```
-
-### Decision tree
-
-- Page title? → `--heading-xl`
-- Section heading? → `--heading-lg` or `--heading-md`
-- Body copy? → `--body-md` (default), `--body-sm` (dense), `--body-lg` (comfortable)
-- Form label or metadata? → `--label-md` (default), `--label-sm` (compact)
 
 ---
 
 ## Color
 
-### Naming pattern
+Names follow `--{property}-{area}-{role}-{state}`:
 
-```
---{type}-{surface}-{variant}-{state}
-```
+- **property:** `bg`, `text`, `border`, `icon`
+- **area:** `surface` (page and containers), `action` (buttons, links), `control` (inputs, checkboxes, menus), `feedback` (status), `navigation` (header, side nav)
+- **state** (optional): e.g. `idle`, `hover`, `pressed`, `active`, `disabled`, `focus`, `readonly`, `invalid`
 
-- Type: `bg`, `text`, `border`
-- Surface: `surface`, `action`, `feedback`, `navigation`
-- Variant: `base`, `subtle`, `inverse`, `primary`, `secondary`
-- State (optional): `idle`, `hover`, `pressed`, `disabled`
+Use a `text-*` token for text, an `icon-*` token for icons, and so on. Don't borrow a `bg-*` token for text.
 
-### Decision tree
+**Surfaces**
 
-**Backgrounds**
-- Default page or card background? → `--bg-surface-base`
-- Page content area (subtle grey)? → `--bg-surface-subtle`
-- Primary button? → `--bg-action-primary-idle`
-- Global header? → `--bg-navigation-bar`
-- Dark/inverse surface? → `--bg-surface-inverse`
-- Brand-colored bar (turquoise, e.g. KeyCaseDetails)? → `--bg-surface-brand`
+| Need | Token |
+| --- | --- |
+| Panel, card, header row background | `--bg-surface-base` |
+| Page background, nested panel, striped row | `--bg-surface-subtle` |
+| Stronger gray fill | `--bg-surface-muted` |
+| Dark surface | `--bg-surface-inverse` |
+| Brand (turquoise) bar | `--bg-surface-brand` |
+| Default text | `--text-surface-base` |
+| Secondary or muted text | `--text-surface-subtle` |
+| Text on dark surfaces | `--text-surface-inverse` |
+| Default icon | `--icon-surface-base`, `--icon-surface-subtle` for muted |
+| Default border, divider | `--border-surface-base` |
+| Faint border | `--border-surface-subtle` |
+| Hyperlink text | `--text-action-hyperlink` |
 
-**Text**
-- Default body text? → `--text-surface-base`
-- Secondary or muted text? → `--text-surface-subtle`
-- Text on dark backgrounds? → `--text-surface-inverse`
+**Feedback (status colors)**
 
-**Borders**
-- Default border? → `--border-surface-base`
-- Subtle border? → `--border-surface-subtle`
+Four statuses: `error`, `warning`, `success`, `informational`. Use them only to communicate status, never for decoration.
 
-### Usage
+| Need | Token |
+| --- | --- |
+| Light status background (e.g. `Message`) | `--bg-feedback-{status}-inverse` |
+| Mid-tone status background | `--bg-feedback-{status}-muted` |
+| Solid status background | `--bg-feedback-{status}-base` |
+| Status border | `--border-feedback-{status}-muted` |
+| Status text | `--text-feedback-{status}-base` |
+| Status icon | `--icon-feedback-{status}-base` |
+| Text or icon on a solid status background | `--text-feedback-{status}-inverse`, `--icon-feedback-{status}-inverse` |
 
-```tsx
-// ✓ correct
-<div className="bg-(--bg-surface-base) text-(--text-surface-base) border-(--border-surface-base)">
+Before building a status box yourself, check whether `Alert`, `Message`, `Tag` or `Tooltip` already covers it.
 
-// ✗ wrong
-<div className="bg-white text-gray-900" style={{ borderColor: '#e5e7eb' }}>
-```
+**Interactive states**
+
+Buttons, inputs and menus are Minerva components and already handle hover, focus and pressed. If you make something custom clickable, such as a clickable list row, use `--bg-control-subtle-hover` for its hover fill and `--border-control-default-focus` for its focus ring.
 
 ---
 
-## Border Radius
+## Radius
 
-### Naming pattern
+| Token | px | Use |
+| --- | --- | --- |
+| `--radius-sm` | 4 | **The default.** Panels, cards, buttons, inputs, tags, tables, modals |
+| `--radius-xs` | 2 | Very small elements |
+| `--radius-md` | 8 | Source cards in Judi Assistant only |
+| `--radius-full` | 9999 | Pills, avatars, circular icons |
 
-```
---radius-{size}
-```
+When in doubt, use `--radius-sm`. `--radius-none`, `--radius-soft`, `--radius-lg`, `--radius-xl` and `--radius-2xl` exist but no Minerva component uses them.
 
-### Decision tree
+---
 
-- Input fields, nav items, badges? → `--radius-sm` (4px)
-- Cards, modals, dropdowns? → `--radius-md` (8px)
-- Large surfaces? → `--radius-lg` (12px)
-- Pill / fully rounded? → `--radius-full`
+## Shadow
 
-```tsx
-className="rounded-(--radius-sm)"
-className="rounded-(--radius-md)"
-className="rounded-(--radius-full)"
-```
+| Token | Use |
+| --- | --- |
+| `--shadow-surface-sm` | Panels. `Panel` already applies it |
+| `--shadow-surface-md` | Floating surfaces: menus, popovers, the notifications panel |
+| `--shadow-surface-lg` | Modals |

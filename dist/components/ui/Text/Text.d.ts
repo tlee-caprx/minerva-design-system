@@ -1,5 +1,5 @@
 import { ReactNode, ElementType, CSSProperties, HTMLAttributes } from 'react';
-export type TextVariant = 'body-sm' | 'body-md' | 'body-lg' | 'heading-xs' | 'heading-sm' | 'heading-md' | 'heading-lg' | 'heading-xl' | 'label-sm' | 'label-md' | 'label-lg' | 'tag-label' | 'option-default';
+export type TextVariant = 'body-sm' | 'body-md' | 'body-lg' | 'heading-xs' | 'heading-sm' | 'heading-md' | 'heading-lg' | 'heading-xl' | 'label-sm' | 'label-md' | 'label-lg' | 'tag-label' | 'option-default' | 'banner-text' | 'toast-text';
 export type TextWeight = 'regular' | 'semibold';
 export interface TextProps extends Omit<HTMLAttributes<HTMLElement>, 'style' | 'className' | 'children'> {
     /** Typography variant — controls font size and line height */

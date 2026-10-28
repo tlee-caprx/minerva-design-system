@@ -303,6 +303,12 @@
   --tag-label-size: 0.75rem;
   --tag-label-line-height: 0.75rem;
   --tag-label-weight: 600;
+  --banner-text-size: 1.25rem;
+  --banner-text-line-height: 2rem;
+  --banner-text-weight: 600;
+  --toast-text-size: 0.875rem;
+  --toast-text-line-height: 1.5rem;
+  --toast-text-weight: 600;
   --root-font-size: 16px;
 }
 :root[data-theme="evolution"] {
@@ -607,6 +613,12 @@
   --tag-label-size: 0.75rem;
   --tag-label-line-height: 0.75rem;
   --tag-label-weight: 600;
+  --banner-text-size: 1.25rem;
+  --banner-text-line-height: 2rem;
+  --banner-text-weight: 600;
+  --toast-text-size: 0.875rem;
+  --toast-text-line-height: 1.5rem;
+  --toast-text-weight: 600;
   --root-font-size: 14px;
 }
 :root {
@@ -922,6 +934,9 @@ html {
   .\@container {
     container-type: inline-size;
   }
+  .pointer-events-auto {
+    pointer-events: auto;
+  }
   .pointer-events-none {
     pointer-events: none;
   }
@@ -956,6 +971,9 @@ html {
   }
   .inset-0 {
     inset: 0px;
+  }
+  .inset-x-0 {
+    inset-inline: 0px;
   }
   .inset-y-0 {
     inset-block: 0px;
@@ -1408,11 +1426,17 @@ html {
   .bg-\(--bg-feedback-error-inverse\) {
     background-color: var(--bg-feedback-error-inverse);
   }
+  .bg-\(--bg-feedback-error-muted\) {
+    background-color: var(--bg-feedback-error-muted);
+  }
   .bg-\(--bg-feedback-informational-base\) {
     background-color: var(--bg-feedback-informational-base);
   }
   .bg-\(--bg-feedback-informational-inverse\) {
     background-color: var(--bg-feedback-informational-inverse);
+  }
+  .bg-\(--bg-feedback-informational-muted\) {
+    background-color: var(--bg-feedback-informational-muted);
   }
   .bg-\(--bg-feedback-success-base\) {
     background-color: var(--bg-feedback-success-base);
@@ -1420,11 +1444,17 @@ html {
   .bg-\(--bg-feedback-success-inverse\) {
     background-color: var(--bg-feedback-success-inverse);
   }
+  .bg-\(--bg-feedback-success-muted\) {
+    background-color: var(--bg-feedback-success-muted);
+  }
   .bg-\(--bg-feedback-warning-base\) {
     background-color: var(--bg-feedback-warning-base);
   }
   .bg-\(--bg-feedback-warning-inverse\) {
     background-color: var(--bg-feedback-warning-inverse);
+  }
+  .bg-\(--bg-feedback-warning-muted\) {
+    background-color: var(--bg-feedback-warning-muted);
   }
   .bg-\(--bg-navigation-item-primary-active\) {
     background-color: var(--bg-navigation-item-primary-active);
@@ -1522,6 +1552,9 @@ html {
   .px-\(--layout-4\) {
     padding-inline: var(--layout-4);
   }
+  .px-\(--space-30\) {
+    padding-inline: var(--space-30);
+  }
   .px-0 {
     padding-inline: 0px;
   }
@@ -1558,6 +1591,9 @@ html {
   .pb-\(--stack-1\) {
     padding-bottom: var(--stack-1);
   }
+  .text-center {
+    text-align: center;
+  }
   .text-left {
     text-align: left;
   }
@@ -1582,6 +1618,9 @@ html {
   .text-\(--icon-action-dismiss-idle\) {
     color: var(--icon-action-dismiss-idle);
   }
+  .text-\(--icon-action-dismiss-inverse-idle\) {
+    color: var(--icon-action-dismiss-inverse-idle);
+  }
   .text-\(--icon-action-hyperlink\) {
     color: var(--icon-action-hyperlink);
   }
@@ -1600,14 +1639,26 @@ html {
   .text-\(--icon-feedback-error-base\) {
     color: var(--icon-feedback-error-base);
   }
+  .text-\(--icon-feedback-error-inverse\) {
+    color: var(--icon-feedback-error-inverse);
+  }
   .text-\(--icon-feedback-informational-base\) {
     color: var(--icon-feedback-informational-base);
+  }
+  .text-\(--icon-feedback-informational-inverse\) {
+    color: var(--icon-feedback-informational-inverse);
   }
   .text-\(--icon-feedback-success-base\) {
     color: var(--icon-feedback-success-base);
   }
+  .text-\(--icon-feedback-success-inverse\) {
+    color: var(--icon-feedback-success-inverse);
+  }
   .text-\(--icon-feedback-warning-base\) {
     color: var(--icon-feedback-warning-base);
+  }
+  .text-\(--icon-feedback-warning-inverse\) {
+    color: var(--icon-feedback-warning-inverse);
   }
   .text-\(--icon-surface-base\) {
     color: var(--icon-surface-base);
@@ -1668,6 +1719,9 @@ html {
   }
   .text-\(--text-feedback-success-inverse\) {
     color: var(--text-feedback-success-inverse);
+  }
+  .text-\(--text-feedback-warning-inverse\) {
+    color: var(--text-feedback-warning-inverse);
   }
   .text-\(--text-feedback-warning-strong\) {
     color: var(--text-feedback-warning-strong);
@@ -1920,6 +1974,9 @@ html {
     .hover\:bg-\(--border-control-emphasis\):hover {
       background-color: var(--border-control-emphasis);
     }
+    .hover\:text-\(--icon-action-dismiss-inverse-hover\):hover {
+      color: var(--icon-action-dismiss-inverse-hover);
+    }
     .hover\:text-\(--icon-action-secondary-hover\):hover {
       color: var(--icon-action-secondary-hover);
     }
@@ -2012,6 +2069,9 @@ html {
   .focus-visible\:outline-\(--border-surface-base\):focus-visible {
     outline-color: var(--border-surface-base);
   }
+  .focus-visible\:outline-\(--icon-action-dismiss-inverse-idle\):focus-visible {
+    outline-color: var(--icon-action-dismiss-inverse-idle);
+  }
   .focus-visible\:outline-\(--text-action-inverse-idle\):focus-visible {
     outline-color: var(--text-action-inverse-idle);
   }
@@ -2042,6 +2102,9 @@ html {
   }
   .active\:bg-\(--bg-control-subtle-hover\):active {
     background-color: var(--bg-control-subtle-hover);
+  }
+  .active\:text-\(--icon-action-dismiss-inverse-pressed\):active {
+    color: var(--icon-action-dismiss-inverse-pressed);
   }
   .active\:text-\(--text-action-inverse-pressed\):active {
     color: var(--text-action-inverse-pressed);

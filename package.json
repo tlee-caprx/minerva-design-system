@@ -1,6 +1,6 @@
 {
   "name": "@judi-health/minerva-ds",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Minerva design system: React components, tokens, and themes for Judi prototypes.",
   "type": "module",
   "sideEffects": [

@@ -30,6 +30,8 @@ export { Tooltip, TooltipBubble } from './ui/Tooltip';
 export type { TooltipProps, TooltipBubbleProps, TooltipBeak } from './ui/Tooltip';
 export { Dropdown, MultiSelectDropdown, MenuGroup, MenuItem, MenuSearchBar, MenuPanel } from './ui/Dropdown';
 export type { DropdownProps, MultiSelectDropdownProps, MenuGroupProps, MenuItemProps, MenuSearchBarProps, MenuPanelProps, } from './ui/Dropdown';
+export { Alert, AlertViewport, showAlert, dismissAlert } from './ui/Alert';
+export type { AlertProps, AlertType, AlertVariant, ShowAlertOptions } from './ui/Alert';
 export { Message } from './ui/Message';
 export type { MessageProps, MessageVariant } from './ui/Message';
 export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableExpandButton, TableRowActions, Pagination } from './ui/Table';

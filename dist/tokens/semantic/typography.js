@@ -1,8 +1,8 @@
-import { fontFamily as g, fontWeight as e, lineHeight as i, fontSize as l } from "../primitive/typography.js";
-const t = {
+import { fontFamily as t, fontWeight as e, lineHeight as i, fontSize as l } from "../primitive/typography.js";
+const g = {
   // ─── Fonts ────────────────────────────────────────────────────────────────
-  "font-base": g["source-sans-3"],
-  "font-code": g["fira-code"],
+  "font-base": t["source-sans-3"],
+  "font-code": t["fira-code"],
   // ─── Font Weights ─────────────────────────────────────────────────────────
   "font-weight-regular": e.regular,
   "font-weight-semibold": e.semibold,
@@ -84,13 +84,24 @@ const t = {
   // 12px / 0.75rem
   "tag-label-line-height": i["050"],
   // 12px / 0.75rem (tight, fits pill shape)
-  "tag-label-weight": e.semibold
+  "tag-label-weight": e.semibold,
+  // ─── Alert ────────────────────────────────────────────────────────────────
+  "banner-text-size": l[600],
+  // 20px / 1.25rem
+  "banner-text-line-height": i[600],
+  // 32px / 2rem
+  "banner-text-weight": e.semibold,
+  "toast-text-size": l[200],
+  // 14px / 0.875rem
+  "toast-text-line-height": i[500],
+  // 24px / 1.5rem
+  "toast-text-weight": e.semibold
 }, h = {
-  ...t,
+  ...g,
   // ─── Fonts ────────────────────────────────────────────────────────────────
-  "font-base": g.inter
+  "font-base": t.inter
 }, n = {
-  minerva: t,
+  minerva: g,
   evolution: h
 };
 export {
