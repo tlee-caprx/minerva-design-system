@@ -24,7 +24,7 @@ import { KeyCaseDetails } from '@judi-health/minerva-ds/patterns'
 | Status       | `Tag`, `Badge`, `Lozenge`, `MetaItem` |
 | Feedback     | `Message`, `Notification`, `Spinner`, `Tooltip`, `TooltipBubble` |
 | Overlays     | `Modal`, `ModalContent` |
-| Data         | `Table`, `TableCell`, `TableCellHeader`, `Pagination` |
+| Data         | `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableExpandButton`, `Pagination` — see [Table](#table) |
 | Structure    | `TabSet`, `Tab`, `Steps`, `Collapse`, `Divider` |
 | Icons        | `Icon` + every `*Icon` listed under [Icon](#icon) |
 
@@ -399,3 +399,85 @@ Use `rightSlot` to render an icon or lozenge to the right of the label:
 <Tab label="Overview" rightSlot={<Lozenge count={3} />} />
 <Tab label="Alerts"   rightSlot={<Icon icon={WarningCircleIcon} size="small" />} />
 ```
+
+---
+
+## Table
+
+Real `<table>` markup, composed like shadcn/ui: `Table` → `TableHeader` / `TableBody` → `TableRow` → `TableHead` / `TableCell`. Rows alternate fills automatically, columns hug their content, and wide tables scroll sideways.
+
+```tsx
+import {
+  Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Pagination, Tag,
+} from '@judi-health/minerva-ds'
+
+<Table paginationBottom={<Pagination currentPage={page} pageSize={10} totalItems={cases.length} onPageChange={setPage} />}>
+  <TableHeader>
+    <TableRow>
+      <TableHead sortable sortDirection={sortDirection} onSort={toggleSort}>Case ID</TableHead>
+      <TableHead grow>Member</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead align="center">Actions</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {pagedCases.map((c) => (
+      <TableRow key={c.id} onClick={() => openCase(c.id)}>
+        <TableCell type="text">{c.id}</TableCell>
+        <TableCell type="text" subtext={`Member ID: ${c.memberId}`}>{c.member}</TableCell>
+        <TableCell type="tag"><Tag variant="success">{c.status}</Tag></TableCell>
+        <TableCell type="action">{/* icon Buttons */}</TableCell>
+      </TableRow>
+    ))}
+  </TableBody>
+</Table>
+```
+
+**Cell `type`** sets alignment and behavior. Give every cell in a column the same type.
+
+| `type` | Use | Notes |
+| --- | --- | --- |
+| `text`, `date`, `number`, `money` | Plain values | Children get body text styling. Left-aligned. Support `subtext`, `color`, `maxWidth`. |
+| `link` | A `<Button variant="link">` | Left-aligned. Clicks don't trigger the row's `onClick`. |
+| `tag` | A `Tag` | Centered. |
+| `checkbox`, `radio` | Row selection | Centered. Clicks don't trigger the row's `onClick`. |
+| `action` | Icon buttons at the end of the row | Centered. **A last column of `action` cells is always pinned to the right**, with a shadow while columns scroll under it. |
+| `expand` | A `TableExpandButton` | Centered. Clicks don't trigger the row's `onClick`. |
+
+**Layout**
+
+- Columns hug their content and text doesn't wrap. Too many columns → horizontal scroll.
+- `grow` on one `TableHead` makes that column fill the leftover width so the table spans its container. Without it the table is only as wide as its content.
+- `maxWidth` on a text cell (e.g. `maxWidth="calc(var(--space-40) * 6)"`) cuts longer text off with "…"; the full text shows in a Tooltip on hover.
+- `subtext` adds a smaller second line under the value, making that row taller.
+- `stickyFirstColumn` on `Table` pins the first column on the left.
+- Sorting and pagination are state you own: slice your rows for the current page, and cycle `sortDirection` unsorted → `'asc'` → `'desc'` → unsorted in `onSort`. `Pagination` hides itself when everything fits on one page. Use `paginationTop` and/or `paginationBottom`.
+
+**Clickable rows and selection.** `onClick` on a `TableRow` makes the whole row a click target (hover fill, Enter/Space from the keyboard). A selection checkbox works independently — give it its own `onChange`:
+
+```tsx
+<TableRow onClick={() => openCase(c.id)}>
+  <TableCell type="checkbox">
+    <Checkbox aria-label={`Select ${c.member}`} checked={selected.includes(c.id)} onChange={() => toggle(c.id)} />
+  </TableCell>
+  ...
+</TableRow>
+```
+
+A select-all `Checkbox` (with `indeterminate`) can go directly inside a `TableHead align="center"`.
+
+**Expandable rows.** `detail` is a full-width area under the row, shown while `expanded` is true. It keeps the row's fill and doesn't break the alternating colors.
+
+```tsx
+import { TableExpandButton } from '@judi-health/minerva-ds'
+
+<TableRow expanded={isOpen} detail={<CaseHistory caseId={c.id} />}>
+  <TableCell type="expand">
+    <TableExpandButton expanded={isOpen} onClick={() => toggleOpen(c.id)} />
+  </TableCell>
+  ...
+</TableRow>
+```
+
+Use an empty `<TableHead />` above an expand column.
+

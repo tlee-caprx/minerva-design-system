@@ -1,5 +1,6 @@
 /*
- * Minerva tokens + base styles, without Tailwind.
+ * Minerva tokens + base styles (and the few component styles that need real
+ * selectors, like table.css), without Tailwind.
  *
  * Use this when your app runs its own Tailwind v4 build (recommended for
  * prototypes). See guidelines/setup.md:
@@ -11,3 +12,4 @@
 @import "./fonts.css";
 @import "./themes.css";
 @import "./base.css";
+@import "./table.css";
