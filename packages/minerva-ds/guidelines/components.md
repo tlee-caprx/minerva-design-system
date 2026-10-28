@@ -409,7 +409,7 @@ The card. Use `Panel` whenever a design shows content grouped in a white box wit
 | Variant | Look | Use |
 | --- | --- | --- |
 | `default` | Surface fill, 1px stroke, small shadow, 4px radius, 24px padding | Top-level cards on a page |
-| `nested` | Subtle (gray) fill, no stroke, same radius and padding | Grouping inside a Panel |
+| `nested` | Subtle (gray) fill, no stroke or shadow, same radius and padding | Grouping inside a Panel |
 
 Panel only provides the container. Lay out what's inside yourself with `Text`, `Tag`, `MetaItem`, `Button` and flex/grid using spacing tokens.
 

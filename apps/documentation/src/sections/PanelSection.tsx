@@ -41,7 +41,7 @@ export function PanelSection() {
       </div>
 
       <div>
-        <SectionLabel title="Nested panel" description='variant="nested": subtle fill and no stroke, for grouping content inside a Panel.' />
+        <SectionLabel title="Nested panel" description='variant="nested": subtle fill, no stroke or shadow, for grouping content inside a Panel.' />
         <Panel>
           <div className="flex flex-col gap-(--stack-4)">
             <Text as="h3" variant="heading-sm" className="text-(--text-surface-base)">Member</Text>

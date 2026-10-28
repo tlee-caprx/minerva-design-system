@@ -5,7 +5,7 @@ import type { HTMLAttributes, ReactNode } from 'react'
 export type PanelVariant = 'default' | 'nested'
 
 export interface PanelProps extends HTMLAttributes<HTMLDivElement> {
-  /** `default` is a white card with a stroke and small shadow; `nested` is a subtle-fill card with no stroke, for panels inside panels */
+  /** `default` is a white card with a stroke and small shadow; `nested` is a subtle-fill card with no stroke or shadow, for panels inside panels */
   variant?: PanelVariant
   /** A TabSet rendered flush on top of the panel body, with no gap between them */
   tabs?: ReactNode
@@ -24,7 +24,7 @@ const STROKE = [
 
 const VARIANT_CLASSES: Record<PanelVariant, string> = {
   default: `bg-(--bg-surface-base) shadow-(--shadow-surface-sm) ${STROKE}`,
-  nested:  'bg-(--bg-surface-subtle) shadow-(--shadow-surface-sm)',
+  nested:  'bg-(--bg-surface-subtle)',
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
