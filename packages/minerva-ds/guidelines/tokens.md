@@ -117,7 +117,7 @@ Four statuses: `error`, `warning`, `success`, `informational`. Use them only to 
 | Status icon | `--icon-feedback-{status}-base` |
 | Text or icon on a solid status background | `--text-feedback-{status}-inverse`, `--icon-feedback-{status}-inverse` |
 
-Before building a status box yourself, check whether `Message`, `Tag` or `Tooltip` already covers it.
+Before building a status box yourself, check whether `Alert`, `Message`, `Tag` or `Tooltip` already covers it.
 
 **Interactive states**
 

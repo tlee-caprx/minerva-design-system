@@ -34,7 +34,7 @@ Designers often use a different name from the component's. Look in **Also called
 | [`Lozenge`](#lozenge) | count, counter, number badge, notification dot | A number next to a tab or nav item |
 | [`MetaItem`](#metaitem) | key-value, metadata, label: value, detail | A labeled value |
 | [`Message`](#message) | inline message, callout, notice | A status message inside the page content |
-| **Alert: not built yet** | alert, toast, banner, snackbar | Coming soon, with banner and toast variants. Don't substitute `Message`: tell the designer Alert isn't available yet |
+| [`Alert`](#alert), `showAlert` | **alert, toast, banner, snackbar, flash message** | Temporary feedback over the page after an action ("Case saved") |
 | [`Tooltip`](#tooltip), `TooltipBubble` | hint, hover text, info popover | Short help on hover |
 | [`Spinner`](#spinner) | loader, loading indicator | Page or section loading |
 | [`Notification`](#notification) | notifications panel, bell dropdown, inbox | The panel that opens from the header bell. Not a toast |
@@ -453,11 +453,56 @@ import { MetaItem, ClockIcon } from '@judi-health/minerva-ds'
 
 ---
 
+## Alert
+
+Temporary feedback shown over the page after something happens: "Case saved", "Couldn't reach the server". Designers call it an alert, toast or banner. It has two properties, matching Figma:
+
+| Prop | Values | Figma property |
+| --- | --- | --- |
+| `type` | `success` \| `warning` \| `error` \| `general` | Type |
+| `variant` | `banner` \| `toast` | Style (React reserves `style`, so it's `variant` in code) |
+
+- **Banner:** full width, covers the global header, × to dismiss.
+- **Toast:** hugs its text, centered at the top of the page, no ×. Several toasts stack.
+- Both disappear after 5 seconds. A new banner replaces the current one.
+- The message is plain text only: no header, links or buttons. For status that should stay on the page, or that needs an action, use [`Message`](#message).
+
+Show one by calling `showAlert` from an event handler. `AppLayout` already renders the `AlertViewport` where it appears, so there's nothing to add to the page:
+
+```tsx
+import { showAlert } from '@judi-health/minerva-ds'
+
+const handleSave = () => {
+  saveCase()
+  showAlert({ type: 'success', variant: 'toast', message: 'Case saved' })
+}
+
+showAlert({ type: 'error', variant: 'banner', message: 'We couldn’t submit the determination. Try again.' })
+showAlert({ type: 'general', variant: 'toast', message: 'Draft autosaved', duration: 3000 })
+```
+
+- `duration` (milliseconds) overrides the 5-second default.
+- `showAlert` returns an id. Pass it to `dismissAlert(id)` to remove the alert early.
+- On a page without `AppLayout`, render `<AlertViewport />` once yourself.
+
+To show an alert in place for a static mockup or a screenshot of a state, render the component directly. A banner takes `onClose`:
+
+```tsx
+import { Alert } from '@judi-health/minerva-ds'
+
+<Alert type="warning" variant="banner" onClose={() => {}}>Your session expires in 5 minutes</Alert>
+<Alert type="success" variant="toast">Case saved</Alert>
+```
+
+Never build a toast or banner yourself, and never use `Message` for one.
+
+---
+
 ## Message
 
 An inline status box inside the page content, with an icon, an optional bold header, body text and an optional action. Designers may call it an inline message, callout or notice.
 
-`Message` is not an alert, toast or banner. Those belong to the Alert component, which isn't built yet.
+`Message` is not an alert, toast or banner: those are [`Alert`](#alert). Use `Message` for status that belongs to the page and stays put; use `Alert` for temporary feedback after an action.
 
 ```tsx
 import { Message, Button } from '@judi-health/minerva-ds'
