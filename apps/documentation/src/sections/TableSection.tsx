@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { Button, Tag, Text, Checkbox, Tooltip, Modal, Table, TableCell, TableCellHeader, Pagination, Icon, DeleteIcon, EditIcon, LockIcon, DocumentIcon } from '@judi-health/minerva-ds'
+import {
+  Button, Tag, Text, Checkbox, Tooltip, Modal, Icon, EditIcon, LockIcon, DocumentIcon,
+  Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableExpandButton, TableRowActions, Pagination,
+} from '@judi-health/minerva-ds'
 import type { TagVariant } from '@judi-health/minerva-ds'
 
 interface DemoTableRow {
@@ -182,69 +185,39 @@ const REALISTIC_TABLE_ROWS: RealisticTableRow[] = [
   },
 ]
 
-export function TableSection() {
-  const [sortColumn, setSortColumn] = useState<'name' | 'date' | null>(null)
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc' | undefined>(undefined)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [selected, setSelected] = useState<number[]>([])
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
-  const pageSize = 10
+type SortDirection = 'asc' | 'desc' | undefined
 
-  const [realisticPage, setRealisticPage] = useState(1)
-  const realisticPageSize = 10
+// unsorted → asc → desc → unsorted, the cycle every sortable column uses.
+function useSort<K extends string>() {
+  const [column, setColumn] = useState<K | null>(null)
+  const [direction, setDirection] = useState<SortDirection>(undefined)
+  const toggle = (next: K) => {
+    if (column !== next) {
+      setColumn(next)
+      setDirection('asc')
+    } else if (direction === 'asc') {
+      setDirection('desc')
+    } else {
+      setColumn(null)
+      setDirection(undefined)
+    }
+  }
+  const directionFor = (key: K) => (column === key ? direction : undefined)
+  const sort = <T extends Record<K, string>>(rows: T[]) =>
+    column ? [...rows].sort((a, b) => a[column].localeCompare(b[column]) * (direction === 'desc' ? -1 : 1)) : rows
+  return { toggle, directionFor, sort }
+}
 
-  type RealisticSortColumn = 'caseId' | 'timeRemaining' | 'member' | 'drug' | 'reviewLevel' | 'serviceStatus' | 'lob'
-  const [realisticSortColumn, setRealisticSortColumn] = useState<RealisticSortColumn | null>(null)
-  const [realisticSortDirection, setRealisticSortDirection] = useState<'asc' | 'desc' | undefined>(undefined)
-
-  const sortedRealisticRows = [...REALISTIC_TABLE_ROWS].sort((a, b) => {
-    if (!realisticSortColumn) return 0
-    const dir = realisticSortDirection === 'desc' ? -1 : 1
-    return a[realisticSortColumn].localeCompare(b[realisticSortColumn]) * dir
-  })
-  const pagedRealisticRows = sortedRealisticRows.slice(
-    (realisticPage - 1) * realisticPageSize,
-    realisticPage * realisticPageSize
+function SectionLabel({ title, description }: { title: string; description?: string }) {
+  return (
+    <div className="mb-(--stack-3) flex flex-col gap-(--stack-1)">
+      <Text as="div" variant="label-lg" className="text-(--text-surface-subtle)">{title}</Text>
+      {description && <Text as="div" variant="body-sm" className="text-(--text-surface-subtle)">{description}</Text>}
+    </div>
   )
+}
 
-  const handleSort = (column: 'name' | 'date') => {
-    if (sortColumn !== column) {
-      setSortColumn(column)
-      setSortDirection('asc')
-    } else if (sortDirection === 'asc') {
-      setSortDirection('desc')
-    } else {
-      setSortColumn(null)
-      setSortDirection(undefined)
-    }
-  }
-
-  const handleRealisticSort = (column: RealisticSortColumn) => {
-    if (realisticSortColumn !== column) {
-      setRealisticSortColumn(column)
-      setRealisticSortDirection('asc')
-    } else if (realisticSortDirection === 'asc') {
-      setRealisticSortDirection('desc')
-    } else {
-      setRealisticSortColumn(null)
-      setRealisticSortDirection(undefined)
-    }
-  }
-
-  const toggleSelected = (id: number) => {
-    setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
-  }
-
-  const sortedRows = [...DEMO_TABLE_ROWS].sort((a, b) => {
-    if (!sortColumn) return 0
-    const dir = sortDirection === 'desc' ? -1 : 1
-    return a[sortColumn].localeCompare(b[sortColumn]) * dir
-  })
-  const pagedRows = sortedRows.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-
-  const standaloneBoxClass = 'inline-flex flex-col w-fit rounded-(--radius-sm) overflow-hidden'
-  const standaloneBoxStyle = { border: 'var(--space-1) solid var(--border-surface-base)' }
-
+export function TableSection() {
   return (
     <div className="min-h-full flex flex-col gap-(--layout-3)">
       <div>
@@ -252,132 +225,104 @@ export function TableSection() {
           Table
         </Text>
         <Text variant="body-sm" className="text-(--text-surface-subtle)">
-          TableCellHeader, TableCell, and Pagination shown standalone, then assembled into a full Table.
-          Gridlines are a 1px gap over a gray background, not per-cell borders — avoids double-border
-          seams where cells meet.
+          Built from real table elements: Table, TableHeader, TableBody, TableRow, TableHead and TableCell
+          (structure from shadcn/ui). Columns hug their content; mark one TableHead with grow to fill the
+          leftover width.
         </Text>
       </div>
+      <SelectableTable />
+      <ExpandableTable />
+      <TruncationTable />
+      <WideTable />
+    </div>
+  )
+}
 
-      <div className="flex flex-wrap items-start gap-(--layout-3)">
-        <div>
-          <Text as="div" variant="label-lg" className="mb-(--stack-3) text-(--text-surface-subtle)">
-            TableCellHeader
-          </Text>
-          <div className={standaloneBoxClass} style={standaloneBoxStyle}>
-            <TableCellHeader
-              label="Sortable, with tooltip"
-              tooltip="This column can be sorted by clicking anywhere on the header"
-              sortable
-              sortDirection="asc"
-              onSort={() => {}}
-            />
-            <TableCellHeader label="Not sortable, no tooltip" />
-          </div>
-        </div>
+// ─── Row click + checkbox ─────────────────────────────────────────────────────
 
-        <div>
-          <Text as="div" variant="label-lg" className="mb-(--stack-3) text-(--text-surface-subtle)">
-            TableCell
-          </Text>
-          <div className={standaloneBoxClass} style={standaloneBoxStyle}>
-            <TableCell type="text" subtext="Member ID: 1234567">
-              Walter White
-            </TableCell>
-            <TableCell type="tag" odd>
-              <Tag variant="success">Approved</Tag>
-            </TableCell>
-            <TableCell type="checkbox">
-              <Checkbox checked={false} onChange={() => {}} />
-            </TableCell>
-            <TableCell type="money" odd>
-              $1,240.00
-            </TableCell>
-          </div>
-        </div>
+function SelectableTable() {
+  const { toggle, directionFor, sort } = useSort<'name' | 'date'>()
+  const [currentPage, setCurrentPage] = useState(1)
+  const [selected, setSelected] = useState<number[]>([])
+  const [opened, setOpened] = useState<DemoTableRow | null>(null)
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const pageSize = 10
 
-        <div>
-          <Text as="div" variant="label-lg" className="mb-(--stack-3) text-(--text-surface-subtle)">
-            Pagination
-          </Text>
-          <div className={standaloneBoxClass} style={standaloneBoxStyle}>
-            <Pagination currentPage={currentPage} pageSize={pageSize} totalItems={DEMO_TABLE_ROWS.length} onPageChange={setCurrentPage} />
-          </div>
-        </div>
-      </div>
+  const pagedRows = sort(DEMO_TABLE_ROWS).slice((currentPage - 1) * pageSize, currentPage * pageSize)
+  const pageIds = pagedRows.map((row) => row.id)
+  const selectedOnPage = pageIds.filter((id) => selected.includes(id))
+  const toggleSelected = (id: number) =>
+    setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
+  const toggleAll = () =>
+    setSelected((prev) =>
+      selectedOnPage.length === pageIds.length ? prev.filter((id) => !pageIds.includes(id)) : [...new Set([...prev, ...pageIds])]
+    )
 
-      <div>
-      <Text as="div" variant="label-lg" className="mb-(--stack-3) text-(--text-surface-subtle)">
-        Full Table
-      </Text>
+  return (
+    <div>
+      <SectionLabel
+        title="Row click + checkbox"
+        description={`The checkbox selects a row; clicking anywhere else on the row opens it. Member Name has grow. Actions pairs an inline Edit button with a TableRowActions menu. ${
+          opened ? `Last opened: ${opened.name}.` : 'Click a row to open it.'
+        }`}
+      />
       <Table
-        columns="48px 1fr max-content max-content max-content max-content"
-        onRowClick={(rowIndex) => {
-          const row = pagedRows[rowIndex]
-          if (row) toggleSelected(row.id)
-        }}
-        header={[
-          <TableCellHeader label="" />,
-          <TableCellHeader
-            label="Member Name"
-            tooltip="Full legal name on file"
-            sortable
-            sortDirection={sortColumn === 'name' ? sortDirection : undefined}
-            onSort={() => handleSort('name')}
-          />,
-          <TableCellHeader label="Status" />,
-          <TableCellHeader label="Amount" />,
-          <TableCellHeader
-            label="Date Submitted"
-            sortable
-            sortDirection={sortColumn === 'date' ? sortDirection : undefined}
-            onSort={() => handleSort('date')}
-          />,
-          <TableCellHeader label="Actions" align="center" />,
-        ]}
-        rows={pagedRows.map((row) => [
-          <TableCell type="checkbox">
-            {/* No-op onChange — the row's own onClick is the single source of
-                truth for toggling selection, so this just reflects state. */}
-            <Checkbox checked={selected.includes(row.id)} onChange={() => {}} />
-          </TableCell>,
-          <TableCell type="text" subtext={`Member ID: ${row.memberId}`}>
-            {row.name}
-          </TableCell>,
-          <TableCell type="tag">
-            <Tag variant={TABLE_STATUS_VARIANT[row.status]}>{row.status}</Tag>
-          </TableCell>,
-          <TableCell type="money">{row.amount}</TableCell>,
-          <TableCell type="date">{row.date}</TableCell>,
-          <TableCell type="action">
-            <div className="flex items-center gap-(--inline-3)">
-              <Tooltip content="Edit">
-                <button
-                  type="button"
-                  aria-label="Edit"
-                  className="inline-flex items-center justify-center cursor-pointer bg-transparent p-0"
-                  style={{ border: 'none' }}
-                >
-                  <Icon icon={EditIcon} size="regular" className="text-(--icon-action-secondary-idle)" />
-                </button>
-              </Tooltip>
-              <Tooltip content="Delete">
-                <button
-                  type="button"
-                  aria-label="Delete"
-                  onClick={() => setDeleteModalOpen(true)}
-                  className="inline-flex items-center justify-center cursor-pointer bg-transparent p-0"
-                  style={{ border: 'none' }}
-                >
-                  <Icon icon={DeleteIcon} size="regular" className="text-(--icon-action-secondary-critical-idle)" />
-                </button>
-              </Tooltip>
-            </div>
-          </TableCell>,
-        ])}
         paginationBottom={
           <Pagination currentPage={currentPage} pageSize={pageSize} totalItems={DEMO_TABLE_ROWS.length} onPageChange={setCurrentPage} />
         }
-      />
+      >
+        <TableHeader>
+          <TableRow>
+            <TableHead align="center">
+              <Checkbox
+                aria-label="Select all rows on this page"
+                checked={selectedOnPage.length === pageIds.length}
+                indeterminate={selectedOnPage.length > 0 && selectedOnPage.length < pageIds.length}
+                onChange={toggleAll}
+              />
+            </TableHead>
+            <TableHead grow tooltip="Full legal name on file" sortable sortDirection={directionFor('name')} onSort={() => toggle('name')}>
+              Member Name
+            </TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Amount</TableHead>
+            <TableHead sortable sortDirection={directionFor('date')} onSort={() => toggle('date')}>
+              Date Submitted
+            </TableHead>
+            <TableHead align="center">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {pagedRows.map((row) => (
+            <TableRow key={row.id} onClick={() => setOpened(row)}>
+              <TableCell type="checkbox">
+                <Checkbox aria-label={`Select ${row.name}`} checked={selected.includes(row.id)} onChange={() => toggleSelected(row.id)} />
+              </TableCell>
+              <TableCell type="text" subtext={`Member ID: ${row.memberId}`}>{row.name}</TableCell>
+              <TableCell type="tag"><Tag variant={TABLE_STATUS_VARIANT[row.status]}>{row.status}</Tag></TableCell>
+              <TableCell type="money">{row.amount}</TableCell>
+              <TableCell type="date">{row.date}</TableCell>
+              <TableCell type="action">
+                <div className="flex items-center gap-(--inline-1)">
+                  <Tooltip content="Edit">
+                    <Button variant="tertiary" iconOnly aria-label={`Edit ${row.name}`}>
+                      <Icon icon={EditIcon} size="regular" />
+                    </Button>
+                  </Tooltip>
+                  <TableRowActions
+                    label={`More actions for ${row.name}`}
+                    actions={[
+                      { label: 'Reassign', onClick: () => setOpened(row) },
+                      { label: 'Download', onClick: () => setOpened(row) },
+                      { label: 'Delete', onClick: () => setDeleteModalOpen(true), destructive: true },
+                    ]}
+                  />
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
 
       <Modal
         open={deleteModalOpen}
@@ -385,132 +330,179 @@ export function TableSection() {
         title="Delete"
         rightActions={
           <>
-            <Button variant="secondary" onClick={() => setDeleteModalOpen(false)}>
-              Cancel
-            </Button>
-            <Button variant="primary" destructive onClick={() => setDeleteModalOpen(false)}>
-              Delete
-            </Button>
+            <Button variant="secondary" onClick={() => setDeleteModalOpen(false)}>Cancel</Button>
+            <Button variant="primary" destructive onClick={() => setDeleteModalOpen(false)}>Delete</Button>
           </>
         }
       >
-        <Text variant="body-md" className="text-(--text-surface-base)">
-          This action cannot be undone.
-        </Text>
+        <Text variant="body-md" className="text-(--text-surface-base)">This action cannot be undone.</Text>
       </Modal>
-      </div>
+    </div>
+  )
+}
 
-      <div>
-      <Text as="div" variant="label-lg" className="mb-(--stack-3) text-(--text-surface-subtle)">
-        Realistic table (sticky first/last column, horizontal scroll)
-      </Text>
-      <Text as="div" variant="body-sm" className="mb-(--stack-3) text-(--text-surface-subtle)">
-        Rows aren't click targets here — only the Case ID link and the status icons are interactive.
-        Scroll horizontally to see Case ID and Actions stay pinned.
-      </Text>
-      <Table
-        columns="max-content max-content max-content minmax(220px,1fr) max-content max-content max-content max-content max-content"
-        stickyFirstColumn
-        paginationTop={
-          <Pagination
-            currentPage={realisticPage}
-            pageSize={realisticPageSize}
-            totalItems={REALISTIC_TABLE_ROWS.length}
-            onPageChange={setRealisticPage}
-          />
-        }
-        paginationBottom={
-          <Pagination
-            currentPage={realisticPage}
-            pageSize={realisticPageSize}
-            totalItems={REALISTIC_TABLE_ROWS.length}
-            onPageChange={setRealisticPage}
-          />
-        }
-        header={[
-          <TableCellHeader
-            label="Case ID"
-            sortable
-            sortDirection={realisticSortColumn === 'caseId' ? realisticSortDirection : undefined}
-            onSort={() => handleRealisticSort('caseId')}
-          />,
-          <TableCellHeader
-            label="Time Remaining"
-            sortable
-            sortDirection={realisticSortColumn === 'timeRemaining' ? realisticSortDirection : undefined}
-            onSort={() => handleRealisticSort('timeRemaining')}
-          />,
-          <TableCellHeader
-            label="Member"
-            sortable
-            sortDirection={realisticSortColumn === 'member' ? realisticSortDirection : undefined}
-            onSort={() => handleRealisticSort('member')}
-          />,
-          <TableCellHeader
-            label="Drug"
-            sortable
-            sortDirection={realisticSortColumn === 'drug' ? realisticSortDirection : undefined}
-            onSort={() => handleRealisticSort('drug')}
-          />,
-          <TableCellHeader
-            label="Review Level"
-            sortable
-            sortDirection={realisticSortColumn === 'reviewLevel' ? realisticSortDirection : undefined}
-            onSort={() => handleRealisticSort('reviewLevel')}
-          />,
-          <TableCellHeader
-            label="Service Status"
-            sortable
-            sortDirection={realisticSortColumn === 'serviceStatus' ? realisticSortDirection : undefined}
-            onSort={() => handleRealisticSort('serviceStatus')}
-          />,
-          <TableCellHeader
-            label="Line of Business"
-            sortable
-            sortDirection={realisticSortColumn === 'lob' ? realisticSortDirection : undefined}
-            onSort={() => handleRealisticSort('lob')}
-          />,
-          <TableCellHeader label="Case Status" />,
-          <TableCellHeader label="Actions" align="center" />,
-        ]}
-        rows={pagedRealisticRows.map((row) => [
-          <TableCell type="link">
-            <Button variant="link">{row.caseId}</Button>
-          </TableCell>,
-          <TableCell type="text" color={row.urgent ? 'var(--text-feedback-error-base)' : undefined}>
-            {row.timeRemaining}
-          </TableCell>,
-          <TableCell type="text">{row.member}</TableCell>,
-          <TableCell type="text" subtext={row.drugSubtext}>
-            {row.drug}
-          </TableCell>,
-          <TableCell type="text">{row.reviewLevel}</TableCell>,
-          <TableCell type="text">{row.serviceStatus}</TableCell>,
-          <TableCell type="text">{row.lob}</TableCell>,
-          <TableCell type="text" color={REALISTIC_STATUS_COLOR[row.status]} subtext={row.statusSubtext}>
-            {row.status}
-          </TableCell>,
-          <TableCell type="action">
-            <div className="flex items-center gap-(--inline-1)">
-              {row.lockedBy && (
-                <Tooltip content={`Locked by ${row.lockedBy}`}>
-                  <span tabIndex={0}>
-                    <Icon icon={LockIcon} size="regular" className="text-(--icon-feedback-error-base)" />
-                  </span>
-                </Tooltip>
-              )}
-              {row.hasNewDocument && (
-                <Tooltip content="New document attached">
-                  <span tabIndex={0}>
-                    <Icon icon={DocumentIcon} size="regular" className="text-(--icon-feedback-informational-base)" />
-                  </span>
-                </Tooltip>
-              )}
-            </div>
-          </TableCell>,
-        ])}
+// ─── Expandable rows ──────────────────────────────────────────────────────────
+
+function ExpandableTable() {
+  const [expanded, setExpanded] = useState<string[]>([REALISTIC_TABLE_ROWS[1].caseId])
+  const rows = REALISTIC_TABLE_ROWS.slice(0, 5)
+  const toggle = (caseId: string) =>
+    setExpanded((prev) => (prev.includes(caseId) ? prev.filter((x) => x !== caseId) : [...prev, caseId]))
+
+  return (
+    <div>
+      <SectionLabel
+        title="Expandable rows"
+        description="A TableRow with detail and expanded shows one full-width area underneath. Detail rows keep their parent's fill and don't break the alternating colors."
       />
-      </div>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead />
+            <TableHead>Case ID</TableHead>
+            <TableHead>Member</TableHead>
+            <TableHead grow>Drug</TableHead>
+            <TableHead>Review Level</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {rows.map((row) => {
+            const isOpen = expanded.includes(row.caseId)
+            return (
+              <TableRow
+                key={row.caseId}
+                expanded={isOpen}
+                detail={
+                  <div className="flex flex-col gap-(--stack-1)">
+                    <Text variant="body-md" weight="semibold" className="text-(--text-surface-base)">{row.status}</Text>
+                    <Text variant="body-sm" className="text-(--text-surface-subtle)">
+                      {row.statusSubtext} · {row.serviceStatus} · {row.lob}
+                    </Text>
+                  </div>
+                }
+              >
+                <TableCell type="expand">
+                  <TableExpandButton expanded={isOpen} onClick={() => toggle(row.caseId)} aria-label={`Details for case ${row.caseId}`} />
+                </TableCell>
+                <TableCell type="text">{row.caseId}</TableCell>
+                <TableCell type="text">{row.member}</TableCell>
+                <TableCell type="text" subtext={row.drugSubtext}>{row.drug}</TableCell>
+                <TableCell type="text">{row.reviewLevel}</TableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
+
+// ─── Truncation ───────────────────────────────────────────────────────────────
+
+function TruncationTable() {
+  const rows = REALISTIC_TABLE_ROWS.slice(0, 4)
+  return (
+    <div>
+      <SectionLabel
+        title="Truncation"
+        description="maxWidth caps a cell; longer text ends in … and shows in full on hover. Without grow, the table hugs its content."
+      />
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Member</TableHead>
+            <TableHead>Drug</TableHead>
+            <TableHead>Case Status</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.caseId}>
+              <TableCell type="text">{row.member}</TableCell>
+              <TableCell type="text" subtext={row.drugSubtext} maxWidth="calc(var(--space-40) * 4)">{row.drug}</TableCell>
+              <TableCell type="text" color={REALISTIC_STATUS_COLOR[row.status]} subtext={row.statusSubtext}>{row.status}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
+
+// ─── Wide table ───────────────────────────────────────────────────────────────
+
+function WideTable() {
+  type SortColumn = 'caseId' | 'timeRemaining' | 'member' | 'drug' | 'reviewLevel' | 'serviceStatus' | 'lob'
+  const { toggle, directionFor, sort } = useSort<SortColumn>()
+  const [page, setPage] = useState(1)
+  const pageSize = 10
+  const pagedRows = sort(REALISTIC_TABLE_ROWS).slice((page - 1) * pageSize, page * pageSize)
+  const pagination = <Pagination currentPage={page} pageSize={pageSize} totalItems={REALISTIC_TABLE_ROWS.length} onPageChange={setPage} />
+  const sortableHead = (key: SortColumn, label: string, grow = false) => (
+    <TableHead grow={grow} sortable sortDirection={directionFor(key)} onSort={() => toggle(key)}>{label}</TableHead>
+  )
+
+  return (
+    <div>
+      <SectionLabel
+        title="Wide table (pinned first column, pinned actions)"
+        description="Scroll sideways: Case ID stays pinned with stickyFirstColumn, and the action column pins itself automatically. Each shows a shadow only while content is hidden behind it."
+      />
+      <Table stickyFirstColumn paginationTop={pagination} paginationBottom={pagination}>
+        <TableHeader>
+          <TableRow>
+            {sortableHead('caseId', 'Case ID')}
+            {sortableHead('timeRemaining', 'Time Remaining')}
+            {sortableHead('member', 'Member')}
+            {sortableHead('drug', 'Drug', true)}
+            {sortableHead('reviewLevel', 'Review Level')}
+            {sortableHead('serviceStatus', 'Service Status')}
+            {sortableHead('lob', 'Line of Business')}
+            <TableHead>Case Status</TableHead>
+            <TableHead align="center">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {pagedRows.map((row) => (
+            <TableRow key={row.caseId}>
+              <TableCell type="link"><Button variant="link">{row.caseId}</Button></TableCell>
+              <TableCell type="text" color={row.urgent ? 'var(--text-feedback-error-base)' : undefined}>{row.timeRemaining}</TableCell>
+              <TableCell type="text">{row.member}</TableCell>
+              <TableCell type="text" subtext={row.drugSubtext}>{row.drug}</TableCell>
+              <TableCell type="text">{row.reviewLevel}</TableCell>
+              <TableCell type="text">{row.serviceStatus}</TableCell>
+              <TableCell type="text">{row.lob}</TableCell>
+              <TableCell type="text" color={REALISTIC_STATUS_COLOR[row.status]} subtext={row.statusSubtext}>{row.status}</TableCell>
+              <TableCell type="action">
+                <div className="flex items-center gap-(--inline-1)">
+                  {row.lockedBy && (
+                    <Tooltip content={`Locked by ${row.lockedBy}`}>
+                      <span tabIndex={0}>
+                        <Icon icon={LockIcon} size="regular" className="text-(--icon-feedback-error-base)" />
+                      </span>
+                    </Tooltip>
+                  )}
+                  {row.hasNewDocument && (
+                    <Tooltip content="New document attached">
+                      <span tabIndex={0}>
+                        <Icon icon={DocumentIcon} size="regular" className="text-(--icon-feedback-informational-base)" />
+                      </span>
+                    </Tooltip>
+                  )}
+                  <TableRowActions
+                    label={`Actions for case ${row.caseId}`}
+                    actions={[
+                      { label: 'Open case', onClick: () => {} },
+                      { label: 'Reassign', onClick: () => {} },
+                      { label: 'Unlock', onClick: () => {}, disabled: !row.lockedBy },
+                    ]}
+                  />
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   )
 }

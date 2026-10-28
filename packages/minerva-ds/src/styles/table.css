@@ -1,0 +1,142 @@
+/*
+ * Table styles that need real selectors (row striping that skips detail rows,
+ * auto-pinning the actions column, scroll shadows). Everything else lives in
+ * Tailwind classes in src/components/ui/Table.
+ *
+ * Declares Tailwind's layer order up front: this file is imported before
+ * tailwindcss, and the first mention of a layer fixes its position. Being in
+ * `components` keeps these rules below utilities, so a className on a cell
+ * still wins.
+ */
+@layer theme, base, components, utilities;
+
+@layer components {
+  /* Separate borders, not collapsed: collapsed borders detach from sticky
+     cells while scrolling. Each cell owns its right and bottom line. */
+  .minerva-table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  /* ── Width ───────────────────────────────────────────────────────────────
+     The table hugs its content. With a grow column it spans its container,
+     and width: 100% on that one column of an auto-layout table makes it take
+     the leftover space while the others keep their content width. */
+  .minerva-table-frame {
+    width: fit-content;
+  }
+
+  /* Child combinators throughout, so a table nested in a detail row
+     doesn't restyle the table around it. */
+  .minerva-table-frame:has(> div > .minerva-table > thead > tr > th[data-grow]),
+  .minerva-table:has(> thead > tr > th[data-grow]),
+  .minerva-table > thead > tr > th[data-grow] {
+    width: 100%;
+  }
+
+  .minerva-table > * > tr > * {
+    border-right: var(--space-1) solid var(--border-surface-base);
+    border-bottom: var(--space-1) solid var(--border-surface-base);
+    background: var(--row-bg);
+  }
+
+  .minerva-table > * > tr > :last-child {
+    border-right: 0;
+  }
+
+  /* The wrapper already draws the outer edge. */
+  .minerva-table > tbody > tr:last-child > td,
+  .minerva-table:has(> tbody:empty) > thead > tr:last-child > th {
+    border-bottom: 0;
+  }
+
+  /* ── Row fills ───────────────────────────────────────────────────────────
+     Rows alternate starting with subtle. Detail rows don't count toward the
+     alternation and take their parent row's fill. */
+  .minerva-table > thead > tr {
+    --row-bg: var(--bg-surface-base);
+  }
+
+  .minerva-table > tbody > tr {
+    --row-bg: var(--bg-surface-subtle);
+  }
+
+  /* :where() keeps striping low-specificity so the hover below wins on
+     every row, not just the odd ones. */
+  .minerva-table > tbody > tr:where([data-row]:nth-child(even of [data-row])),
+  .minerva-table > tbody > tr:where([data-row]:nth-child(even of [data-row]) + [data-detail]) {
+    --row-bg: var(--bg-surface-base);
+  }
+
+  /* Same light blue as a sortable header's hover. */
+  .minerva-table > tbody > tr[data-clickable]:hover {
+    --row-bg: var(--bg-control-subtle-hover);
+  }
+
+  /* ── Pinned columns ──────────────────────────────────────────────────────
+     First column: opt-in with stickyFirstColumn. Last column: automatic
+     whenever the body's last cells are type="action". */
+  .minerva-table[data-sticky-first] > * > tr[data-row] > :first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+
+  .minerva-table > tbody > tr[data-row] > td[data-type='action']:last-child,
+  .minerva-table:has(> tbody > tr > td[data-type='action']:last-child) > thead > tr > th:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 1;
+    border-left: var(--space-1) solid var(--border-surface-base);
+  }
+
+  /* The pinned column draws its own left line, so the cell before it drops
+     its right one to avoid a doubled line at rest. */
+  .minerva-table > tbody > tr[data-row] > :has(+ td[data-type='action']:last-child),
+  .minerva-table:has(> tbody > tr > td[data-type='action']:last-child) > thead > tr > th:nth-last-child(2) {
+    border-right: 0;
+  }
+
+  /* Shadows only while content is hidden on that side. clip-path keeps each
+     cell's shadow to its own row band, so stacked cells join without seams.
+     :where() keeps these low-specificity so the row focus ring below wins. */
+  .minerva-table:where([data-sticky-first][data-scrolled-start]) > * > tr:where([data-row]) > :first-child {
+    box-shadow: var(--shadow-table-outer-right);
+    clip-path: inset(0 calc(var(--space-16) * -1) 0 0);
+  }
+
+  .minerva-table:where([data-scrolled-end]) > tbody > tr:where([data-row]) > td:where([data-type='action']):last-child,
+  .minerva-table:where([data-scrolled-end]):where(:has(> tbody > tr > td[data-type='action']:last-child)) > thead > tr > th:last-child {
+    box-shadow: var(--shadow-table-outer-left);
+    clip-path: inset(0 0 0 calc(var(--space-16) * -1));
+  }
+
+  /* ── Keyboard focus on clickable rows ────────────────────────────────────
+     Drawn by the cells, not as an outline on the <tr>: an outline paints
+     beneath positioned children, so pinned cells would cover it. Takes over
+     a pinned cell's scroll shadow while the row is focused. */
+  .minerva-table > tbody > tr[data-clickable] {
+    outline: none;
+  }
+
+  .minerva-table > tbody > tr[data-clickable]:focus-visible > td {
+    --row-focus-ring: var(--border-control-default-focus);
+    box-shadow:
+      inset 0 var(--space-2) 0 0 var(--row-focus-ring),
+      inset 0 calc(var(--space-2) * -1) 0 0 var(--row-focus-ring);
+  }
+
+  .minerva-table > tbody > tr[data-clickable]:focus-visible > td:first-child {
+    box-shadow:
+      inset 0 var(--space-2) 0 0 var(--row-focus-ring),
+      inset 0 calc(var(--space-2) * -1) 0 0 var(--row-focus-ring),
+      inset var(--space-2) 0 0 0 var(--row-focus-ring);
+  }
+
+  .minerva-table > tbody > tr[data-clickable]:focus-visible > td:last-child {
+    box-shadow:
+      inset 0 var(--space-2) 0 0 var(--row-focus-ring),
+      inset 0 calc(var(--space-2) * -1) 0 0 var(--row-focus-ring),
+      inset calc(var(--space-2) * -1) 0 0 0 var(--row-focus-ring);
+  }
+}

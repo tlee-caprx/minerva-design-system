@@ -22,6 +22,8 @@ export interface TooltipBubbleProps {
 export interface TooltipProps {
   content: ReactNode
   beak?: TooltipBeak
+  /** Skips showing the tooltip, e.g. while truncated text still fits */
+  disabled?: boolean
   children: ReactNode
   className?: string
 }
@@ -76,7 +78,7 @@ export function TooltipBubble({ content, beak = 'bottom', id, className = '' }: 
 // expressed as Tailwind classes.
 const GAP_PX = 8
 
-export function Tooltip({ content, beak = 'bottom', children, className = '' }: TooltipProps) {
+export function Tooltip({ content, beak = 'bottom', disabled = false, children, className = '' }: TooltipProps) {
   const [visible, setVisible] = useState(false)
   const [coords, setCoords] = useState<CSSProperties | null>(null)
   const triggerRef = useRef<HTMLSpanElement>(null)
@@ -89,6 +91,7 @@ export function Tooltip({ content, beak = 'bottom', children, className = '' }: 
   // absolutely-positioned bubble to get clipped. Portaling escapes that
   // entirely, same reasoning as Modal.
   const show = () => {
+    if (disabled) return
     const rect = triggerRef.current?.getBoundingClientRect()
     if (!rect) return
 
@@ -126,15 +129,19 @@ export function Tooltip({ content, beak = 'bottom', children, className = '' }: 
   return (
     <span
       ref={triggerRef}
-      className="inline-flex"
+      // max-w-full + min-w-0 let the trigger shrink inside a width-limited
+      // parent, so truncated text (e.g. a Table cell with maxWidth) can
+      // ellipsize instead of overflowing.
+      className="inline-flex max-w-full"
       onMouseEnter={show}
       onMouseLeave={hide}
       onFocus={show}
       onBlur={hide}
     >
-      <span aria-describedby={visible ? tooltipId : undefined}>{children}</span>
+      <span className="min-w-0" aria-describedby={visible ? tooltipId : undefined}>{children}</span>
 
       {visible &&
+        !disabled &&
         coords &&
         createPortal(
           // Arbitrary max z-index (beyond Tailwind's z-50 ceiling, which the

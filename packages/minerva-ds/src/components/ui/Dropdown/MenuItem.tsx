@@ -45,12 +45,14 @@ export function MenuItem({
     ? 'text-(--text-control-destructive-idle)'
     : 'text-(--text-control-subtle-idle)'
 
-  // Pressed uses the same fill as hover — no distinct pressed treatment.
+  // Pressed and keyboard focus use the same fill as hover — no distinct
+  // pressed treatment, and the outline is off, so focus needs the fill to
+  // stay visible when arrowing through a menu.
   const interactionClass = disabled
     ? ''
     : destructive
-    ? 'hover:bg-(--bg-control-subtle-destructive-hover) active:bg-(--bg-control-subtle-destructive-hover)'
-    : 'hover:bg-(--bg-control-subtle-hover) active:bg-(--bg-control-subtle-hover)'
+    ? 'hover:bg-(--bg-control-subtle-destructive-hover) active:bg-(--bg-control-subtle-destructive-hover) focus-visible:bg-(--bg-control-subtle-destructive-hover)'
+    : 'hover:bg-(--bg-control-subtle-hover) active:bg-(--bg-control-subtle-hover) focus-visible:bg-(--bg-control-subtle-hover)'
 
   return (
     <button
