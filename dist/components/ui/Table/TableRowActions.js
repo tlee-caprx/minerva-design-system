@@ -43,6 +43,7 @@ function N({ actions: y, label: f = "Row actions" }) {
         ref: u,
         variant: "tertiary",
         iconOnly: !0,
+        unpadded: !0,
         "aria-label": f,
         "aria-haspopup": "menu",
         "aria-expanded": o,

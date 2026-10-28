@@ -69,7 +69,7 @@ function I({ content: n, beak: o = "bottom", disabled: r = !1, children: l, clas
       onFocus: u,
       onBlur: d,
       children: [
-        /* @__PURE__ */ s("span", { className: "min-w-0", "aria-describedby": i ? m : void 0, children: l }),
+        /* @__PURE__ */ s("span", { className: "flex min-w-0", "aria-describedby": i ? m : void 0, children: l }),
         i && !r && f && N(
           // Arbitrary max z-index (beyond Tailwind's z-50 ceiling, which the
           // sidebar/header also use) — a tooltip must always paint above

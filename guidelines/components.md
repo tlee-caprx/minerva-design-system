@@ -468,7 +468,7 @@ A select-all `Checkbox` (with `indeterminate`) can go directly inside a `TableHe
 
 **Row actions.** Put actions in a last column of `action` cells.
 
-- One or two frequent actions (Edit, Download) → inline icon `Button`s (`variant="tertiary" iconOnly`), each with a `Tooltip`.
+- One or two frequent actions (Edit, Download) → inline icon `Button`s (`variant="tertiary" iconOnly unpadded`, matching the ⋮), each with a `Tooltip`. Space them with `gap-(--inline-3)`.
 - Three or more, or a tight table → `TableRowActions`: a ⋮ button that opens the same menu as `Dropdown` (`MenuPanel` + `MenuItem`). Put destructive actions last with `destructive: true`.
 - Both is fine: the most common action inline, followed by `TableRowActions` for the rest.
 

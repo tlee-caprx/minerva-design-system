@@ -1,7 +1,7 @@
 import { jsx as t, jsxs as m, Fragment as j } from "react/jsx-runtime";
 import { forwardRef as w } from "react";
-import { Spinner as l } from "../Spinner/Spinner.js";
-import { Icon as v } from "../Icon/Icon.js";
+import { Spinner as v } from "../Spinner/Spinner.js";
+import { Icon as b } from "../Icon/Icon.js";
 function S({ children: o }) {
   return /* @__PURE__ */ t(
     "span",
@@ -125,27 +125,27 @@ const k = [
       "focus-visible:outline-(--text-action-inverse-idle)"
     ].join(" ")
   }
-}, I = w(function({
+}, E = w(function({
   variant: e = "primary",
-  destructive: b = !1,
+  destructive: u = !1,
   leftIcon: n,
   rightIcon: a,
   iconOnly: c = !1,
   loading: i = !1,
   fullWidth: s = !1,
-  unpadded: u = !1,
+  unpadded: l = !1,
   disabled: x,
   children: d,
   className: y = "",
   style: p,
   ...g
 }, h) {
-  const r = x || i, f = r ? k : C[e][b ? "destructive" : "default"], _ = [...[
+  const r = x || i, f = r ? k : C[e][u ? "destructive" : "default"], _ = [...[
     "inline-flex items-center justify-center",
     "select-none",
     "transition-colors duration-150",
     "outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-    c ? "p-(--inset-3) shrink-0" : e === "link" || e === "tertiary" && u ? `p-0 gap-(--inline-2) ${s ? "w-full sm:w-auto" : ""}` : `py-(--inset-3) ${e === "tertiary" ? "px-0" : "px-(--inset-5)"} gap-(--inline-2) ${s ? "w-full sm:w-auto" : ""}`,
+    c ? `${e === "tertiary" && l ? "p-0" : "p-(--inset-3)"} shrink-0` : e === "link" || e === "tertiary" && l ? `p-0 gap-(--inline-2) ${s ? "w-full sm:w-auto" : ""}` : `py-(--inset-3) ${e === "tertiary" ? "px-0" : "px-(--inset-5)"} gap-(--inline-2) ${s ? "w-full sm:w-auto" : ""}`,
     r ? "cursor-not-allowed" : "cursor-pointer"
   ], f, y].filter(Boolean).join(" ");
   return /* @__PURE__ */ t(
@@ -164,15 +164,15 @@ const k = [
         ...p
       },
       ...g,
-      children: c ? /* @__PURE__ */ t(S, { children: i ? /* @__PURE__ */ t(l, {}) : d }) : /* @__PURE__ */ m(j, { children: [
-        n && /* @__PURE__ */ t(v, { icon: n, size: "regular" }),
+      children: c ? /* @__PURE__ */ t(S, { children: i ? /* @__PURE__ */ t(v, {}) : d }) : /* @__PURE__ */ m(j, { children: [
+        n && /* @__PURE__ */ t(b, { icon: n, size: "regular" }),
         d,
-        a && /* @__PURE__ */ t(v, { icon: a, size: "regular" }),
-        i && /* @__PURE__ */ t(l, {})
+        a && /* @__PURE__ */ t(b, { icon: a, size: "regular" }),
+        i && /* @__PURE__ */ t(v, {})
       ] })
     }
   );
 });
 export {
-  I as Button
+  E as Button
 };

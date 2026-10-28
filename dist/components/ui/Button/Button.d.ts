@@ -19,7 +19,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
      * Removes all padding — tertiary only, so the button sits flush inline
      * with surrounding content (e.g. inside a Message) at exactly its text's
      * line-height rather than tertiary's usual 12px vertical touch-target
-     * padding. Ignored for every other variant.
+     * padding. With `iconOnly`, the button shrinks to the 20×20 icon itself.
+     * Ignored for every other variant.
      */
     unpadded?: boolean;
 }
