@@ -31,7 +31,7 @@ export interface TableBodyProps extends HTMLAttributes<HTMLTableSectionElement> 
 
 export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
   children: ReactNode
-  /** Makes the row a click target: pointer cursor, hover fill, Enter/Space to activate. Clicks on link, action, checkbox and radio cells don't trigger it. */
+  /** Makes the row a click target: pointer cursor, light blue hover fill, Enter/Space to activate. Clicks on link, action, checkbox and radio cells don't trigger it. */
   onClick?: () => void
   /** Full-width area shown under the row while `expanded` is true */
   detail?: ReactNode

@@ -61,13 +61,16 @@
     --row-bg: var(--bg-surface-subtle);
   }
 
-  .minerva-table > tbody > tr[data-row]:nth-child(even of [data-row]),
-  .minerva-table > tbody > tr[data-row]:nth-child(even of [data-row]) + tr[data-detail] {
+  /* :where() keeps striping low-specificity so the hover below wins on
+     every row, not just the odd ones. */
+  .minerva-table > tbody > tr:where([data-row]:nth-child(even of [data-row])),
+  .minerva-table > tbody > tr:where([data-row]:nth-child(even of [data-row]) + [data-detail]) {
     --row-bg: var(--bg-surface-base);
   }
 
+  /* Same light blue as a sortable header's hover. */
   .minerva-table > tbody > tr[data-clickable]:hover {
-    --row-bg: var(--bg-surface-muted);
+    --row-bg: var(--bg-control-subtle-hover);
   }
 
   /* ── Pinned columns ──────────────────────────────────────────────────────
