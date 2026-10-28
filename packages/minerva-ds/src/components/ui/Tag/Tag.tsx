@@ -57,11 +57,13 @@ const VARIANT_STYLES: Record<TagVariant, VariantStyle> = {
 export function Tag({ variant = 'info', children, className = '' }: TagProps) {
   const { className: variantClass, border } = VARIANT_STYLES[variant]
 
+  // Never wraps or shrinks: a tag reads as one unit, so "Ready to Complete"
+  // stays on one line even in a tight flex row or table cell.
   return (
     <Text
       as="span"
       variant="tag-label"
-      className={`inline-flex items-center rounded-(--radius-sm) py-(--inset-1) px-(--inset-3) ${variantClass} ${className}`}
+      className={`inline-flex items-center shrink-0 whitespace-nowrap rounded-(--radius-sm) py-(--inset-1) px-(--inset-3) ${variantClass} ${className}`}
       style={border ? { border } : undefined}
     >
       {children}
