@@ -29,24 +29,24 @@ const minervaTypography = {
   'option-default-weight':      fontWeight['regular'],
 
   // ─── Heading ──────────────────────────────────────────────────────────────
-  'heading-xs-size':        fontSize['500'],
-  'heading-xs-line-height': lineHeight['500'],
+  'heading-xs-size':        fontSize['500'],   // 18px / 1.125rem
+  'heading-xs-line-height': lineHeight['500'], // 24px / 1.5rem
   'heading-xs-weight':      fontWeight['semibold'],
 
-  'heading-sm-size':        fontSize['600'],
-  'heading-sm-line-height': lineHeight['500'],
+  'heading-sm-size':        fontSize['600'],   // 20px / 1.25rem
+  'heading-sm-line-height': lineHeight['500'], // 24px / 1.5rem
   'heading-sm-weight':      fontWeight['semibold'],
 
-  'heading-md-size':        fontSize['600'],
-  'heading-md-line-height': lineHeight['550'],
+  'heading-md-size':        fontSize['700'],   // 24px / 1.5rem
+  'heading-md-line-height': lineHeight['600'], // 32px / 2rem
   'heading-md-weight':      fontWeight['semibold'],
 
-  'heading-lg-size':        fontSize['700'],
-  'heading-lg-line-height': lineHeight['600'],
+  'heading-lg-size':        fontSize['800'],   // 26px / 1.625rem
+  'heading-lg-line-height': lineHeight['700'], // 36px / 2.25rem
   'heading-lg-weight':      fontWeight['semibold'],
 
-  'heading-xl-size':        fontSize['800'],
-  'heading-xl-line-height': lineHeight['700'],
+  'heading-xl-size':        fontSize['900'],   // 28px / 1.75rem
+  'heading-xl-line-height': lineHeight['800'], // 40px / 2.5rem
   'heading-xl-weight':      fontWeight['semibold'],
 
   // ─── Label ────────────────────────────────────────────────────────────────
