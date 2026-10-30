@@ -1,92 +1,85 @@
-import { jsxs as S, jsx as e, Fragment as N } from "react/jsx-runtime";
-import { useRef as p, useState as v, useEffect as E, useContext as R, Children as W, createContext as g } from "react";
-const h = g("body");
-function L({
-  children: l,
-  stickyFirstColumn: r = !1,
-  paginationTop: o,
-  paginationBottom: c,
-  className: b = ""
-}) {
-  const a = p(null), n = p(null), [i, d] = v(!1), [m, s] = v(!1), [y, w] = v(), f = () => {
-    const t = a.current;
-    t && (d(t.scrollLeft > 0), s(t.scrollLeft < t.scrollWidth - t.clientWidth - 1), w(t.clientWidth));
-  };
-  return E(() => {
-    const t = a.current, x = n.current;
-    if (!t || !x) return;
-    f();
-    const u = new ResizeObserver(f);
-    return u.observe(t), u.observe(x), () => u.disconnect();
-  }, []), /* @__PURE__ */ S(
-    "div",
-    {
-      className: `minerva-table-frame flex flex-col max-w-full rounded-(--radius-sm) overflow-hidden ${b}`,
-      style: { border: "var(--space-1) solid var(--border-surface-base)" },
-      children: [
-        o,
-        o && /* @__PURE__ */ e("div", { className: "h-(--space-1) bg-(--border-surface-base)" }),
-        /* @__PURE__ */ e(
-          "div",
-          {
-            ref: a,
-            onScroll: f,
-            className: "w-full overflow-x-auto",
-            style: y ? { "--table-visible-width": `${y}px` } : void 0,
-            children: /* @__PURE__ */ e(
-              "table",
-              {
-                ref: n,
-                className: "minerva-table",
-                "data-sticky-first": r || void 0,
-                "data-scrolled-start": i || void 0,
-                "data-scrolled-end": m || void 0,
-                children: l
-              }
-            )
-          }
-        ),
-        c && /* @__PURE__ */ e("div", { className: "h-(--space-1) bg-(--border-surface-base)" }),
-        c
-      ]
-    }
-  );
+import { Children as e, createContext as t, useContext as n, useEffect as r, useRef as i, useState as a } from "react";
+import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
+// src/components/ui/Table/Table.tsx
+var l = t("body");
+function u({ children: e, stickyFirstColumn: t = !1, paginationTop: n, paginationBottom: o, className: l = "" }) {
+	let u = i(null), d = i(null), [f, p] = a(!1), [m, h] = a(!1), [g, _] = a(), v = () => {
+		let e = u.current;
+		e && (p(e.scrollLeft > 0), h(e.scrollLeft < e.scrollWidth - e.clientWidth - 1), _(e.clientWidth));
+	};
+	return r(() => {
+		let e = u.current, t = d.current;
+		if (!e || !t) return;
+		v();
+		let n = new ResizeObserver(v);
+		return n.observe(e), n.observe(t), () => n.disconnect();
+	}, []), /* @__PURE__ */ c("div", {
+		className: `minerva-table-frame flex flex-col max-w-full rounded-(--radius-sm) overflow-hidden ${l}`,
+		style: { border: "var(--space-1) solid var(--border-surface-base)" },
+		children: [
+			n,
+			n && /* @__PURE__ */ s("div", { className: "h-(--space-1) bg-(--border-surface-base)" }),
+			/* @__PURE__ */ s("div", {
+				ref: u,
+				onScroll: v,
+				className: "w-full overflow-x-auto",
+				style: g ? { "--table-visible-width": `${g}px` } : void 0,
+				children: /* @__PURE__ */ s("table", {
+					ref: d,
+					className: "minerva-table",
+					"data-sticky-first": t || void 0,
+					"data-scrolled-start": f || void 0,
+					"data-scrolled-end": m || void 0,
+					children: e
+				})
+			}),
+			o && /* @__PURE__ */ s("div", { className: "h-(--space-1) bg-(--border-surface-base)" }),
+			o
+		]
+	});
 }
-function P({ children: l, ...r }) {
-  return /* @__PURE__ */ e(h.Provider, { value: "head", children: /* @__PURE__ */ e("thead", { ...r, children: l }) });
+function d({ children: e, ...t }) {
+	return /* @__PURE__ */ s(l.Provider, {
+		value: "head",
+		children: /* @__PURE__ */ s("thead", {
+			...t,
+			children: e
+		})
+	});
 }
-function $({ children: l, ...r }) {
-  return /* @__PURE__ */ e(h.Provider, { value: "body", children: /* @__PURE__ */ e("tbody", { ...r, children: l }) });
+function f({ children: e, ...t }) {
+	return /* @__PURE__ */ s(l.Provider, {
+		value: "body",
+		children: /* @__PURE__ */ s("tbody", {
+			...t,
+			children: e
+		})
+	});
 }
-function k({ children: l, onClick: r, detail: o, expanded: c = !1, className: b = "", onKeyDown: a, ...n }) {
-  const i = R(h), d = i === "body" && !!r;
-  return /* @__PURE__ */ S(N, { children: [
-    /* @__PURE__ */ e(
-      "tr",
-      {
-        ...n,
-        "data-row": "",
-        "data-clickable": d || void 0,
-        "aria-expanded": i === "body" && o !== void 0 ? c : void 0,
-        tabIndex: d ? 0 : void 0,
-        onClick: d ? r : void 0,
-        onKeyDown: (s) => {
-          a == null || a(s), !(!d || s.target !== s.currentTarget) && (s.key === "Enter" || s.key === " ") && (s.preventDefault(), r == null || r());
-        },
-        className: [
-          // Focus ring is drawn by the cells in table.css.
-          d ? "cursor-pointer" : "",
-          b
-        ].join(" "),
-        children: l
-      }
-    ),
-    i === "body" && c && o !== void 0 && /* @__PURE__ */ e("tr", { "data-detail": "", children: /* @__PURE__ */ e("td", { colSpan: W.toArray(l).length, className: "p-0", children: /* @__PURE__ */ e("div", { className: "sticky left-0 w-(--table-visible-width) p-(--inset-5)", children: o }) }) })
-  ] });
+function p({ children: t, onClick: r, detail: i, expanded: a = !1, className: u = "", onKeyDown: d, ...f }) {
+	let p = n(l), m = p === "body" && !!r, h = (e) => {
+		d?.(e), m && e.target === e.currentTarget && (e.key === "Enter" || e.key === " ") && (e.preventDefault(), r?.());
+	};
+	return /* @__PURE__ */ c(o, { children: [/* @__PURE__ */ s("tr", {
+		...f,
+		"data-row": "",
+		"data-clickable": m || void 0,
+		"aria-expanded": p === "body" && i !== void 0 ? a : void 0,
+		tabIndex: m ? 0 : void 0,
+		onClick: m ? r : void 0,
+		onKeyDown: h,
+		className: [m ? "cursor-pointer" : "", u].join(" "),
+		children: t
+	}), p === "body" && a && i !== void 0 && /* @__PURE__ */ s("tr", {
+		"data-detail": "",
+		children: /* @__PURE__ */ s("td", {
+			colSpan: e.toArray(t).length,
+			className: "p-0",
+			children: /* @__PURE__ */ s("div", {
+				className: "sticky left-0 w-(--table-visible-width) p-(--inset-5)",
+				children: i
+			})
+		})
+	})] });
 }
-export {
-  L as Table,
-  $ as TableBody,
-  P as TableHeader,
-  k as TableRow
-};
+export { u as Table, f as TableBody, d as TableHeader, p as TableRow };

@@ -1,4 +1,1 @@
-import { DocumentViewer as r } from "./patterns/DocumentViewer/DocumentViewer.js";
-export {
-  r as DocumentViewer
-};
+export { DocumentViewer } from "./patterns/DocumentViewer/DocumentViewer.js";

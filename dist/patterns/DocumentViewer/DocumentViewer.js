@@ -1,22 +1,22 @@
 import { jsx as e } from "react/jsx-runtime";
-import { PDFViewer as c } from "@embedpdf/react-pdf-viewer";
-function s({ src: r, config: i, className: o = "", style: f }) {
-  const { theme: n, ...t } = i ?? {};
-  return /* @__PURE__ */ e("div", { className: `overflow-hidden bg-(--bg-surface-base) ${o}`, style: f, children: /* @__PURE__ */ e(
-    c,
-    {
-      className: "h-full w-full",
-      config: {
-        ...t,
-        src: r,
-        theme: {
-          preference: "light",
-          ...n
-        }
-      }
-    }
-  ) });
+import { PDFViewer as t } from "@embedpdf/react-pdf-viewer";
+// src/patterns/DocumentViewer/DocumentViewer.tsx
+function n({ src: n, config: r, className: i = "", style: a }) {
+	let { theme: o, ...s } = r ?? {};
+	return /* @__PURE__ */ e("div", {
+		className: `overflow-hidden bg-(--bg-surface-base) ${i}`,
+		style: a,
+		children: /* @__PURE__ */ e(t, {
+			className: "h-full w-full",
+			config: {
+				...s,
+				src: n,
+				theme: {
+					preference: "light",
+					...o
+				}
+			}
+		})
+	});
 }
-export {
-  s as DocumentViewer
-};
+export { n as DocumentViewer };

@@ -1,15 +1,11 @@
-import { jsx as r } from "react/jsx-runtime";
-import { SearchInput as a } from "../Input/SearchInput.js";
-function t(e) {
-  return /* @__PURE__ */ r(
-    "div",
-    {
-      className: "w-full p-(--inset-3) bg-(--bg-surface-base)",
-      style: { borderBottom: "var(--space-1) solid var(--border-surface-inverse)" },
-      children: /* @__PURE__ */ r(a, { ...e })
-    }
-  );
+import { SearchInput as e } from "../Input/SearchInput.js";
+import { jsx as t } from "react/jsx-runtime";
+// src/components/ui/Dropdown/MenuSearchBar.tsx
+function n(n) {
+	return /* @__PURE__ */ t("div", {
+		className: "w-full p-(--inset-3) bg-(--bg-surface-base)",
+		style: { borderBottom: "var(--space-1) solid var(--border-surface-inverse)" },
+		children: /* @__PURE__ */ t(e, { ...n })
+	});
 }
-export {
-  t as MenuSearchBar
-};
+export { n as MenuSearchBar };

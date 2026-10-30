@@ -1,46 +1,23 @@
-const e = {
-  "space-0": "0",
-  // Hairline tokens stay in fixed px rather than rem — like --radius-*, they're
-  // structural (border widths, 1px gridlines), not type-relative, so they must
-  // stay crisp at any root font-size. A theme with a smaller root font-size
-  // (e.g. Evolution's 14px) would otherwise resolve these to sub-pixel widths
-  // (0.0625rem → 0.875px), which browsers round inconsistently and can render
-  // as a clipped/missing edge on inset box-shadow borders.
-  "space-1": "1px",
-  "space-2": "2px",
-  "space-4": "0.25rem",
-  //  4px
-  "space-6": "0.375rem",
-  //  6px
-  "space-8": "0.5rem",
-  //  8px
-  "space-9": "0.5625rem",
-  //  9px
-  "space-10": "0.625rem",
-  // 10px
-  "space-11": "0.6875rem",
-  // 11px
-  "space-12": "0.75rem",
-  // 12px
-  "space-16": "1rem",
-  // 16px
-  "space-18": "1.125rem",
-  // 18px
-  "space-20": "1.25rem",
-  // 20px
-  "space-24": "1.5rem",
-  // 24px
-  "space-30": "1.875rem",
-  // 30px
-  "space-32": "2rem",
-  // 32px
-  "space-36": "2.25rem",
-  // 36px
-  "space-40": "2.5rem",
-  // 40px
-  "space-48": "3rem"
-  // 48px
+// src/tokens/primitive/spacing.ts
+var e = {
+	"space-0": "0",
+	"space-1": "1px",
+	"space-2": "2px",
+	"space-4": "0.25rem",
+	"space-6": "0.375rem",
+	"space-8": "0.5rem",
+	"space-9": "0.5625rem",
+	"space-10": "0.625rem",
+	"space-11": "0.6875rem",
+	"space-12": "0.75rem",
+	"space-16": "1rem",
+	"space-18": "1.125rem",
+	"space-20": "1.25rem",
+	"space-24": "1.5rem",
+	"space-30": "1.875rem",
+	"space-32": "2rem",
+	"space-36": "2.25rem",
+	"space-40": "2.5rem",
+	"space-48": "3rem"
 };
-export {
-  e as spacing
-};
+export { e as spacing };

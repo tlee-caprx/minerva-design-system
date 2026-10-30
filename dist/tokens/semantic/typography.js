@@ -1,110 +1,76 @@
-import { fontFamily as t, fontWeight as e, lineHeight as i, fontSize as l } from "../primitive/typography.js";
-const g = {
-  // ─── Fonts ────────────────────────────────────────────────────────────────
-  "font-base": t["source-sans-3"],
-  "font-code": t["fira-code"],
-  // ─── Font Weights ─────────────────────────────────────────────────────────
-  "font-weight-regular": e.regular,
-  "font-weight-semibold": e.semibold,
-  "font-weight-bold": e.bold,
-  // ─── Body ─────────────────────────────────────────────────────────────────
-  "body-sm-size": l[100],
-  // 12px / 0.75rem
-  "body-sm-line-height": i[200],
-  // 16px / 1rem
-  "body-sm-weight": e.regular,
-  "body-md-size": l[200],
-  // 14px / 0.875rem
-  "body-md-line-height": i[400],
-  // 20px / 1.25rem
-  "body-md-weight": e.regular,
-  "body-lg-size": l[400],
-  // 16px / 1rem
-  "body-lg-line-height": i[500],
-  // 24px / 1.5rem
-  "body-lg-weight": e.regular,
-  // ─── Option (checkbox / radio labels) ────────────────────────────────────
-  "option-default-size": l[200],
-  // 14px / 0.875rem
-  "option-default-line-height": i[300],
-  // 18px / 1.125rem
-  "option-default-weight": e.regular,
-  // ─── Heading ──────────────────────────────────────────────────────────────
-  "heading-xs-size": l[500],
-  "heading-xs-line-height": i[500],
-  "heading-xs-weight": e.semibold,
-  "heading-sm-size": l[600],
-  "heading-sm-line-height": i[500],
-  "heading-sm-weight": e.semibold,
-  "heading-md-size": l[600],
-  "heading-md-line-height": i[550],
-  "heading-md-weight": e.semibold,
-  "heading-lg-size": l[700],
-  "heading-lg-line-height": i[600],
-  "heading-lg-weight": e.semibold,
-  "heading-xl-size": l[800],
-  "heading-xl-line-height": i[700],
-  "heading-xl-weight": e.semibold,
-  // ─── Label ────────────────────────────────────────────────────────────────
-  "label-sm-size": l["050"],
-  "label-sm-line-height": i["050"],
-  "label-sm-weight": e.semibold,
-  "label-md-size": l[100],
-  "label-md-line-height": i[100],
-  "label-md-weight": e.semibold,
-  "label-lg-size": l[200],
-  "label-lg-line-height": i[200],
-  "label-lg-weight": e.semibold,
-  // ─── Global Header ────────────────────────────────────────────────────────
-  "global-header-module-title-size": l[200],
-  "global-header-module-title-line-height": i[100],
-  "global-header-module-title-weight": e.semibold,
-  // ─── Breadcrumb ───────────────────────────────────────────────────────────
-  "breadcrumb-label-size": l["050"],
-  // 10px / 0.625rem
-  "breadcrumb-label-line-height": i[200],
-  // 16px / 1rem
-  "breadcrumb-label-weight": e.regular,
-  // ─── Menu ─────────────────────────────────────────────────────────────────
-  "menu-item-size": l[200],
-  // 14px / 0.875rem
-  "menu-item-line-height": i[400],
-  // 20px / 1.25rem
-  "menu-item-weight": e.regular,
-  "menu-item-lg-size": l[400],
-  // 16px / 1rem
-  "menu-item-lg-line-height": i[500],
-  // 24px / 1.5rem
-  "menu-item-lg-weight": e.regular,
-  // ─── Button Label ─────────────────────────────────────────────────────────
-  "button-label-size": l[300],
-  "button-label-line-height": i[400],
-  "button-label-weight": e.semibold,
-  // ─── Tag Label ────────────────────────────────────────────────────────────
-  "tag-label-size": l[100],
-  // 12px / 0.75rem
-  "tag-label-line-height": i["050"],
-  // 12px / 0.75rem (tight, fits pill shape)
-  "tag-label-weight": e.semibold,
-  // ─── Alert ────────────────────────────────────────────────────────────────
-  "banner-text-size": l[600],
-  // 20px / 1.25rem
-  "banner-text-line-height": i[600],
-  // 32px / 2rem
-  "banner-text-weight": e.semibold,
-  "toast-text-size": l[200],
-  // 14px / 0.875rem
-  "toast-text-line-height": i[500],
-  // 24px / 1.5rem
-  "toast-text-weight": e.semibold
-}, h = {
-  ...g,
-  // ─── Fonts ────────────────────────────────────────────────────────────────
-  "font-base": t.inter
-}, n = {
-  minerva: g,
-  evolution: h
+import { fontFamily as e, fontSize as t, fontWeight as n, lineHeight as r } from "../primitive/typography.js";
+// src/tokens/semantic/typography.ts
+var i = {
+	"font-base": e["source-sans-3"],
+	"font-code": e["fira-code"],
+	"font-weight-regular": n.regular,
+	"font-weight-semibold": n.semibold,
+	"font-weight-bold": n.bold,
+	"body-sm-size": t[100],
+	"body-sm-line-height": r[200],
+	"body-sm-weight": n.regular,
+	"body-md-size": t[200],
+	"body-md-line-height": r[400],
+	"body-md-weight": n.regular,
+	"body-lg-size": t[400],
+	"body-lg-line-height": r[500],
+	"body-lg-weight": n.regular,
+	"option-default-size": t[200],
+	"option-default-line-height": r[300],
+	"option-default-weight": n.regular,
+	"heading-xs-size": t[500],
+	"heading-xs-line-height": r[500],
+	"heading-xs-weight": n.semibold,
+	"heading-sm-size": t[600],
+	"heading-sm-line-height": r[500],
+	"heading-sm-weight": n.semibold,
+	"heading-md-size": t[600],
+	"heading-md-line-height": r[550],
+	"heading-md-weight": n.semibold,
+	"heading-lg-size": t[700],
+	"heading-lg-line-height": r[600],
+	"heading-lg-weight": n.semibold,
+	"heading-xl-size": t[800],
+	"heading-xl-line-height": r[700],
+	"heading-xl-weight": n.semibold,
+	"label-sm-size": t["050"],
+	"label-sm-line-height": r["050"],
+	"label-sm-weight": n.semibold,
+	"label-md-size": t[100],
+	"label-md-line-height": r[100],
+	"label-md-weight": n.semibold,
+	"label-lg-size": t[200],
+	"label-lg-line-height": r[200],
+	"label-lg-weight": n.semibold,
+	"global-header-module-title-size": t[200],
+	"global-header-module-title-line-height": r[100],
+	"global-header-module-title-weight": n.semibold,
+	"breadcrumb-label-size": t["050"],
+	"breadcrumb-label-line-height": r[200],
+	"breadcrumb-label-weight": n.regular,
+	"menu-item-size": t[200],
+	"menu-item-line-height": r[400],
+	"menu-item-weight": n.regular,
+	"menu-item-lg-size": t[400],
+	"menu-item-lg-line-height": r[500],
+	"menu-item-lg-weight": n.regular,
+	"button-label-size": t[300],
+	"button-label-line-height": r[400],
+	"button-label-weight": n.semibold,
+	"tag-label-size": t[100],
+	"tag-label-line-height": r["050"],
+	"tag-label-weight": n.semibold,
+	"banner-text-size": t[600],
+	"banner-text-line-height": r[600],
+	"banner-text-weight": n.semibold,
+	"toast-text-size": t[200],
+	"toast-text-line-height": r[500],
+	"toast-text-weight": n.semibold
+}, a = {
+	minerva: i,
+	evolution: {
+		...i,
+		"font-base": e.inter
+	}
 };
-export {
-  n as typographyThemes
-};
+export { a as typographyThemes };

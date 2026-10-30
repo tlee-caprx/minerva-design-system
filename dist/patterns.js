@@ -1,7 +1,3 @@
-import { JudiAssistantPanel as t, JudiAssistantReviewStep as i } from "./patterns/JudiAssistant/JudiAssistantPanel.js";
-import { KeyCaseDetails as o } from "./patterns/KeyCaseDetails/KeyCaseDetails.js";
-export {
-  t as JudiAssistantPanel,
-  i as JudiAssistantReviewStep,
-  o as KeyCaseDetails
-};
+import { KeyCaseDetails as e } from "./patterns/KeyCaseDetails/KeyCaseDetails.js";
+import { JudiAssistantPanel as t, JudiAssistantReviewStep as n } from "./patterns/JudiAssistant/JudiAssistantPanel.js";
+export { t as JudiAssistantPanel, n as JudiAssistantReviewStep, e as KeyCaseDetails };

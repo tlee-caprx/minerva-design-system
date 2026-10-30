@@ -1,46 +1,45 @@
-import { jsx as o } from "react/jsx-runtime";
-import { forwardRef as m, useRef as h, useState as d, useEffect as I } from "react";
-import { Input as b } from "./Input.js";
-import { Icon as u } from "../Icon/Icon.js";
-import { XCloseIcon as x } from "../Icon/icons/x-close.js";
-import { SearchIcon as g } from "../Icon/icons/search.js";
-const B = m(function({ onChange: r, value: e, defaultValue: i, ...p }, n) {
-  const l = h(null), [f, s] = d(() => !!(e ?? i));
-  return I(() => {
-    e !== void 0 && s(!!e);
-  }, [e]), /* @__PURE__ */ o(
-    b,
-    {
-      ...p,
-      value: e,
-      defaultValue: i,
-      onChange: (t) => {
-        s(t.target.value.length > 0), r == null || r(t);
-      },
-      type: "text",
-      ref: (t) => {
-        l.current = t, typeof n == "function" ? n(t) : n && (n.current = t);
-      },
-      leftIcon: /* @__PURE__ */ o(u, { icon: g, size: "regular", className: "text-(--icon-control-default)" }),
-      rightIcon: f ? /* @__PURE__ */ o(
-        "button",
-        {
-          type: "button",
-          onClick: () => {
-            var a;
-            const t = l.current;
-            if (!t) return;
-            const c = (a = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value")) == null ? void 0 : a.set;
-            c == null || c.call(t, ""), t.dispatchEvent(new Event("input", { bubbles: !0 })), t.focus();
-          },
-          "aria-label": "Clear search",
-          className: "inline-flex items-center justify-center cursor-pointer bg-transparent p-0 text-(--icon-control-default) hover:text-(--icon-control-strong)",
-          children: /* @__PURE__ */ o(u, { icon: x, size: "small" })
-        }
-      ) : void 0
-    }
-  );
+import { Input as e } from "./Input.js";
+import { Icon as t } from "../Icon/Icon.js";
+import { SearchIcon as n } from "../Icon/icons/search.js";
+import { XCloseIcon as r } from "../Icon/icons/x-close.js";
+import { forwardRef as i, useEffect as a, useRef as o, useState as s } from "react";
+import { jsx as c } from "react/jsx-runtime";
+// src/components/ui/Input/SearchInput.tsx
+var l = i(function({ onChange: i, value: l, defaultValue: u, ...d }, f) {
+	let p = o(null), [m, h] = s(() => !!(l ?? u));
+	a(() => {
+		l !== void 0 && h(!!l);
+	}, [l]);
+	let g = (e) => {
+		h(e.target.value.length > 0), i?.(e);
+	}, _ = () => {
+		let e = p.current;
+		e && ((Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value")?.set)?.call(e, ""), e.dispatchEvent(new Event("input", { bubbles: !0 })), e.focus());
+	};
+	return /* @__PURE__ */ c(e, {
+		...d,
+		value: l,
+		defaultValue: u,
+		onChange: g,
+		type: "text",
+		ref: (e) => {
+			p.current = e, typeof f == "function" ? f(e) : f && (f.current = e);
+		},
+		leftIcon: /* @__PURE__ */ c(t, {
+			icon: n,
+			size: "regular",
+			className: "text-(--icon-control-default)"
+		}),
+		rightIcon: m ? /* @__PURE__ */ c("button", {
+			type: "button",
+			onClick: _,
+			"aria-label": "Clear search",
+			className: "inline-flex items-center justify-center cursor-pointer bg-transparent p-0 text-(--icon-control-default) hover:text-(--icon-control-strong)",
+			children: /* @__PURE__ */ c(t, {
+				icon: r,
+				size: "small"
+			})
+		}) : void 0
+	});
 });
-export {
-  B as SearchInput
-};
+export { l as SearchInput };

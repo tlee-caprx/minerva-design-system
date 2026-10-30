@@ -1,58 +1,39 @@
-import { jsx as o } from "react/jsx-runtime";
-import { forwardRef as x, useId as g } from "react";
-import { FieldWrapper as h } from "../FieldWrapper/FieldWrapper.js";
-const b = x(function({
-  label: n,
-  required: a = !1,
-  tooltip: i,
-  instructions: l,
-  invalid: f = !1,
-  disabled: e = !1,
-  readOnly: t = !1,
-  className: s = "",
-  id: c,
-  rows: m = 4,
-  ...d
-}, u) {
-  const p = g(), r = c ?? p;
-  return /* @__PURE__ */ o(
-    h,
-    {
-      inputId: r,
-      label: n,
-      required: a,
-      tooltip: i,
-      instructions: l,
-      invalid: f,
-      disabled: e,
-      readOnly: t,
-      children: /* @__PURE__ */ o(
-        "textarea",
-        {
-          id: r,
-          ref: u,
-          rows: m,
-          disabled: e,
-          readOnly: t,
-          className: [
-            "flex-1 min-w-0 w-full resize-none",
-            "bg-transparent outline-none",
-            t ? "caret-transparent cursor-default" : "",
-            e ? "cursor-not-allowed" : "",
-            s
-          ].filter(Boolean).join(" "),
-          style: {
-            fontSize: "var(--body-md-size)",
-            lineHeight: "var(--body-md-line-height)",
-            fontWeight: "var(--body-md-weight)",
-            color: "var(--text-control-value)"
-          },
-          ...d
-        }
-      )
-    }
-  );
+import { FieldWrapper as e } from "../FieldWrapper/FieldWrapper.js";
+import { forwardRef as t, useId as n } from "react";
+import { jsx as r } from "react/jsx-runtime";
+// src/components/ui/Input/Textarea.tsx
+var i = t(function({ label: t, required: i = !1, tooltip: a, instructions: o, invalid: s = !1, disabled: c = !1, readOnly: l = !1, className: u = "", id: d, rows: f = 4, ...p }, m) {
+	let h = n(), g = d ?? h;
+	return /* @__PURE__ */ r(e, {
+		inputId: g,
+		label: t,
+		required: i,
+		tooltip: a,
+		instructions: o,
+		invalid: s,
+		disabled: c,
+		readOnly: l,
+		children: /* @__PURE__ */ r("textarea", {
+			id: g,
+			ref: m,
+			rows: f,
+			disabled: c,
+			readOnly: l,
+			className: [
+				"flex-1 min-w-0 w-full resize-none",
+				"bg-transparent outline-none",
+				l ? "caret-transparent cursor-default" : "",
+				c ? "cursor-not-allowed" : "",
+				u
+			].filter(Boolean).join(" "),
+			style: {
+				fontSize: "var(--body-md-size)",
+				lineHeight: "var(--body-md-line-height)",
+				fontWeight: "var(--body-md-weight)",
+				color: "var(--text-control-value)"
+			},
+			...p
+		})
+	});
 });
-export {
-  b as Textarea
-};
+export { i as Textarea };

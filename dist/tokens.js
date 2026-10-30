@@ -1,17 +1,6 @@
-import { themes as r } from "./tokens/semantic/index.js";
-import { evolution as i, global as f, minerva as m } from "./tokens/primitive/colors.js";
-import { fontFamily as p, fontSize as a, fontWeight as l, lineHeight as x } from "./tokens/primitive/typography.js";
-import { radius as h } from "./tokens/primitive/radius.js";
-import { spacing as u } from "./tokens/primitive/spacing.js";
-export {
-  i as evolution,
-  p as fontFamily,
-  a as fontSize,
-  l as fontWeight,
-  f as global,
-  x as lineHeight,
-  m as minerva,
-  h as radius,
-  u as spacing,
-  r as themes
-};
+import { evolution as e, global as t, minerva as n } from "./tokens/primitive/colors.js";
+import { spacing as r } from "./tokens/primitive/spacing.js";
+import { radius as i } from "./tokens/primitive/radius.js";
+import { fontFamily as a, fontSize as o, fontWeight as s, lineHeight as c } from "./tokens/primitive/typography.js";
+import { themes as l } from "./tokens/semantic/index.js";
+export { e as evolution, a as fontFamily, o as fontSize, s as fontWeight, t as global, c as lineHeight, n as minerva, i as radius, r as spacing, l as themes };
