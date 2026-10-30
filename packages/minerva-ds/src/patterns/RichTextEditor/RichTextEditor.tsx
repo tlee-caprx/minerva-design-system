@@ -149,7 +149,11 @@ export function RichTextEditor({
     onUpdate: ({ editor: e }) => onChangeRef.current?.(e.isEmpty ? '' : e.getHTML()),
   })
 
+  // Both effects below skip a destroyed editor. React 19's StrictMode re-runs
+  // effects after a simulated unmount that has already destroyed this editor
+  // instance; useEditor then hands back a fresh one and the effects run again.
   useEffect(() => {
+    if (editor.isDestroyed) return
     editor.setEditable(editable)
     if (!editable) setLinkMode(null)
   }, [editor, editable])
@@ -157,7 +161,7 @@ export function RichTextEditor({
   // Controlled: follow `value` when it changes from outside, without echoing
   // the editor's own updates back into it (which would move the cursor).
   useEffect(() => {
-    if (value === undefined) return
+    if (value === undefined || editor.isDestroyed) return
     const current = editor.isEmpty ? '' : editor.getHTML()
     if (value !== current) editor.commands.setContent(value, { emitUpdate: false })
   }, [editor, value])
