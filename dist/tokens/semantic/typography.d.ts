@@ -4,6 +4,7 @@ export declare const typographyThemes: {
         readonly 'font-code': "\"Fira Code\", monospace";
         readonly 'font-weight-regular': "400";
         readonly 'font-weight-semibold': "600";
+        readonly 'font-weight-bold': "700";
         readonly 'body-sm-size': "0.75rem";
         readonly 'body-sm-line-height': "1rem";
         readonly 'body-sm-weight': "400";
@@ -70,6 +71,7 @@ export declare const typographyThemes: {
         readonly 'font-code': "\"Fira Code\", monospace";
         readonly 'font-weight-regular': "400";
         readonly 'font-weight-semibold': "600";
+        readonly 'font-weight-bold': "700";
         readonly 'body-sm-size': "0.75rem";
         readonly 'body-sm-line-height': "1rem";
         readonly 'body-sm-weight': "400";

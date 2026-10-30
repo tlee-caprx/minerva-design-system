@@ -17,6 +17,12 @@ export interface FieldWrapperProps {
      * a label or instructions are present above/below it.
      */
     panel?: ReactNode;
+    /**
+     * No padding, children stacked full-width and clipped to the rounded box,
+     * for controls with their own internal layout (RichTextEditor's toolbar
+     * and text area).
+     */
+    flush?: boolean;
     children: ReactNode;
 }
-export declare function FieldWrapper({ inputId, label, required, tooltip, instructions, invalid, disabled, readOnly, leftIcon, rightIcon, panel, children, }: FieldWrapperProps): import('react').JSX.Element;
+export declare function FieldWrapper({ inputId, label, required, tooltip, instructions, invalid, disabled, readOnly, leftIcon, rightIcon, panel, flush, children, }: FieldWrapperProps): import('react').JSX.Element;

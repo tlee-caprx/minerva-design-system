@@ -5,6 +5,7 @@ export declare const themes: {
         'font-code': "\"Fira Code\", monospace";
         'font-weight-regular': "400";
         'font-weight-semibold': "600";
+        'font-weight-bold': "700";
         'body-sm-size': "0.75rem";
         'body-sm-line-height': "1rem";
         'body-sm-weight': "400";
@@ -315,6 +316,7 @@ export declare const themes: {
         'font-code': "\"Fira Code\", monospace";
         'font-weight-regular': "400";
         'font-weight-semibold': "600";
+        'font-weight-bold': "700";
         'body-sm-size': "0.75rem";
         'body-sm-line-height': "1rem";
         'body-sm-weight': "400";

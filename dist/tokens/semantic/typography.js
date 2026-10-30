@@ -6,6 +6,7 @@ const g = {
   // ─── Font Weights ─────────────────────────────────────────────────────────
   "font-weight-regular": e.regular,
   "font-weight-semibold": e.semibold,
+  "font-weight-bold": e.bold,
   // ─── Body ─────────────────────────────────────────────────────────────────
   "body-sm-size": l[100],
   // 12px / 0.75rem

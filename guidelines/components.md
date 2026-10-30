@@ -24,7 +24,7 @@ Designers often use a different name from the component's. Look in **Also called
 | [`Button`](#button) | CTA, link, icon button | Actions. `variant="link"` for text links |
 | [`ButtonGroup`](#buttongroup) | button row, actions, footer buttons | Two or more related buttons |
 | [`Chip`](#chip) | filter chip, toggle, pill button | Quick toggle filters |
-| [`Input`](#input-textarea-passwordinput-searchinput), `Textarea`, `PasswordInput`, `SearchInput` | text field, form field, text box, search bar | Typing text |
+| [`Input`](#input-textarea-passwordinput-searchinput), `Textarea`, `PasswordInput`, `SearchInput` | text field, form field, text box, search bar | Typing text. For formatting (bold, lists, links), use `RichTextEditor` |
 | [`Dropdown`](#dropdown-multiselectdropdown), `MultiSelectDropdown` | select, picker, combobox, multi-select | Choosing from a list |
 | `MenuPanel`, `MenuItem`, `MenuGroup`, `MenuSearchBar` | menu, popover menu, options list | The list inside Dropdown, for building a menu |
 | [`Checkbox`, `Radio`](#checkbox-radio) | tick box, radio button, option | Yes/no and single-choice options |
@@ -65,6 +65,18 @@ It has its own import path so its large PDF engine is only bundled when used:
 
 ```tsx
 import { DocumentViewer } from '@judi-health/minerva-ds/document-viewer'
+```
+
+### Rich text editor: `@judi-health/minerva-ds/rich-text-editor`
+
+| Component | Also called | Use |
+| --- | --- | --- |
+| [`RichTextEditor`](#richtexteditor) | RTE, WYSIWYG, formatted text field, text editor, notes field | A text field with bold, italic, underline, strikethrough, lists and links |
+
+It has its own import path so its editor engine is only bundled when used:
+
+```tsx
+import { RichTextEditor } from '@judi-health/minerva-ds/rich-text-editor'
 ```
 
 Not in the table? Minerva doesn't have it. Build it from the components above and the token rules in `Guidelines.md`, and tell the designer it's custom.
@@ -335,6 +347,38 @@ import { Input, Textarea, SearchInput, PasswordInput } from '@judi-health/minerv
 All other native `<input>` / `<textarea>` props (`value`, `onChange`, `placeholder`, `disabled`, `readOnly`) work as usual. `SearchInput` adds the search icon and a clear button. `PasswordInput` adds the show/hide toggle.
 
 Building a custom control that should look like a field? Wrap it in `FieldWrapper`, which provides the same label, box and helper text.
+
+---
+
+## RichTextEditor
+
+A text field with a formatting toolbar: bold, italic, underline, strikethrough, bulleted and numbered lists, and links. It takes the same `label`, `required`, `tooltip`, `instructions`, `invalid`, `readOnly` and `disabled` props as `Textarea`. The value is an HTML string.
+
+```tsx
+import { RichTextEditor } from '@judi-health/minerva-ds/rich-text-editor'
+
+const [notes, setNotes] = useState('')
+
+<RichTextEditor
+  label="Reviewer notes"
+  required
+  placeholder="Add notes for the reviewer"
+  instructions="Visible to the pharmacist on this case"
+  value={notes}
+  onChange={setNotes}
+/>
+
+// Showing saved content without editing
+<RichTextEditor label="Notes" value={savedNotesHtml} readOnly />
+```
+
+- `value` + `onChange` for a controlled field; `defaultValue` for starting content you don't track. `onChange` receives `''` when the field is empty.
+- The text area is 182px tall and scrolls past that. `height` (any CSS length) changes it.
+- `readOnly` and `disabled` hide the toolbar.
+- Links: select text and click the link button, or put the cursor in a link to edit or remove it. Links open in a new tab.
+- To display saved HTML outside an editor, use `readOnly` rather than rendering the HTML yourself.
+
+Use `Textarea` for plain text without formatting.
 
 ---
 
@@ -838,19 +882,21 @@ Sizes: `small` (14px) | `regular` (20px, default)
 ```
 AddCircleIcon, AddIcon, AIIcon, AlarmClockIcon, ArrowDownIcon, ArrowDownLeftIcon,
 ArrowDownRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, ArrowUpRightIcon,
-AttachmentIcon, BankIcon, BellIcon, BoltIcon, BranchIcon, CheckCircleIcon,
-CheckMarkIcon, ChevronDownIcon, ChevronEndIcon, ChevronLeftIcon, ChevronRightIcon,
-ChevronStartIcon, ChevronUpIcon, ClockIcon, CloseIcon, CopyIcon, CreditCardIcon,
-CustomerServiceIcon, DeleteIcon, DocumentIcon, DocumentPageFoldIcon,
-DollarCircleIcon, DollarIcon, DownloadIcon, EditIcon, EllipsisCircleIcon,
-EllipsisVerticalIcon, EnvelopeIcon, EyeIcon, EyeSlashIcon, FaceIdIcon, FilterIcon,
-GlobeIcon, GrabberIcon, GridIcon, HistoryIcon, HomeIcon, InfoCircleIcon, LinkIcon,
-LinkOutIcon, ListTreeIcon, LocationIcon, LockIcon, LockOpenIcon, LogOutIcon,
-MedicalIcon, MenuBarsIcon, MenuGridIcon, MessageDotsIcon, PhoneIcon, PillBottleIcon,
+AttachmentIcon, BankIcon, BellIcon, BoldIcon, BoltIcon, BranchIcon,
+CheckCircleIcon, CheckMarkIcon, ChevronDownIcon, ChevronEndIcon, ChevronLeftIcon,
+ChevronRightIcon, ChevronStartIcon, ChevronUpIcon, ClockIcon, CloseIcon, CopyIcon,
+CreditCardIcon, CustomerServiceIcon, DeleteIcon, DocumentIcon,
+DocumentPageFoldIcon, DollarCircleIcon, DollarIcon, DownloadIcon, EditIcon,
+EllipsisCircleIcon, EllipsisVerticalIcon, EnvelopeIcon, EyeIcon, EyeSlashIcon,
+FaceIdIcon, FilterIcon, GlobeIcon, GrabberIcon, GridIcon, HistoryIcon, HomeIcon,
+InfoCircleIcon, ItalicIcon, LinkIcon, LinkOutIcon, ListOlIcon, ListTreeIcon,
+ListUlIcon, LocationIcon, LockIcon, LockOpenIcon, LogOutIcon, MedicalIcon,
+MenuBarsIcon, MenuGridIcon, MessageDotsIcon, PhoneIcon, PillBottleIcon,
 PlaceholderIcon, PrintIcon, QuestionCircleIcon, RedoIcon, RefreshIcon, RemoveIcon,
 ScaleIcon, SearchIcon, SeriesIcon, SettingsIcon, ShieldCheckIcon, ShippingIcon,
-SortIcon, StarEmptyIcon, StarFilledIcon, ThumbsDownIcon, ThumbsUpIcon, UndoIcon,
-UploadIcon, UserIcon, WarningCircleIcon, XCircleIcon, XCloseIcon, XIcon
+SortIcon, StarEmptyIcon, StarFilledIcon, StrikethroughIcon, ThumbsDownIcon,
+ThumbsUpIcon, UnderlineIcon, UndoIcon, UploadIcon, UserIcon, WarningCircleIcon,
+XCircleIcon, XCloseIcon, XIcon
 ```
 
 ---

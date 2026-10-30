@@ -249,6 +249,7 @@
   --font-code: "Fira Code", monospace;
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
+  --font-weight-bold: 700;
   --body-sm-size: 0.75rem;
   --body-sm-line-height: 1rem;
   --body-sm-weight: 400;
@@ -559,6 +560,7 @@
   --font-code: "Fira Code", monospace;
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
+  --font-weight-bold: 700;
   --body-sm-size: 0.75rem;
   --body-sm-line-height: 1rem;
   --body-sm-weight: 400;
@@ -764,6 +766,68 @@ html {
   .minerva-table > tbody > tr[data-clickable]:focus-visible > td:last-child {
     box-shadow: inset 0 var(--space-2) 0 0 var(--row-focus-ring), inset 0 calc(var(--space-2) * -1) 0 0 var(--row-focus-ring), inset calc(var(--space-2) * -1) 0 0 0 var(--row-focus-ring);
   }
+  .minerva-rte-scroll {
+    overflow-y: auto;
+  }
+  .minerva-rte-scroll::-webkit-scrollbar {
+    width: calc(var(--space-4) * 3);
+  }
+  .minerva-rte-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    margin-block: var(--space-4);
+  }
+  .minerva-rte-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--bg-surface-accent-tertiary);
+    background-clip: padding-box;
+    border: var(--space-4) solid transparent;
+    border-radius: var(--radius-full);
+  }
+  @supports not selector(::-webkit-scrollbar) {
+    .minerva-rte-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: var(--bg-surface-accent-tertiary) transparent;
+    }
+  }
+  .minerva-rte-content {
+    min-height: 100%;
+    padding: var(--inset-3) var(--space-4) var(--inset-3) var(--space-9);
+    outline: none;
+    font-size: var(--body-md-size);
+    line-height: var(--body-md-line-height);
+    font-weight: var(--body-md-weight);
+    color: var(--text-control-value);
+    overflow-wrap: anywhere;
+  }
+  [aria-readonly='true'].minerva-rte-content, .minerva-rte-content[contenteditable='false'] {
+    cursor: default;
+  }
+  .minerva-rte-content p {
+    margin: 0;
+  }
+  .minerva-rte-content strong {
+    font-weight: var(--font-weight-bold);
+  }
+  .minerva-rte-content a {
+    color: var(--text-action-hyperlink);
+    text-decoration: underline;
+  }
+  .minerva-rte-content ul, .minerva-rte-content ol {
+    margin: 0;
+    padding-left: var(--inset-7);
+  }
+  .minerva-rte-content ul {
+    list-style: disc;
+  }
+  .minerva-rte-content ol {
+    list-style: decimal;
+  }
+  .minerva-rte-content p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+    color: var(--text-control-placeholder);
+  }
 }
 @layer theme, base, components, utilities;
 @layer theme {
@@ -773,6 +837,7 @@ html {
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --font-weight-semibold: 600;
+    --font-weight-bold: 700;
     --radius-sm: 0.25rem;
     --radius-md: 0.375rem;
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
@@ -1390,6 +1455,12 @@ html {
   .bg-\(--bg-action-neutral-disabled\) {
     background-color: var(--bg-action-neutral-disabled);
   }
+  .bg-\(--bg-action-neutral-idle\) {
+    background-color: var(--bg-action-neutral-idle);
+  }
+  .bg-\(--bg-action-neutral-press\) {
+    background-color: var(--bg-action-neutral-press);
+  }
   .bg-\(--bg-action-primary-critical-idle\) {
     background-color: var(--bg-action-primary-critical-idle);
   }
@@ -1504,6 +1575,9 @@ html {
   .bg-transparent {
     background-color: transparent;
   }
+  .p-\(--inset-1\) {
+    padding: var(--inset-1);
+  }
   .p-\(--inset-3\) {
     padding: var(--inset-3);
   }
@@ -1585,6 +1659,9 @@ html {
   .pt-\(--stack-1\) {
     padding-top: var(--stack-1);
   }
+  .pr-\(--inset-3\) {
+    padding-right: var(--inset-3);
+  }
   .pb-\(--inset-7\) {
     padding-bottom: var(--inset-7);
   }
@@ -1623,6 +1700,9 @@ html {
   }
   .text-\(--icon-action-hyperlink\) {
     color: var(--icon-action-hyperlink);
+  }
+  .text-\(--icon-action-neutral-idle\) {
+    color: var(--icon-action-neutral-idle);
   }
   .text-\(--icon-action-secondary-idle\) {
     color: var(--icon-action-secondary-idle);
@@ -1977,6 +2057,9 @@ html {
     .hover\:text-\(--icon-action-dismiss-inverse-hover\):hover {
       color: var(--icon-action-dismiss-inverse-hover);
     }
+    .hover\:text-\(--icon-action-neutral-hover\):hover {
+      color: var(--icon-action-neutral-hover);
+    }
     .hover\:text-\(--icon-action-secondary-hover\):hover {
       color: var(--icon-action-secondary-hover);
     }
@@ -2084,6 +2167,9 @@ html {
   }
   .active\:bg-\(--bg-action-inverse-pressed\):active {
     background-color: var(--bg-action-inverse-pressed);
+  }
+  .active\:bg-\(--bg-action-neutral-press\):active {
+    background-color: var(--bg-action-neutral-press);
   }
   .active\:bg-\(--bg-action-primary-critical-pressed\):active {
     background-color: var(--bg-action-primary-critical-pressed);
