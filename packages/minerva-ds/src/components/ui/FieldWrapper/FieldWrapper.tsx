@@ -26,6 +26,12 @@ export interface FieldWrapperProps {
    * a label or instructions are present above/below it.
    */
   panel?: ReactNode
+  /**
+   * No padding, children stacked full-width and clipped to the rounded box,
+   * for controls with their own internal layout (RichTextEditor's toolbar
+   * and text area).
+   */
+  flush?: boolean
   children: ReactNode
 }
 
@@ -41,6 +47,7 @@ export function FieldWrapper({
   leftIcon,
   rightIcon,
   panel,
+  flush = false,
   children,
 }: FieldWrapperProps) {
   return (
@@ -68,8 +75,9 @@ export function FieldWrapper({
       )}
       <div
         className={[
-          'relative flex items-center',
-          'py-(--inset-3) px-(--inset-3) gap-(--inline-2)',
+          flush
+            ? 'relative flex flex-col items-stretch overflow-hidden'
+            : 'relative flex items-center py-(--inset-3) px-(--inset-3) gap-(--inline-2)',
           'rounded-(--radius-sm)',
           'transition-colors duration-150',
           disabled

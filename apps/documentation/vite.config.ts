@@ -15,6 +15,7 @@ export default defineConfig({
       { find: /^@judi-health\/minerva-ds$/,          replacement: `${ds}/index.ts` },
       { find: /^@judi-health\/minerva-ds\/patterns$/, replacement: `${ds}/patterns/index.ts` },
       { find: /^@judi-health\/minerva-ds\/document-viewer$/, replacement: `${ds}/patterns/DocumentViewer/index.ts` },
+      { find: /^@judi-health\/minerva-ds\/rich-text-editor$/, replacement: `${ds}/patterns/RichTextEditor/index.ts` },
       { find: /^@judi-health\/minerva-ds\/tokens$/,   replacement: `${ds}/tokens/index.ts` },
     ],
   },
