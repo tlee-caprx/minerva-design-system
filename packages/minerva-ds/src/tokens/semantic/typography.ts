@@ -8,6 +8,7 @@ const minervaTypography = {
   // ─── Font Weights ─────────────────────────────────────────────────────────
   'font-weight-regular':  fontWeight['regular'],
   'font-weight-semibold': fontWeight['semibold'],
+  'font-weight-bold':     fontWeight['bold'],
 
   // ─── Body ─────────────────────────────────────────────────────────────────
   'body-sm-size':        fontSize['100'],   // 12px / 0.75rem

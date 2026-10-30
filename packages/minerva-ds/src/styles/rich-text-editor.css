@@ -1,0 +1,91 @@
+/*
+ * RichTextEditor content and scroll styles. The editable content is HTML that
+ * Tiptap renders, so it's styled with real selectors rather than classes on
+ * each element. In the `components` layer (order declared in table.css), so
+ * utilities still win.
+ */
+@layer components {
+  /* ── Scroll area ─────────────────────────────────────────────────────────
+     A 4px rounded thumb inset 4px from the edge, as in the design. */
+  .minerva-rte-scroll {
+    overflow-y: auto;
+  }
+
+  .minerva-rte-scroll::-webkit-scrollbar {
+    width: calc(var(--space-4) * 3);
+  }
+
+  .minerva-rte-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    margin-block: var(--space-4);
+  }
+
+  .minerva-rte-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--bg-surface-accent-tertiary);
+    background-clip: padding-box;
+    border: var(--space-4) solid transparent;
+    border-radius: var(--radius-full);
+  }
+
+  /* Firefox has no ::-webkit-scrollbar; these are ignored where it exists,
+     because setting them there would switch off the styles above. */
+  @supports not selector(::-webkit-scrollbar) {
+    .minerva-rte-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: var(--bg-surface-accent-tertiary) transparent;
+    }
+  }
+
+  /* ── Content ─────────────────────────────────────────────────────────── */
+  .minerva-rte-content {
+    min-height: 100%;
+    padding: var(--inset-3) var(--space-4) var(--inset-3) var(--space-9);
+    outline: none;
+    font-size: var(--body-md-size);
+    line-height: var(--body-md-line-height);
+    font-weight: var(--body-md-weight);
+    color: var(--text-control-value);
+    overflow-wrap: anywhere;
+  }
+
+  [aria-readonly='true'].minerva-rte-content,
+  .minerva-rte-content[contenteditable='false'] {
+    cursor: default;
+  }
+
+  .minerva-rte-content p {
+    margin: 0;
+  }
+
+  .minerva-rte-content strong {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .minerva-rte-content a {
+    color: var(--text-action-hyperlink);
+    text-decoration: underline;
+  }
+
+  .minerva-rte-content ul,
+  .minerva-rte-content ol {
+    margin: 0;
+    padding-left: var(--inset-7);
+  }
+
+  .minerva-rte-content ul {
+    list-style: disc;
+  }
+
+  .minerva-rte-content ol {
+    list-style: decimal;
+  }
+
+  /* Placeholder text while empty, from Tiptap's Placeholder extension. */
+  .minerva-rte-content p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+    color: var(--text-control-placeholder);
+  }
+}

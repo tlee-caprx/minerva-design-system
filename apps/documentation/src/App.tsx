@@ -11,6 +11,7 @@ import { RadioSection } from './sections/RadioSection'
 import { InputSection } from './sections/InputSection'
 import { TextareaSection } from './sections/TextareaSection'
 import { DropdownSection } from './sections/DropdownSection'
+import { RichTextEditorSection } from './sections/RichTextEditorSection'
 import { NotificationSection } from './sections/NotificationSection'
 import { CollapseSection } from './sections/CollapseSection'
 import { TooltipSection } from './sections/TooltipSection'
@@ -39,7 +40,7 @@ const NAV_GROUPS: { label: string; sections: Record<string, ComponentType> }[] =
   },
   {
     label: 'Form Controls',
-    sections: { Checkbox: CheckboxSection, Radio: RadioSection, Input: InputSection, Textarea: TextareaSection, Dropdown: DropdownSection },
+    sections: { Checkbox: CheckboxSection, Radio: RadioSection, Input: InputSection, Textarea: TextareaSection, 'Rich Text Editor': RichTextEditorSection, Dropdown: DropdownSection },
   },
   {
     label: 'Content & Feedback',

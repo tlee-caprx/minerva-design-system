@@ -14,6 +14,7 @@
       "@judi-health/minerva-ds": ["../../packages/minerva-ds/src/index.ts"],
       "@judi-health/minerva-ds/patterns": ["../../packages/minerva-ds/src/patterns/index.ts"],
       "@judi-health/minerva-ds/document-viewer": ["../../packages/minerva-ds/src/patterns/DocumentViewer/index.ts"],
+      "@judi-health/minerva-ds/rich-text-editor": ["../../packages/minerva-ds/src/patterns/RichTextEditor/index.ts"],
       "@judi-health/minerva-ds/tokens": ["../../packages/minerva-ds/src/tokens/index.ts"]
     }
   },

@@ -27,6 +27,7 @@ export default defineConfig({
         index:    resolve(__dirname, 'src/index.ts'),
         patterns: resolve(__dirname, 'src/patterns/index.ts'),
         'document-viewer': resolve(__dirname, 'src/patterns/DocumentViewer/index.ts'),
+        'rich-text-editor': resolve(__dirname, 'src/patterns/RichTextEditor/index.ts'),
         tokens:   resolve(__dirname, 'src/tokens/index.ts'),
       },
       formats: ['es'],

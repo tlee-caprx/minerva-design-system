@@ -6,7 +6,7 @@ This repo builds and publishes `@judi-health/minerva-ds`, the Minerva design sys
 
 - `packages/minerva-ds/`: the package.
   - `src/components/`: core components (`layout/`, `navigation/`, `ui/`), one folder per component with `Component.tsx` and `index.ts`.
-  - `src/patterns/`: Judi-specific compositions built from core components (`KeyCaseDetails`, `JudiAssistant`, `DocumentViewer`).
+  - `src/patterns/`: Judi-specific compositions built from core components (`KeyCaseDetails`, `JudiAssistant`, `DocumentViewer`, `RichTextEditor`).
   - `src/tokens/`: TypeScript source of truth for tokens (primitive → semantic).
   - `src/styles/`: `themes.css` (generated), `base.css`, `fonts.css`, plus `tokens.css` and `index.css`, which become `dist/tokens.css` and `dist/style.css`.
   - `guidelines/`: Markdown shipped in the package. Designers' AI tools read these files to build with Minerva. Treat them as public API.
