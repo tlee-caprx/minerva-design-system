@@ -1,18 +1,18 @@
 import { jsxs as d, jsx as t } from "react/jsx-runtime";
-import { useId as U, useState as N, useRef as T, useEffect as L } from "react";
-import { useEditor as y, EditorContent as M, useEditorState as P } from "@tiptap/react";
+import { useId as y, useState as U, useRef as N, useEffect as L } from "react";
+import { useEditor as T, EditorContent as M, useEditorState as P } from "@tiptap/react";
 import R from "@tiptap/starter-kit";
 import { Placeholder as j } from "@tiptap/extensions";
 import { LinkPanel as q } from "./LinkPanel.js";
-import { ToolbarButton as r } from "./ToolbarButton.js";
-import { FieldWrapper as F } from "../../components/ui/FieldWrapper/FieldWrapper.js";
-import { BoldIcon as H } from "../../components/ui/Icon/icons/bold.js";
-import { ItalicIcon as z } from "../../components/ui/Icon/icons/italic.js";
-import { UnderlineIcon as K } from "../../components/ui/Icon/icons/underline.js";
-import { StrikethroughIcon as O } from "../../components/ui/Icon/icons/strikethrough.js";
-import { ListUlIcon as W } from "../../components/ui/Icon/icons/list-ul.js";
-import { ListOlIcon as $ } from "../../components/ui/Icon/icons/list-ol.js";
-import { LinkIcon as w } from "../../components/ui/Icon/icons/link.js";
+import { ToolbarButton as l } from "./ToolbarButton.js";
+import { FieldWrapper as D } from "../../components/ui/FieldWrapper/FieldWrapper.js";
+import { BoldIcon as F } from "../../components/ui/Icon/icons/bold.js";
+import { ItalicIcon as H } from "../../components/ui/Icon/icons/italic.js";
+import { UnderlineIcon as z } from "../../components/ui/Icon/icons/underline.js";
+import { StrikethroughIcon as K } from "../../components/ui/Icon/icons/strikethrough.js";
+import { ListUlIcon as O } from "../../components/ui/Icon/icons/list-ul.js";
+import { ListOlIcon as W } from "../../components/ui/Icon/icons/list-ol.js";
+import { LinkIcon as $ } from "../../components/ui/Icon/icons/link.js";
 function k({ children: n, divider: c = !0 }) {
   return /* @__PURE__ */ t(
     "div",
@@ -23,8 +23,8 @@ function k({ children: n, divider: c = !0 }) {
     }
   );
 }
-function D({ editor: n, onLinkClick: c }) {
-  const i = P({
+function w({ editor: n, onLinkClick: c }) {
+  const o = P({
     editor: n,
     selector: ({ editor: e }) => ({
       bold: e.isActive("bold"),
@@ -35,7 +35,7 @@ function D({ editor: n, onLinkClick: c }) {
       orderedList: e.isActive("orderedList"),
       link: e.isActive("link")
     })
-  }), l = (e) => e(n.chain().focus()).run();
+  }), r = (e) => e(n.chain().focus()).run();
   return /* @__PURE__ */ d(
     "div",
     {
@@ -45,16 +45,16 @@ function D({ editor: n, onLinkClick: c }) {
       style: { borderBottom: "var(--space-1) solid var(--border-control-default-idle)" },
       children: [
         /* @__PURE__ */ d(k, { children: [
-          /* @__PURE__ */ t(r, { label: "Bold", icon: H, active: i.bold, onClick: () => l((e) => e.toggleBold()) }),
-          /* @__PURE__ */ t(r, { label: "Italic", icon: z, active: i.italic, onClick: () => l((e) => e.toggleItalic()) }),
-          /* @__PURE__ */ t(r, { label: "Underline", icon: K, active: i.underline, onClick: () => l((e) => e.toggleUnderline()) }),
-          /* @__PURE__ */ t(r, { label: "Strikethrough", icon: O, active: i.strike, onClick: () => l((e) => e.toggleStrike()) })
+          /* @__PURE__ */ t(l, { label: "Bold", icon: F, active: o.bold, onClick: () => r((e) => e.toggleBold()) }),
+          /* @__PURE__ */ t(l, { label: "Italic", icon: H, active: o.italic, onClick: () => r((e) => e.toggleItalic()) }),
+          /* @__PURE__ */ t(l, { label: "Underline", icon: z, active: o.underline, onClick: () => r((e) => e.toggleUnderline()) }),
+          /* @__PURE__ */ t(l, { label: "Strikethrough", icon: K, active: o.strike, onClick: () => r((e) => e.toggleStrike()) })
         ] }),
         /* @__PURE__ */ d(k, { children: [
-          /* @__PURE__ */ t(r, { label: "Bulleted list", icon: W, active: i.bulletList, onClick: () => l((e) => e.toggleBulletList()) }),
-          /* @__PURE__ */ t(r, { label: "Numbered list", icon: $, active: i.orderedList, onClick: () => l((e) => e.toggleOrderedList()) })
+          /* @__PURE__ */ t(l, { label: "Bulleted list", icon: O, active: o.bulletList, onClick: () => r((e) => e.toggleBulletList()) }),
+          /* @__PURE__ */ t(l, { label: "Numbered list", icon: W, active: o.orderedList, onClick: () => r((e) => e.toggleOrderedList()) })
         ] }),
-        /* @__PURE__ */ t(k, { divider: !1, children: /* @__PURE__ */ t(r, { label: "Link", icon: w, active: i.link, onClick: c }) })
+        /* @__PURE__ */ t(k, { divider: !1, children: /* @__PURE__ */ t(l, { label: "Link", icon: $, active: o.link, onClick: c }) })
       ]
     }
   );
@@ -62,11 +62,11 @@ function D({ editor: n, onLinkClick: c }) {
 function ce({
   label: n,
   required: c = !1,
-  tooltip: i,
-  instructions: l,
+  tooltip: o,
+  instructions: r,
   invalid: e = !1,
   disabled: b = !1,
-  readOnly: f = !1,
+  readOnly: m = !1,
   value: a,
   defaultValue: I,
   onChange: v,
@@ -75,9 +75,9 @@ function ce({
   id: B,
   className: E = ""
 }) {
-  const A = U(), g = B ?? A, s = !b && !f, [S, p] = N(null), u = T(v);
+  const A = y(), g = B ?? A, s = !b && !m, [S, p] = U(null), u = N(v);
   u.current = v;
-  const o = y({
+  const i = T({
     extensions: [
       R.configure({
         // Only what the toolbar offers: no headings, code or quotes sneaking
@@ -99,41 +99,41 @@ function ce({
         role: "textbox",
         "aria-multiline": "true",
         ...e ? { "aria-invalid": "true" } : {},
-        ...f ? { "aria-readonly": "true" } : {},
+        ...m ? { "aria-readonly": "true" } : {},
         class: "minerva-rte-content"
       }
     },
-    onUpdate: ({ editor: m }) => {
+    onUpdate: ({ editor: f }) => {
       var h;
-      return (h = u.current) == null ? void 0 : h.call(u, m.isEmpty ? "" : m.getHTML());
+      return (h = u.current) == null ? void 0 : h.call(u, f.isEmpty ? "" : f.getHTML());
     }
   });
   return L(() => {
-    o.setEditable(s), s || p(null);
-  }, [o, s]), L(() => {
-    if (a === void 0) return;
-    const m = o.isEmpty ? "" : o.getHTML();
-    a !== m && o.commands.setContent(a, { emitUpdate: !1 });
-  }, [o, a]), /* @__PURE__ */ d("div", { className: E, children: [
+    i.isDestroyed || (i.setEditable(s), s || p(null));
+  }, [i, s]), L(() => {
+    if (a === void 0 || i.isDestroyed) return;
+    const f = i.isEmpty ? "" : i.getHTML();
+    a !== f && i.commands.setContent(a, { emitUpdate: !1 });
+  }, [i, a]), /* @__PURE__ */ d("div", { className: E, children: [
     /* @__PURE__ */ d(
-      F,
+      D,
       {
         inputId: g,
         label: n,
         required: c,
-        tooltip: i,
-        instructions: l,
+        tooltip: o,
+        instructions: r,
         invalid: e,
         disabled: b,
-        readOnly: f,
+        readOnly: m,
         flush: !0,
         children: [
-          s && /* @__PURE__ */ t(D, { editor: o, onLinkClick: () => p("add") }),
-          /* @__PURE__ */ t("div", { className: "minerva-rte-scroll", style: { height: x }, children: /* @__PURE__ */ t(M, { editor: o, className: "h-full" }) })
+          s && /* @__PURE__ */ t(w, { editor: i, onLinkClick: () => p("add") }),
+          /* @__PURE__ */ t("div", { className: "minerva-rte-scroll", style: { height: x }, children: /* @__PURE__ */ t(M, { editor: i, className: "h-full" }) })
         ]
       }
     ),
-    s && /* @__PURE__ */ t(q, { editor: o, addRequested: S === "add", onClose: () => p(null) })
+    s && /* @__PURE__ */ t(q, { editor: i, addRequested: S === "add", onClose: () => p(null) })
   ] });
 }
 export {
