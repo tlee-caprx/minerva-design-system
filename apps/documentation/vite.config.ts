@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // Resolve the design system from source so edits to packages/minerva-ds hot
 // reload here without a rebuild. Designers outside this repo use the built package.
-const ds = resolve(__dirname, '../../packages/minerva-ds/src')
+const ds = resolve(import.meta.dirname, '../../packages/minerva-ds/src')
 
 export default defineConfig({
   plugins: [tailwindcss(), react()],

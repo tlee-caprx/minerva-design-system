@@ -24,15 +24,15 @@ export default defineConfig({
   build: {
     lib: {
       entry: {
-        index:    resolve(__dirname, 'src/index.ts'),
-        patterns: resolve(__dirname, 'src/patterns/index.ts'),
-        'document-viewer': resolve(__dirname, 'src/patterns/DocumentViewer/index.ts'),
-        'rich-text-editor': resolve(__dirname, 'src/patterns/RichTextEditor/index.ts'),
-        tokens:   resolve(__dirname, 'src/tokens/index.ts'),
+        index:    resolve(import.meta.dirname, 'src/index.ts'),
+        patterns: resolve(import.meta.dirname, 'src/patterns/index.ts'),
+        'document-viewer': resolve(import.meta.dirname, 'src/patterns/DocumentViewer/index.ts'),
+        'rich-text-editor': resolve(import.meta.dirname, 'src/patterns/RichTextEditor/index.ts'),
+        tokens:   resolve(import.meta.dirname, 'src/tokens/index.ts'),
       },
       formats: ['es'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: (id) => externals.some((dep) => id === dep || id.startsWith(`${dep}/`)),
       output: {
         // Keep one file per module so the dist stays readable and scannable by
